@@ -15,6 +15,10 @@
 		5BAD91FD15B18DD700E3A100 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD91FC15B18DD700E3A100 /* main.m */; };
 		5BAD920115B18DD700E3A100 /* MTKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD920015B18DD700E3A100 /* MTKAppDelegate.m */; };
 		5BAD920915B18E8300E3A100 /* libBlockObserving.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */; };
+		5BAD921015B18F1700E3A100 /* NSObject+MTKBlockObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD920E15B18F1700E3A100 /* NSObject+MTKBlockObserving.h */; };
+		5BAD921115B18F1700E3A100 /* NSObject+MTKBlockObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD920F15B18F1700E3A100 /* NSObject+MTKBlockObserving.m */; };
+		5BAD921515B18FC400E3A100 /* MTKBlockObservationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD921315B18FC400E3A100 /* MTKBlockObservationTypes.h */; };
+		5BAD921615B18FC400E3A100 /* MTKBlockObservationTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD921415B18FC400E3A100 /* MTKBlockObservationTypes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +44,10 @@
 		5BAD91FE15B18DD700E3A100 /* BlockObservingAppIOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlockObservingAppIOS-Prefix.pch"; sourceTree = "<group>"; };
 		5BAD91FF15B18DD700E3A100 /* MTKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTKAppDelegate.h; sourceTree = "<group>"; };
 		5BAD920015B18DD700E3A100 /* MTKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTKAppDelegate.m; sourceTree = "<group>"; };
+		5BAD920E15B18F1700E3A100 /* NSObject+MTKBlockObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MTKBlockObserving.h"; sourceTree = "<group>"; };
+		5BAD920F15B18F1700E3A100 /* NSObject+MTKBlockObserving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MTKBlockObserving.m"; sourceTree = "<group>"; };
+		5BAD921315B18FC400E3A100 /* MTKBlockObservationTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKBlockObservationTypes.h; sourceTree = "<group>"; };
+		5BAD921415B18FC400E3A100 /* MTKBlockObservationTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKBlockObservationTypes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +105,12 @@
 		5BAD91CD15B18C4800E3A100 /* BlockObserving */ = {
 			isa = PBXGroup;
 			children = (
+				5BAD921315B18FC400E3A100 /* MTKBlockObservationTypes.h */,
+				5BAD921415B18FC400E3A100 /* MTKBlockObservationTypes.m */,
 				5BAD91D015B18C4800E3A100 /* MTKBlockObserving.h */,
 				5BAD91D115B18C4800E3A100 /* MTKBlockObserving.m */,
+				5BAD920E15B18F1700E3A100 /* NSObject+MTKBlockObserving.h */,
+				5BAD920F15B18F1700E3A100 /* NSObject+MTKBlockObserving.m */,
 			);
 			path = BlockObserving;
 			sourceTree = "<group>";
@@ -122,6 +134,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BAD921015B18F1700E3A100 /* NSObject+MTKBlockObserving.h in Headers */,
+				5BAD921515B18FC400E3A100 /* MTKBlockObservationTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +221,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BAD91D215B18C4800E3A100 /* MTKBlockObserving.m in Sources */,
+				5BAD921115B18F1700E3A100 /* NSObject+MTKBlockObserving.m in Sources */,
+				5BAD921615B18FC400E3A100 /* MTKBlockObservationTypes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +399,7 @@
 				5BAD920415B18DD700E3A100 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
