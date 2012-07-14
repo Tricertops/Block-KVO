@@ -8,14 +8,38 @@
 
 /* Begin PBXBuildFile section */
 		5BAD91CC15B18C4800E3A100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91BC15B18BF700E3A100 /* Foundation.framework */; };
-		5BAD91D215B18C4800E3A100 /* BlockObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD91D115B18C4800E3A100 /* BlockObserving.m */; };
+		5BAD91D215B18C4800E3A100 /* MTKBlockObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD91D115B18C4800E3A100 /* MTKBlockObserving.m */; };
+		5BAD91F215B18DD700E3A100 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91F115B18DD700E3A100 /* UIKit.framework */; };
+		5BAD91F315B18DD700E3A100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91BC15B18BF700E3A100 /* Foundation.framework */; };
+		5BAD91F515B18DD700E3A100 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91F415B18DD700E3A100 /* CoreGraphics.framework */; };
+		5BAD91FD15B18DD700E3A100 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD91FC15B18DD700E3A100 /* main.m */; };
+		5BAD920115B18DD700E3A100 /* MTKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD920015B18DD700E3A100 /* MTKAppDelegate.m */; };
+		5BAD920915B18E8300E3A100 /* libBlockObserving.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5BAD920715B18E7D00E3A100 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5BAD91AE15B18B1200E3A100 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BAD91CA15B18C4800E3A100;
+			remoteInfo = BlockObserving;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5BAD91BC15B18BF700E3A100 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlockObserving.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5BAD91D015B18C4800E3A100 /* BlockObserving.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockObserving.h; sourceTree = "<group>"; };
-		5BAD91D115B18C4800E3A100 /* BlockObserving.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockObserving.m; sourceTree = "<group>"; };
+		5BAD91D015B18C4800E3A100 /* MTKBlockObserving.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTKBlockObserving.h; sourceTree = "<group>"; };
+		5BAD91D115B18C4800E3A100 /* MTKBlockObserving.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTKBlockObserving.m; sourceTree = "<group>"; };
+		5BAD91EF15B18DD700E3A100 /* BlockObservingAppIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlockObservingAppIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BAD91F115B18DD700E3A100 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		5BAD91F415B18DD700E3A100 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		5BAD91F815B18DD700E3A100 /* BlockObservingAppIOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlockObservingAppIOS-Info.plist"; sourceTree = "<group>"; };
+		5BAD91FC15B18DD700E3A100 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5BAD91FE15B18DD700E3A100 /* BlockObservingAppIOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlockObservingAppIOS-Prefix.pch"; sourceTree = "<group>"; };
+		5BAD91FF15B18DD700E3A100 /* MTKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTKAppDelegate.h; sourceTree = "<group>"; };
+		5BAD920015B18DD700E3A100 /* MTKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTKAppDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +51,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5BAD91EC15B18DD700E3A100 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BAD920915B18E8300E3A100 /* libBlockObserving.a in Frameworks */,
+				5BAD91F215B18DD700E3A100 /* UIKit.framework in Frameworks */,
+				5BAD91F315B18DD700E3A100 /* Foundation.framework in Frameworks */,
+				5BAD91F515B18DD700E3A100 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -34,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				5BAD91CD15B18C4800E3A100 /* BlockObserving */,
+				5BAD91F615B18DD700E3A100 /* BlockObservingAppIOS */,
 				5BAD91BB15B18BF700E3A100 /* Frameworks */,
 				5BAD91BA15B18BF700E3A100 /* Products */,
 			);
@@ -43,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */,
+				5BAD91EF15B18DD700E3A100 /* BlockObservingAppIOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -51,6 +88,8 @@
 			isa = PBXGroup;
 			children = (
 				5BAD91BC15B18BF700E3A100 /* Foundation.framework */,
+				5BAD91F115B18DD700E3A100 /* UIKit.framework */,
+				5BAD91F415B18DD700E3A100 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -58,10 +97,22 @@
 		5BAD91CD15B18C4800E3A100 /* BlockObserving */ = {
 			isa = PBXGroup;
 			children = (
-				5BAD91D015B18C4800E3A100 /* BlockObserving.h */,
-				5BAD91D115B18C4800E3A100 /* BlockObserving.m */,
+				5BAD91D015B18C4800E3A100 /* MTKBlockObserving.h */,
+				5BAD91D115B18C4800E3A100 /* MTKBlockObserving.m */,
 			);
 			path = BlockObserving;
+			sourceTree = "<group>";
+		};
+		5BAD91F615B18DD700E3A100 /* BlockObservingAppIOS */ = {
+			isa = PBXGroup;
+			children = (
+				5BAD91F815B18DD700E3A100 /* BlockObservingAppIOS-Info.plist */,
+				5BAD91FE15B18DD700E3A100 /* BlockObservingAppIOS-Prefix.pch */,
+				5BAD91FC15B18DD700E3A100 /* main.m */,
+				5BAD91FF15B18DD700E3A100 /* MTKAppDelegate.h */,
+				5BAD920015B18DD700E3A100 /* MTKAppDelegate.m */,
+			);
+			path = BlockObservingAppIOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +145,24 @@
 			productReference = 5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		5BAD91EE15B18DD700E3A100 /* BlockObservingAppIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5BAD920215B18DD700E3A100 /* Build configuration list for PBXNativeTarget "BlockObservingAppIOS" */;
+			buildPhases = (
+				5BAD91EB15B18DD700E3A100 /* Sources */,
+				5BAD91EC15B18DD700E3A100 /* Frameworks */,
+				5BAD91ED15B18DD700E3A100 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5BAD920815B18E7D00E3A100 /* PBXTargetDependency */,
+			);
+			name = BlockObservingAppIOS;
+			productName = BlockObservingAppIOS;
+			productReference = 5BAD91EF15B18DD700E3A100 /* BlockObservingAppIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -117,20 +186,48 @@
 			projectRoot = "";
 			targets = (
 				5BAD91CA15B18C4800E3A100 /* BlockObserving */,
+				5BAD91EE15B18DD700E3A100 /* BlockObservingAppIOS */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5BAD91ED15B18DD700E3A100 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5BAD91C715B18C4800E3A100 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BAD91D215B18C4800E3A100 /* BlockObserving.m in Sources */,
+				5BAD91D215B18C4800E3A100 /* MTKBlockObserving.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5BAD91EB15B18DD700E3A100 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BAD91FD15B18DD700E3A100 /* main.m in Sources */,
+				5BAD920115B18DD700E3A100 /* MTKAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5BAD920815B18E7D00E3A100 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5BAD91CA15B18C4800E3A100 /* BlockObserving */;
+			targetProxy = 5BAD920715B18E7D00E3A100 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5BAD91B315B18B1300E3A100 /* Debug */ = {
@@ -195,6 +292,69 @@
 			};
 			name = Release;
 		};
+		5BAD920315B18DD700E3A100 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BlockObservingAppIOS/BlockObservingAppIOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "BlockObservingAppIOS/BlockObservingAppIOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5BAD920415B18DD700E3A100 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BlockObservingAppIOS/BlockObservingAppIOS-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "BlockObservingAppIOS/BlockObservingAppIOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -212,6 +372,15 @@
 			buildConfigurations = (
 				5BAD91D415B18C4800E3A100 /* Debug */,
 				5BAD91D515B18C4800E3A100 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5BAD920215B18DD700E3A100 /* Build configuration list for PBXNativeTarget "BlockObservingAppIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5BAD920315B18DD700E3A100 /* Debug */,
+				5BAD920415B18DD700E3A100 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
