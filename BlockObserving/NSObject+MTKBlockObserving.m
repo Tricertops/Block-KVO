@@ -10,6 +10,13 @@
 
 #import <objc/runtime.h>
 
+#import "MTKBlockObserver.h"
+#import "MTKChangeBlockObserver.h"
+#import "MTKSettingBlockObserver.h"
+#import "MTKInsertionBlockObserver.h"
+#import "MTKRemovalBlockObserver.h"
+#import "MTKReplacementBlockObserver.h"
+
 
 
 @interface NSObject (MTKBlockObserving_Private)
@@ -25,16 +32,112 @@
 
 
 
-- (NSSet *)mtk_blockObservers {
-    static void *_mtk_blockObservers_associationKey;
-    NSMutableSet *blockObservers = objc_getAssociatedObject(self, _mtk_blockObservers_associationKey);
+- (NSSet *)blockObservers {
+    static char associationKey;
+    NSMutableSet *blockObservers = objc_getAssociatedObject(self, &associationKey);
     if ( ! blockObservers) {
         blockObservers = [[NSMutableSet alloc] init];
-        objc_setAssociatedObject(self, _mtk_blockObservers_associationKey, blockObservers, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self,
+                                 &associationKey,
+                                 blockObservers,
+                                 OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return blockObservers;
+}
+
+- (void)addBlockObserver:(MTKBlockObserver *)blockObserver {
+    [(NSMutableSet *)self.blockObservers addObject:blockObserver];
+    [blockObserver activate];
+}
+
+- (void)removeBlockObserversForKeyPath:(NSString *)keyPath {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"keyPath == %@", keyPath];
+    NSSet *blockObservers = [self.blockObservers filteredSetUsingPredicate:predicate];
+    
+    for (MTKBlockObserver *blockObserver in blockObservers) {
+        [self removeBlockObserver:blockObserver];
+    }
+}
+
+- (void)removeBlockObserversOfKind:(MTKBlockObservationKind)kind forKeyPath:(NSString *)keyPath {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"kind == %i AND keyPath == %@", kind, keyPath];
+    NSSet *blockObservers = [self.blockObservers filteredSetUsingPredicate:predicate];
+    
+    for (MTKBlockObserver *blockObserver in blockObservers) {
+        [self removeBlockObserver:blockObserver];
+    }
+}
+
+- (void)removeBlockObserver:(MTKBlockObserver *)blockObserver {
+    [blockObserver deactivate];
+    [(NSMutableSet *)self.blockObservers removeObject:blockObserver];
+}
+
+- (void)removeAllBlockObservers {
+    [self.blockObservers makeObjectsPerformSelector:@selector(deactivate)];
+    [(NSMutableSet *)self.blockObservers removeAllObjects];
+}
+
+
+
+- (MTKBlockObserver *)observeChanges:(NSString *)keyPath
+                         beforeBlock:(void(^)(id))beforeBlock
+                          afterBlock:(void(^)(id))afterBlock {
+    MTKBlockObserver *blockObserver = [MTKBlockObserver changeBlockObserverWithObject:self
+                                                                              keyPath:keyPath
+                                                                          beforeBlock:beforeBlock
+                                                                           afterBlock:afterBlock];
+    [self addBlockObserver:blockObserver];
+    return blockObserver;
+}
+
+- (MTKBlockObserver *)observeSetting:(NSString *)keyPath
+                         beforeBlock:(void(^)(id))beforeBlock
+                          afterBlock:(void(^)(id, id))afterBlock {
+    MTKBlockObserver *blockObserver = [MTKBlockObserver settingBlockObserverWithObject:self
+                                                                               keyPath:keyPath
+                                                                           beforeBlock:beforeBlock
+                                                                            afterBlock:afterBlock];
+    [self addBlockObserver:blockObserver];
+    return blockObserver;
+}
+
+- (MTKBlockObserver *)observeInsertion:(NSString *)keyPath
+                           beforeBlock:(void(^)(NSIndexSet *))beforeBlock
+                            afterBlock:(void(^)(id, NSIndexSet *))afterBlock {
+    MTKBlockObserver *observer = [MTKBlockObserver insertionBlockObserverWithObject:self
+                                                                            keyPath:keyPath
+                                                                        beforeBlock:beforeBlock
+                                                                         afterBlock:afterBlock];
+    [self addBlockObserver:observer];
+    return observer;
+}
+
+- (MTKBlockObserver *)observeRemoval:(NSString *)keyPath
+                         beforeBlock:(void(^)(id, NSIndexSet *))beforeBlock
+                          afterBlock:(void(^)(id, NSIndexSet *))afterBlock {
+    MTKBlockObserver *observer = [MTKBlockObserver removalBlockObserverWithObject:self
+                                                                          keyPath:keyPath
+                                                                      beforeBlock:beforeBlock
+                                                                       afterBlock:afterBlock];
+    [self addBlockObserver:observer];
+    return observer;
+}
+
+- (MTKBlockObserver *)observeReplacement:(NSString *)keyPath
+                             beforeBlock:(void(^)(id, NSIndexSet *))beforeBlock
+                              afterBlock:(void(^)(id, id, NSIndexSet *))afterBlock {
+    MTKBlockObserver *observer = [MTKBlockObserver replacementBlockObserverWithObject:self
+                                                                              keyPath:keyPath
+                                                                          beforeBlock:beforeBlock
+                                                                           afterBlock:afterBlock];
+    [self addBlockObserver:observer];
+    return observer;
 }
 
 
 
 @end
+
+

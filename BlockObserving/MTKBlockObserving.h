@@ -6,10 +6,13 @@
 //  Copyright (c) 2012 iMartin Kiss. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "MTKBlockObserver.h"
 
+#import "MTKBlockObservationTypes.h"
+#import "NSObject+MTKBlockObserving.h"
 
-
-@interface MTKBlockObserving : NSObject
-
-@end
+#import "MTKChangeBlockObserver.h"
+#import "MTKSettingBlockObserver.h"
+#import "MTKInsertionBlockObserver.h"
+#import "MTKRemovalBlockObserver.h"
+#import "MTKReplacementBlockObserver.h"

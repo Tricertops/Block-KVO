@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "MTKBlockObservationTypes.h"
+#import "MTKBlockObserver.h"
 
 
 
@@ -16,53 +17,43 @@
 
 
 
-- (NSMutableSet *)mtk_blockObservers;
-- (void)mtk_addBlockObserver:(id)blockObserver;
-- (void)mtk_removeAllBlockObservers;
+- (NSSet *)blockObservers;
+
+- (void)addBlockObserver:(MTKBlockObserver *)blockObserver;
+
+- (void)removeBlockObserversForKeyPath:(NSString *)keyPath;
+- (void)removeBlockObserversOfKind:(MTKBlockObservationKind)kind forKeyPath:(NSString *)keyPath;
+- (void)removeBlockObserver:(MTKBlockObserver *)blockObserver;
+- (void)removeAllBlockObservers;
 
 
 
-- (void)observe:(MTKBlockObservationKind)kind
-        keyPath:(NSString *)keyPath
-      withBlock:(void (^)(id old, id new, NSIndexSet *indexes))block;
+- (MTKBlockObserver *)observeChanges:(NSString *)keyPath
+                         beforeBlock:(void(^)(id oldValue))beforeBlock
+                          afterBlock:(void(^)(id newValue))afterBlock;
 
+- (MTKBlockObserver *)observeSetting:(NSString *)keyPath
+                         beforeBlock:(void(^)(id oldValue))beforeBlock
+                          afterBlock:(void(^)(id oldValue,
+                                              id newValue))afterBlock;
 
+- (MTKBlockObserver *)observeInsertion:(NSString *)keyPath
+                           beforeBlock:(void(^)(NSIndexSet *indexes))beforeBlock
+                            afterBlock:(void(^)(id newValues,
+                                                NSIndexSet *indexes))afterBlock;
 
-- (void)observeAnythingAtKeyPath:(NSString *)keyPath
-                       withBlock:(void(^)(MTKBlockObservationKind kind, id old, id new, NSIndexSet *indexes))block;
+- (MTKBlockObserver *)observeRemoval:(NSString *)keyPath
+                         beforeBlock:(void(^)(id oldValues,
+                                              NSIndexSet *indexes))beforeBlock
+                          afterBlock:(void(^)(id oldValues,
+                                              NSIndexSet *indexes))afterBlock;
 
-
-
-- (void)observeWillChange:(NSString *)keyPath
-                withBlock:(void(^)(id oldValue))block;
-
-- (void)observeDidChange:(NSString *)keyPath
-               withBlock:(void(^)(id oldValue, id newValue))block;
-
-
-
-- (void)observeWillInsert:(NSString *)keyPath
-                withBlock:(void(^)(NSIndexSet *indexes))block;
-
-- (void)observeDidInsert:(NSString *)keyPath
-               withBlock:(void(^)(id newValues, NSIndexSet *indexes))block;
-
-
-
-
-- (void)observeWillRemove:(NSString *)keyPath
-                withBlock:(void(^)(id oldValues, NSIndexSet *indexes))block;
-
-- (void)observeDidRemove:(NSString *)keyPath
-               withBlock:(void(^)(id oldValues, NSIndexSet *indexes))block;
-
-
-
-- (void)observeWillReplace:(NSString *)keyPath
-                 withBlock:(void(^)(id oldValues, NSIndexSet *indexes))block;
-
-- (void)observeDidReplace:(NSString *)keyPath
-                withBlock:(void(^)(id oldValues, id newValues, NSIndexSet *indexes))block;
+- (MTKBlockObserver *)observeReplacement:(NSString *)keyPath
+                             beforeBlock:(void(^)(id oldValues,
+                                                  NSIndexSet *indexes))beforeBlock
+                              afterBlock:(void(^)(id oldValues,
+                                                  id newValues,
+                                                  NSIndexSet *indexes))afterBlock;
 
 
 

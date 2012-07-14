@@ -12,17 +12,9 @@
 
 typedef NSInteger MTKBlockObservationKind;
 enum {
-    MTKBlockObservationKindDidChange = 0,
-    MTKBlockObservationKindWillChange = 1,
-    
-    MTKBlockObservationKindDidInsert = 2,
-    MTKBlockObservationKindWillInsert = 3,
-    
-    MTKBlockObservationKindDidRemove = 4,
-    MTKBlockObservationKindWillRemove = 5,
-    
-    MTKBlockObservationKindDidReplace = 6,
-    MTKBlockObservationKindWillReplace = 7,
-    
-    MTKBlockObservationKindAnything = 8,
+    MTKBlockObservationKindChange = 0,
+    MTKBlockObservationKindSetting = NSKeyValueChangeSetting,
+    MTKBlockObservationKindInsertion = NSKeyValueChangeInsertion,
+    MTKBlockObservationKindRemoval = NSKeyValueChangeRemoval,
+    MTKBlockObservationKindReplacement = NSKeyValueChangeReplacement,
 };
