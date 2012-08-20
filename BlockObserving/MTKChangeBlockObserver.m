@@ -48,6 +48,13 @@
     afterBlock([self.object valueForKeyPath:self.keyPath]);
 }
 
+- (BOOL)shouldObserveChangeKind:(NSKeyValueChange)changeKind {
+    return (changeKind == NSKeyValueChangeSetting ||
+            changeKind == NSKeyValueChangeInsertion ||
+            changeKind == NSKeyValueChangeRemoval ||
+            changeKind == NSKeyValueChangeReplacement);
+}
+
 
 
 @end

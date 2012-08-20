@@ -20,11 +20,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     MTKTestingObject *first = [[MTKTestingObject alloc] init];
-    [self observeChanges:@"object.name" beforeBlock:^(NSString *oldName) {
-        NSLog(@"Will change name from '%@'", oldName);
-    } afterBlock:^(NSString *name) {
+    
+    MTKBlockObserver *obs = [self observeChanges:@"object.name" beforeBlock:nil afterBlock:^(NSString *name) {
         NSLog(@"Did change name to '%@'", name);
     }];
+    
+    [self removeBlockObserver:obs];
     
     MTKTestingObject *second = [[MTKTestingObject alloc] init];
     second.name = @"Bro";
@@ -37,6 +38,8 @@
     self.object = first;
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(update:) userInfo:nil repeats:NO];
     
+    [self removeAllBlockObservers];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -44,9 +47,11 @@
 }
 
 - (void)update:(NSTimer *)timer {
-    [self.object setName:[NSString stringWithFormat:@"Me %i", timer.timeInterval]];
+    [self.object setName:[NSString stringWithFormat:@"Me %f", timer.timeInterval]];
     self.object = nil;
 }
+
+
 
 @end
 

@@ -84,15 +84,17 @@ static NSUInteger _livingBlockObservers = 0;
                         change:(NSDictionary *)change
                        context:(void *)context {
     if (self.object == object && [self.keyPath isEqualToString:keyPath]) {
-        BOOL isPrior = [[change objectForKey:NSKeyValueChangeNotificationIsPriorKey] boolValue];
-        if (isPrior) {
-            if (self.beforeBlock) {
-                [self observeBeforeChange:change];
+        if ([self shouldObserveChangeKind:[[change objectForKey:NSKeyValueChangeKindKey] intValue]]) {
+            BOOL isPrior = [[change objectForKey:NSKeyValueChangeNotificationIsPriorKey] boolValue];
+            if (isPrior) {
+                if (self.beforeBlock) {
+                    [self observeBeforeChange:change];
+                }
             }
-        }
-        else {
-            if (self.afterBlock) {
-                [self observeAfterChange:change];
+            else {
+                if (self.afterBlock) {
+                    [self observeAfterChange:change];
+                }
             }
         }
     }

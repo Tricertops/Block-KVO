@@ -31,6 +31,7 @@
 - (void)dealloc;
 
 - (MTKBlockObservationKind)kind;
+- (BOOL)shouldObserveChangeKind:(NSKeyValueChange)changeKind;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object

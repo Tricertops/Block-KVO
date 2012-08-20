@@ -44,6 +44,10 @@
     afterBlock(newValues, indexes);
 }
 
+- (BOOL)shouldObserveChangeKind:(NSKeyValueChange)changeKind {
+    return (changeKind == NSKeyValueChangeInsertion);
+}
+
 
 
 @end
