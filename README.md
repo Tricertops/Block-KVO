@@ -8,7 +8,8 @@ Block KVO can be used and mixed with classic KVO without any problems.
 **Requirements:**
   - **iOS 4 and greater**
   - using source files: **ARC enabled**
-  - using library: **`-ObjC` and `-all_load` as "Other Linker Flags" in Build Settings** (this is needed since it adds category to `NSObject`)
+  - using library: **`-ObjC` and `-all_load` as _Other Linker Flags_ in Build Settings**
+    (this is needed since it adds category to `NSObject`)
 
 **Example of typical usage**
   - In `init...` method:
@@ -22,6 +23,6 @@ Block KVO can be used and mixed with classic KVO without any problems.
 
         [self removeAllBlockObservers];
 
-Other methods in `NSObject+MTKBlockObserving.h` are for more advanced use, for example for observing collections/relationships or removing single block observers.
+Other methods in [`NSObject+MTKBlockObserving.h`](/blob/master/BlockObserving/NSObject%2BMTKBlockObserving.h) are for more advanced use, for example for observing collections/relationships or removing single block observers.
 
 **TODO:** Add documentation comments.
