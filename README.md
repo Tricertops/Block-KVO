@@ -13,11 +13,11 @@ Block KVO can be used alongside with classic KVO without any problems.
 **Example of typical usage**
   - In `init...` method:
 
-    [self observe:@"window.rootViewController.title"
+    \[self observe:@"window.rootViewController.title"
         withBlock:^(NSString *oldRootTitle, NSString *newRootTitle) {
         NSLog(@"Root view controller's title changed from '%@' to '%@'.", oldRootTitle, newRootTitle);
-    }];
+    }\];
 
   - In `dealloc` method:
 
-    [self removeAllBlockObservers];
+    \[self removeAllBlockObservers\];
