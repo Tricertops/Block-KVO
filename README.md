@@ -6,6 +6,15 @@ This set of classes integrates use the Objective-C KVO mechanism and allows you 
 Block KVO can be used alongside with classic KVO without any problems.
 
 **Requirements:**
-    - **iOS 4 and greater**
-    - using source files: **ARC enabled**
-    - using library: **`-ObjC` and `-all_load` as "Other Linker Flags" in Build Settings**
+  - **iOS 4 and greater**
+  - using source files: **ARC enabled**
+  - using library: **`-ObjC` and `-all_load` as "Other Linker Flags" in Build Settings**
+
+**Example of typical usage**
+  - In `init...` method:
+    [self observe:@"window.rootViewController.title"
+        withBlock:^(NSString *oldRootTitle, NSString *newRootTitle) {
+        NSLog(@"Root view controller's title changed from '%@' to '%@'.", oldRootTitle, newRootTitle);
+    }];
+  - In `dealloc` method:
+    [self removeAllBlockObservers];

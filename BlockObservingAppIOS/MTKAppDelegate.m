@@ -26,15 +26,26 @@
     
     window.rootViewController = viewController;
     
+    
+    
     [self observe:@"window" withBlock:^(UIWindow *oldWindow, UIWindow *newWindow) {
         [newWindow makeKeyAndVisible];
     }];
-    [self observe:@"window.rootViewController.title" withBlock:^(NSString *oldRootTitle, NSString *newRootTitle) {
+    [self observe:@"window.rootViewController.title"
+        withBlock:^(NSString *oldRootTitle, NSString *newRootTitle) {
         NSLog(@"Root view controller's title changed from '%@' to '%@'.", oldRootTitle, newRootTitle);
     }];
     
+    
+    
     self.window = window;
     return YES;
+}
+
+
+
+- (void)dealloc {
+    [self removeAllBlockObservers];
 }
 
 
