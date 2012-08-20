@@ -27,6 +27,9 @@
 - (void)removeAllBlockObservers;
 
 
+- (void)observe:(NSString *)keyPath
+      withBlock:(void (^)(id oldValue,
+                          id newValue))observationBlock;
 
 - (MTKBlockObserver *)observeChanges:(NSString *)keyPath
                          beforeBlock:(void(^)(id oldValue))beforeBlock

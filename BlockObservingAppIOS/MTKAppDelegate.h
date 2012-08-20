@@ -11,15 +11,5 @@
 @interface MTKAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, readwrite, strong) id object;
-
-@end
-
-
-
-@interface MTKTestingObject : NSObject
-
-@property (nonatomic, readwrite, strong) NSString *name;
-@property (nonatomic, readwrite, weak) MTKTestingObject *bro;
 
 @end

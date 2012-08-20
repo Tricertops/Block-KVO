@@ -81,6 +81,12 @@
 
 
 
+- (void)observe:(NSString *)keyPath
+      withBlock:(void (^)(id oldValue,
+                          id newValue))observationBlock {
+    [self observeSetting:keyPath beforeBlock:nil afterBlock:observationBlock];
+}
+
 - (MTKBlockObserver *)observeChanges:(NSString *)keyPath
                          beforeBlock:(void(^)(id))beforeBlock
                           afterBlock:(void(^)(id))afterBlock {

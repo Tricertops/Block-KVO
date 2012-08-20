@@ -7,7 +7,6 @@
 //
 
 #import "MTKAppDelegate.h"
-
 #import "MTKBlockObserving.h"
 
 
@@ -15,56 +14,30 @@
 @implementation MTKAppDelegate
 
 @synthesize window = _window;
-@synthesize object = _object;
+
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    window.backgroundColor = [UIColor whiteColor];
     
-    MTKTestingObject *first = [[MTKTestingObject alloc] init];
+    UIViewController *viewController = [[UIViewController alloc] init];
+    viewController.title = @"Block KVO";
     
-    MTKBlockObserver *obs = [self observeChanges:@"object.name" beforeBlock:nil afterBlock:^(NSString *name) {
-        NSLog(@"Did change name to '%@'", name);
+    window.rootViewController = viewController;
+    
+    [self observe:@"window" withBlock:^(UIWindow *oldWindow, UIWindow *newWindow) {
+        [newWindow makeKeyAndVisible];
+    }];
+    [self observe:@"window.rootViewController.title" withBlock:^(NSString *oldRootTitle, NSString *newRootTitle) {
+        NSLog(@"Root view controller's title changed from '%@' to '%@'.", oldRootTitle, newRootTitle);
     }];
     
-    [self removeBlockObserver:obs];
-    
-    MTKTestingObject *second = [[MTKTestingObject alloc] init];
-    second.name = @"Bro";
-    first.bro = second;
-    second = nil;
-    
-    first.name = @"Martin";
-    first.name = @"Marcel";
-    
-    self.object = first;
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(update:) userInfo:nil repeats:NO];
-    
-    [self removeAllBlockObservers];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    self.window = window;
     return YES;
 }
 
-- (void)update:(NSTimer *)timer {
-    [self.object setName:[NSString stringWithFormat:@"Me %f", timer.timeInterval]];
-    self.object = nil;
-}
 
-
-
-@end
-
-
-
-@implementation MTKTestingObject
-
-@synthesize name = _name;
-@synthesize bro = _bro;
-
-- (void)dealloc {
-    NSLog(@"DEALLOC: %@", self->_name);
-}
 
 @end
 
