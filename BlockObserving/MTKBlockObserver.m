@@ -100,6 +100,11 @@ static NSUInteger _livingBlockObservers = 0;
     }
 }
 
+- (BOOL)shouldObserveChangeKind:(NSKeyValueChange)changeKind {
+    NSAssert(NO, @"Method is abstract");
+    return NO;
+}
+
 - (void)observeBeforeChange:(NSDictionary *)change {
     NSAssert(NO, @"Method is abstract");
 }
