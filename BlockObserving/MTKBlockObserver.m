@@ -59,6 +59,7 @@ static NSUInteger _livingBlockObservers = 0;
         self->_keyPath = keyPath;
         self->_beforeBlock = beforeBlock;
         self->_afterBlock = afterBlock;
+        self->_active = YES;
         
         _livingBlockObservers ++;
     }
