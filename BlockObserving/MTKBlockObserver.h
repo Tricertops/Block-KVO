@@ -21,6 +21,7 @@
 @property (nonatomic, readonly, copy) id keyPath;
 @property (nonatomic, readonly, copy) id beforeBlock;
 @property (nonatomic, readonly, copy) id afterBlock;
+@property (nonatomic, readwrite) BOOL attached;
 @property (nonatomic, readwrite) BOOL active;
 
 - (id)init;
@@ -40,7 +41,10 @@
 - (void)observeBeforeChange:(NSDictionary *)change; //abstract
 - (void)observeAfterChange:(NSDictionary *)change; //abstract
 
-- (void)activate; //start observing
-- (void)deactivate; //end observing
+- (void)attach; //start observing
+- (void)detach; //end observing
+
+- (void)activate; //calls blocks
+- (void)deactivate; //dont call blocks
 
 @end

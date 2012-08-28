@@ -45,32 +45,36 @@
     return blockObservers;
 }
 
+- (NSSet *)blockObserversForKeyPath:(NSString *)keyPath {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"keyPath == %@", keyPath];
+    return [self.blockObservers filteredSetUsingPredicate:predicate];
+}
+
+- (NSSet *)blockObserversOfKind:(MTKBlockObservationKind)kind forKeyPath:(NSString *)keyPath; {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"kind == %i AND keyPath == %@", kind, keyPath];
+    return [self.blockObservers filteredSetUsingPredicate:predicate];
+}
+
 - (void)addBlockObserver:(MTKBlockObserver *)blockObserver {
     [(NSMutableSet *)self.blockObservers addObject:blockObserver];
-    [blockObserver activate];
+    [blockObserver attach];
 }
 
 - (void)removeBlockObserversForKeyPath:(NSString *)keyPath {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"keyPath == %@", keyPath];
-    NSSet *blockObservers = [self.blockObservers filteredSetUsingPredicate:predicate];
-    
-    for (MTKBlockObserver *blockObserver in blockObservers) {
+    for (MTKBlockObserver *blockObserver in [self blockObserversForKeyPath:keyPath]) {
         [self removeBlockObserver:blockObserver];
     }
 }
 
 - (void)removeBlockObserversOfKind:(MTKBlockObservationKind)kind forKeyPath:(NSString *)keyPath {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"kind == %i AND keyPath == %@", kind, keyPath];
-    NSSet *blockObservers = [self.blockObservers filteredSetUsingPredicate:predicate];
-    
-    for (MTKBlockObserver *blockObserver in blockObservers) {
+    for (MTKBlockObserver *blockObserver in [self blockObserversOfKind:kind forKeyPath:keyPath]) {
         [self removeBlockObserver:blockObserver];
     }
 }
 
 - (void)removeBlockObserver:(MTKBlockObserver *)blockObserver {
-    [blockObserver deactivate];
+    [blockObserver detach];
     [(NSMutableSet *)self.blockObservers removeObject:blockObserver];
 }
 

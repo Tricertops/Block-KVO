@@ -35,6 +35,7 @@ static NSUInteger _livingBlockObservers = 0;
 @synthesize keyPath = _keyPath;
 @synthesize beforeBlock = _beforeBlock;
 @synthesize afterBlock = _afterBlock;
+@synthesize attached = _attached;
 @synthesize active = _active;
 
 
@@ -87,12 +88,12 @@ static NSUInteger _livingBlockObservers = 0;
         if ([self shouldObserveChangeKind:[[change objectForKey:NSKeyValueChangeKindKey] intValue]]) {
             BOOL isPrior = [[change objectForKey:NSKeyValueChangeNotificationIsPriorKey] boolValue];
             if (isPrior) {
-                if (self.beforeBlock) {
+                if (self.active && self.beforeBlock) {
                     [self observeBeforeChange:change];
                 }
             }
             else {
-                if (self.afterBlock) {
+                if (self.active && self.afterBlock) {
                     [self observeAfterChange:change];
                 }
             }
@@ -114,13 +115,13 @@ static NSUInteger _livingBlockObservers = 0;
 }
 
 
-- (void)setActive:(BOOL)active {
-    if (active != NO) {
-        active = YES;
+- (void)setAttached:(BOOL)attached {
+    if (attached != NO) {
+        attached = YES;
     }
-    if (self->_active != active) {
-        self->_active = active;
-        if (active) {
+    if (self->_attached != attached) {
+        self->_attached = attached;
+        if (attached) {
             [self.object addObserver:self
                           forKeyPath:self.keyPath
                              options:
@@ -134,6 +135,14 @@ static NSUInteger _livingBlockObservers = 0;
             [self.object removeObserver:self forKeyPath:self.keyPath];
         }
     }
+}
+
+- (void)attach {
+    self.attached = YES;
+}
+
+- (void)detach {
+    self.attached = NO;
 }
 
 - (void)activate {

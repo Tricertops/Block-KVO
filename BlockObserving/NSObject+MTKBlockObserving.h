@@ -18,6 +18,8 @@
 
 
 - (NSSet *)blockObservers;
+- (NSSet *)blockObserversForKeyPath:(NSString *)keyPath;
+- (NSSet *)blockObserversOfKind:(MTKBlockObservationKind)kind forKeyPath:(NSString *)keyPath;
 
 - (void)addBlockObserver:(MTKBlockObserver *)blockObserver;
 
