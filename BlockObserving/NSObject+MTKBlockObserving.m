@@ -79,7 +79,7 @@
 }
 
 - (void)removeAllBlockObservers {
-    [self.blockObservers makeObjectsPerformSelector:@selector(deactivate)];
+    [self.blockObservers makeObjectsPerformSelector:@selector(detach)];
     [(NSMutableSet *)self.blockObservers removeAllObjects];
 }
 

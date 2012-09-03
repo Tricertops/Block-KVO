@@ -67,10 +67,9 @@ static NSUInteger _livingBlockObservers = 0;
 }
 
 - (void)dealloc {
-    [self.object removeObserver:self forKeyPath:self.keyPath];
+    self.attached = NO;
     
     _livingBlockObservers --;
-    NSLog(@"DEALLOC: observer %@ %@", self->_object, self->_keyPath);
 }
 
 

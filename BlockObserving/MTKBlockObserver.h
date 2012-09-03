@@ -17,7 +17,7 @@
 + (NSUInteger)livingBlockObservers;
 + (MTKBlockObservationKind)kind; //abstract
 
-@property (nonatomic, readonly, weak) NSObject *object;
+@property (nonatomic, readonly, assign) NSObject *object;
 @property (nonatomic, readonly, copy) id keyPath;
 @property (nonatomic, readonly, copy) id beforeBlock;
 @property (nonatomic, readonly, copy) id afterBlock;
