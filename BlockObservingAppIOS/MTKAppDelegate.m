@@ -7,7 +7,7 @@
 //
 
 #import "MTKAppDelegate.h"
-#import "MTKBlockObserving.h"
+#import "MTKObserving.h"
 
 
 
@@ -26,26 +26,40 @@
     
     window.rootViewController = viewController;
     
+    [self observeProperty:@"window" withBlock:^(__weak id self, id old, id new) {
+        NSLog(@"Window changed 1");
+    }];
     
-    
-    [self observe:@"window" withBlock:^(UIWindow *oldWindow, UIWindow *newWindow) {
+    [self observeProperty:@"window" withBlock:^(__weak id self, UIWindow *oldWindow, UIWindow *newWindow) {
+        NSLog(@"Window changed 2");
         [newWindow makeKeyAndVisible];
     }];
-    [self observe:@"window.rootViewController.title"
-        withBlock:^(NSString *oldRootTitle, NSString *newRootTitle) {
-        NSLog(@"Root view controller's title changed from '%@' to '%@'.", oldRootTitle, newRootTitle);
+    
+    [self map:@"profile.username" to:@"usernameLabel.text" transform:^id(id value) {
+        return value ?: @"Loading...";
     }];
     
+    [self observeProperty:@"window.rootViewController.title" withBlock:^(__weak id self, NSString *oldTitle, NSString *newTitle) {
+        NSLog(@"Root view controller's title changed from '%@' to '%@'.", oldTitle, newTitle);
+    }];
     
+    [self observeRelationship:@"profile.videos" changeBlock:^(id self, id old, id new) {
+        // Reload table
+    } insertionBlock:^(id self, id news, NSIndexSet *indexes) {
+        // Insert rows
+    } removalBlock:^(id self, id olds, NSIndexSet *indexes) {
+        // Delete rows
+    } replacementBlock:nil]; // Since we didn't specify this block, `changeBlock` will be called.
     
     self.window = window;
+    self.text = @"Hello World!";
     return YES;
 }
 
 
 
 - (void)dealloc {
-    [self removeAllBlockObservers];
+    [self removeAllObservations];
 }
 
 

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B4781F216160823006609A1 /* MTKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B4781F016160823006609A1 /* MTKObserver.h */; };
+		5B4781F316160823006609A1 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4781F116160823006609A1 /* MTKObserver.m */; };
+		5B4781F516162174006609A1 /* MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD91D015B18C4800E3A100 /* MTKObserving.h */; };
 		5BAD91CC15B18C4800E3A100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91BC15B18BF700E3A100 /* Foundation.framework */; };
 		5BAD91F215B18DD700E3A100 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91F115B18DD700E3A100 /* UIKit.framework */; };
 		5BAD91F315B18DD700E3A100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91BC15B18BF700E3A100 /* Foundation.framework */; };
@@ -14,22 +17,8 @@
 		5BAD91FD15B18DD700E3A100 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD91FC15B18DD700E3A100 /* main.m */; };
 		5BAD920115B18DD700E3A100 /* MTKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD920015B18DD700E3A100 /* MTKAppDelegate.m */; };
 		5BAD920915B18E8300E3A100 /* libBlockObserving.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */; };
-		5BAD921015B18F1700E3A100 /* NSObject+MTKBlockObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD920E15B18F1700E3A100 /* NSObject+MTKBlockObserving.h */; };
-		5BAD921115B18F1700E3A100 /* NSObject+MTKBlockObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD920F15B18F1700E3A100 /* NSObject+MTKBlockObserving.m */; };
-		5BAD921515B18FC400E3A100 /* MTKBlockObservationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD921315B18FC400E3A100 /* MTKBlockObservationTypes.h */; };
-		5BAD921615B18FC400E3A100 /* MTKBlockObservationTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD921415B18FC400E3A100 /* MTKBlockObservationTypes.m */; };
-		5BAD921A15B1932300E3A100 /* MTKBlockObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD921815B1932300E3A100 /* MTKBlockObserver.h */; };
-		5BAD921B15B1932300E3A100 /* MTKBlockObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD921915B1932300E3A100 /* MTKBlockObserver.m */; };
-		5BAD921E15B1966800E3A100 /* MTKSettingBlockObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD921C15B1966800E3A100 /* MTKSettingBlockObserver.h */; };
-		5BAD921F15B1966800E3A100 /* MTKSettingBlockObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD921D15B1966800E3A100 /* MTKSettingBlockObserver.m */; };
-		5BAD922215B1A20F00E3A100 /* MTKChangeBlockObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD922015B1A20F00E3A100 /* MTKChangeBlockObserver.h */; };
-		5BAD922315B1A20F00E3A100 /* MTKChangeBlockObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD922115B1A20F00E3A100 /* MTKChangeBlockObserver.m */; };
-		5BAD922E15B1B85D00E3A100 /* MTKInsertionBlockObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD922C15B1B85D00E3A100 /* MTKInsertionBlockObserver.h */; };
-		5BAD922F15B1B85D00E3A100 /* MTKInsertionBlockObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD922D15B1B85D00E3A100 /* MTKInsertionBlockObserver.m */; };
-		5BAD923315B1BA0B00E3A100 /* MTKRemovalBlockObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD923115B1BA0B00E3A100 /* MTKRemovalBlockObserver.h */; };
-		5BAD923415B1BA0B00E3A100 /* MTKRemovalBlockObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD923215B1BA0B00E3A100 /* MTKRemovalBlockObserver.m */; };
-		5BAD923715B1BE8900E3A100 /* MTKReplacementBlockObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD923515B1BE8800E3A100 /* MTKReplacementBlockObserver.h */; };
-		5BAD923815B1BE8900E3A100 /* MTKReplacementBlockObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD923615B1BE8800E3A100 /* MTKReplacementBlockObserver.m */; };
+		5BAD921015B18F1700E3A100 /* NSObject+MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD920E15B18F1700E3A100 /* NSObject+MTKObserving.h */; };
+		5BAD921115B18F1700E3A100 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD920F15B18F1700E3A100 /* NSObject+MTKObserving.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,9 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B4781F016160823006609A1 /* MTKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserver.h; sourceTree = "<group>"; };
+		5B4781F116160823006609A1 /* MTKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKObserver.m; sourceTree = "<group>"; };
 		5BAD91BC15B18BF700E3A100 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlockObserving.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5BAD91D015B18C4800E3A100 /* MTKBlockObserving.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTKBlockObserving.h; sourceTree = "<group>"; };
+		5BAD91D015B18C4800E3A100 /* MTKObserving.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTKObserving.h; sourceTree = "<group>"; };
 		5BAD91EF15B18DD700E3A100 /* BlockObservingAppIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlockObservingAppIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BAD91F115B18DD700E3A100 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		5BAD91F415B18DD700E3A100 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
@@ -54,22 +45,8 @@
 		5BAD91FE15B18DD700E3A100 /* BlockObservingAppIOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlockObservingAppIOS-Prefix.pch"; sourceTree = "<group>"; };
 		5BAD91FF15B18DD700E3A100 /* MTKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTKAppDelegate.h; sourceTree = "<group>"; };
 		5BAD920015B18DD700E3A100 /* MTKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTKAppDelegate.m; sourceTree = "<group>"; };
-		5BAD920E15B18F1700E3A100 /* NSObject+MTKBlockObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MTKBlockObserving.h"; sourceTree = "<group>"; };
-		5BAD920F15B18F1700E3A100 /* NSObject+MTKBlockObserving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MTKBlockObserving.m"; sourceTree = "<group>"; };
-		5BAD921315B18FC400E3A100 /* MTKBlockObservationTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKBlockObservationTypes.h; sourceTree = "<group>"; };
-		5BAD921415B18FC400E3A100 /* MTKBlockObservationTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKBlockObservationTypes.m; sourceTree = "<group>"; };
-		5BAD921815B1932300E3A100 /* MTKBlockObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKBlockObserver.h; sourceTree = "<group>"; };
-		5BAD921915B1932300E3A100 /* MTKBlockObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKBlockObserver.m; sourceTree = "<group>"; };
-		5BAD921C15B1966800E3A100 /* MTKSettingBlockObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKSettingBlockObserver.h; sourceTree = "<group>"; };
-		5BAD921D15B1966800E3A100 /* MTKSettingBlockObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKSettingBlockObserver.m; sourceTree = "<group>"; };
-		5BAD922015B1A20F00E3A100 /* MTKChangeBlockObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKChangeBlockObserver.h; sourceTree = "<group>"; };
-		5BAD922115B1A20F00E3A100 /* MTKChangeBlockObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKChangeBlockObserver.m; sourceTree = "<group>"; };
-		5BAD922C15B1B85D00E3A100 /* MTKInsertionBlockObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKInsertionBlockObserver.h; sourceTree = "<group>"; };
-		5BAD922D15B1B85D00E3A100 /* MTKInsertionBlockObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKInsertionBlockObserver.m; sourceTree = "<group>"; };
-		5BAD923115B1BA0B00E3A100 /* MTKRemovalBlockObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKRemovalBlockObserver.h; sourceTree = "<group>"; };
-		5BAD923215B1BA0B00E3A100 /* MTKRemovalBlockObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKRemovalBlockObserver.m; sourceTree = "<group>"; };
-		5BAD923515B1BE8800E3A100 /* MTKReplacementBlockObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKReplacementBlockObserver.h; sourceTree = "<group>"; };
-		5BAD923615B1BE8800E3A100 /* MTKReplacementBlockObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKReplacementBlockObserver.m; sourceTree = "<group>"; };
+		5BAD920E15B18F1700E3A100 /* NSObject+MTKObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MTKObserving.h"; sourceTree = "<group>"; };
+		5BAD920F15B18F1700E3A100 /* NSObject+MTKObserving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MTKObserving.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,12 +104,11 @@
 		5BAD91CD15B18C4800E3A100 /* BlockObserving */ = {
 			isa = PBXGroup;
 			children = (
-				5BAD91D015B18C4800E3A100 /* MTKBlockObserving.h */,
-				5BAD921315B18FC400E3A100 /* MTKBlockObservationTypes.h */,
-				5BAD921415B18FC400E3A100 /* MTKBlockObservationTypes.m */,
-				5BAD920E15B18F1700E3A100 /* NSObject+MTKBlockObserving.h */,
-				5BAD920F15B18F1700E3A100 /* NSObject+MTKBlockObserving.m */,
-				5BAD921715B192F500E3A100 /* Block Observers */,
+				5BAD91D015B18C4800E3A100 /* MTKObserving.h */,
+				5BAD920E15B18F1700E3A100 /* NSObject+MTKObserving.h */,
+				5BAD920F15B18F1700E3A100 /* NSObject+MTKObserving.m */,
+				5B4781F016160823006609A1 /* MTKObserver.h */,
+				5B4781F116160823006609A1 /* MTKObserver.m */,
 			);
 			path = BlockObserving;
 			sourceTree = "<group>";
@@ -149,25 +125,6 @@
 			path = BlockObservingAppIOS;
 			sourceTree = "<group>";
 		};
-		5BAD921715B192F500E3A100 /* Block Observers */ = {
-			isa = PBXGroup;
-			children = (
-				5BAD921815B1932300E3A100 /* MTKBlockObserver.h */,
-				5BAD921915B1932300E3A100 /* MTKBlockObserver.m */,
-				5BAD922015B1A20F00E3A100 /* MTKChangeBlockObserver.h */,
-				5BAD922115B1A20F00E3A100 /* MTKChangeBlockObserver.m */,
-				5BAD921C15B1966800E3A100 /* MTKSettingBlockObserver.h */,
-				5BAD921D15B1966800E3A100 /* MTKSettingBlockObserver.m */,
-				5BAD922C15B1B85D00E3A100 /* MTKInsertionBlockObserver.h */,
-				5BAD922D15B1B85D00E3A100 /* MTKInsertionBlockObserver.m */,
-				5BAD923115B1BA0B00E3A100 /* MTKRemovalBlockObserver.h */,
-				5BAD923215B1BA0B00E3A100 /* MTKRemovalBlockObserver.m */,
-				5BAD923515B1BE8800E3A100 /* MTKReplacementBlockObserver.h */,
-				5BAD923615B1BE8800E3A100 /* MTKReplacementBlockObserver.m */,
-			);
-			name = "Block Observers";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -175,14 +132,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BAD921015B18F1700E3A100 /* NSObject+MTKBlockObserving.h in Headers */,
-				5BAD921515B18FC400E3A100 /* MTKBlockObservationTypes.h in Headers */,
-				5BAD921A15B1932300E3A100 /* MTKBlockObserver.h in Headers */,
-				5BAD921E15B1966800E3A100 /* MTKSettingBlockObserver.h in Headers */,
-				5BAD922215B1A20F00E3A100 /* MTKChangeBlockObserver.h in Headers */,
-				5BAD922E15B1B85D00E3A100 /* MTKInsertionBlockObserver.h in Headers */,
-				5BAD923315B1BA0B00E3A100 /* MTKRemovalBlockObserver.h in Headers */,
-				5BAD923715B1BE8900E3A100 /* MTKReplacementBlockObserver.h in Headers */,
+				5BAD921015B18F1700E3A100 /* NSObject+MTKObserving.h in Headers */,
+				5B4781F216160823006609A1 /* MTKObserver.h in Headers */,
+				5B4781F516162174006609A1 /* MTKObserving.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,14 +219,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BAD921115B18F1700E3A100 /* NSObject+MTKBlockObserving.m in Sources */,
-				5BAD921615B18FC400E3A100 /* MTKBlockObservationTypes.m in Sources */,
-				5BAD921B15B1932300E3A100 /* MTKBlockObserver.m in Sources */,
-				5BAD921F15B1966800E3A100 /* MTKSettingBlockObserver.m in Sources */,
-				5BAD922315B1A20F00E3A100 /* MTKChangeBlockObserver.m in Sources */,
-				5BAD922F15B1B85D00E3A100 /* MTKInsertionBlockObserver.m in Sources */,
-				5BAD923415B1BA0B00E3A100 /* MTKRemovalBlockObserver.m in Sources */,
-				5BAD923815B1BE8900E3A100 /* MTKReplacementBlockObserver.m in Sources */,
+				5BAD921115B18F1700E3A100 /* NSObject+MTKObserving.m in Sources */,
+				5B4781F316160823006609A1 /* MTKObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
