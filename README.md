@@ -1,27 +1,48 @@
 Block KVO
 =========
 
-Key-Value observing made easier with blocks.
+Overview
+--------
+
+**Key-Value observing made easier with blocks.**
+
 This set of classes use the Objective-C KVO mechanism and allows you to use blocks as observation handlers.
 Block KVO can be used and mixed with classic KVO without any problems.
 
-**Requirements:**
+This branch is not properly tested, but it takes different approach and simplifies things even more.
+
+Requirements
+-------------
   - **iOS 4 and greater**
   - using source files: **ARC enabled**
   - using library: **`-ObjC` and `-all_load` as _Other Linker Flags_ in Build Settings**
 
-**Example of typical usage**
-  - In `init...` method:
 
-        [self observe:@"window.rootViewController.title"
-            withBlock:^(NSString *oldRootTitle, NSString *newRootTitle) {
-            NSLog(@"Root view controller's title changed from '%@' to '%@'.", oldRootTitle, newRootTitle);
-        }];
+Example
+-------
 
-  - In `dealloc` method:
+  1. In `init`, `viewDidLoad` or similar method:
+  
+```objc
+[self observeProperty:@"view.backgroundColor"
+            withBlock:^(__weak UIViewController *self, UIColor *oldColor, UIColor *newColor) {
+    NSLog(@"Background color changed from %@ to %@", oldColor, newColor);
+}];
+```
 
-        [self removeAllBlockObservers];
+```objc
+[self map:@"profile.username" to:@"usernameLabel.text" transform:^NSString *(NSString *username) {
+    return username ?: @"Loading...";
+}];
+```
 
-Other methods in [`NSObject+MTKBlockObserving.h`](/blob/master/BlockObserving/NSObject%2BMTKBlockObserving.h) are for more advanced use, for example for observing collections/relationships or removing single block observers.
+  2. In `dealloc` method:
 
-**TODO:** Add documentation comments.
+```objc
+[self removeAllObservations];
+````
+
+
+---------
+
+**TODO:** Test relationship observations in real project.
