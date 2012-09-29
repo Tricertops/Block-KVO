@@ -24,9 +24,9 @@ Example
   1. In `init`, `viewDidLoad` or similar method:
   
 ```objc
-[self observe:@"window.rootViewController.title"
-    withBlock:^(NSString *oldRootTitle, NSString *newRootTitle) {
-        NSLog(@"Root view controller's title changed from '%@' to '%@'.", oldRootTitle, newRootTitle);
+[self observe:@"view.backgroundColor"
+    withBlock:^(UIColor *oldColor, UIColor *newColor) {
+        NSLog(@"Background color of view changed from '%@' to '%@'.", oldColor, newColor);
 }];
 ```
 
