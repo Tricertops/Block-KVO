@@ -1,5 +1,5 @@
-Block KVO
-=========
+Block KVO 2.0
+=============
 
 Overview
 --------
@@ -21,7 +21,7 @@ Requirements
 Example
 -------
 
-  1. In `init`, `viewDidLoad` or similar method:
+  - In `init`, `viewDidLoad` or similar method:
   
 ```objc
 [self observeProperty:@"view.backgroundColor"
@@ -36,7 +36,7 @@ Example
 }];
 ```
 
-  2. In `dealloc` method:
+  - In `dealloc` method:
 
 ```objc
 [self removeAllObservations];
