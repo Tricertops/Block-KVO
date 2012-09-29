@@ -23,7 +23,7 @@ Example
 
   1. In `init`, `viewDidLoad` or similar method:
   
-```
+```objc
 [self observe:@"window.rootViewController.title"
     withBlock:^(NSString *oldRootTitle, NSString *newRootTitle) {
         NSLog(@"Root view controller's title changed from '%@' to '%@'.", oldRootTitle, newRootTitle);
