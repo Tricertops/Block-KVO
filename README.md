@@ -32,7 +32,7 @@ Example
 
   2. In `dealloc` method:
 
-```
+```objc
 [self removeAllBlockObservers];
 ````
 
