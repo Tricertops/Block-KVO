@@ -50,19 +50,19 @@
 
 
 
-- (void)addSettingObservationBlock:(void (^)(__weak id self, id old, id new))block {
+- (void)addSettingObservationBlock:(MTKObservationChangeBlock)block {
     [self.afterSettingBlocks addObject:[block copy]];
 }
 
-- (void)addInsertionObservationBlock:(void (^)(__weak id self, id new, NSIndexSet *indexes))block {
+- (void)addInsertionObservationBlock:(MTKObservationInsertionBlock)block {
     [self.afterInsertionBlocks addObject:block];
 }
 
-- (void)addRemovalObservationBlock:(void (^)(__weak id self, id old, NSIndexSet *indexes))block {
+- (void)addRemovalObservationBlock:(MTKObservationRemovalBlock)block {
     [self.afterRemovalBlocks addObject:block];
 }
 
-- (void)addReplacementObservationBlock:(void (^)(__weak id self, id old, id new, NSIndexSet *indexes))block {
+- (void)addReplacementObservationBlock:(MTKObservationReplacementBlock)block {
     [self.afterReplacementBlocks addObject:block];
 }
 
@@ -123,25 +123,25 @@
 }
 
 - (void)executeAfterSettingBlocksOld:(id)old new:(id)new {
-    for (void (^block)(__weak id self, id old, id new) in self.afterSettingBlocks) {
+    for (MTKObservationChangeBlock block in self.afterSettingBlocks) {
         block(self.target, old, new);
     }
 }
 
 - (void)executeAfterInsertionBlocksNew:(id)new indexes:(NSIndexSet *)indexes {
-    for (void (^block)(__weak id self, id new, NSIndexSet *indexes) in self.afterInsertionBlocks) {
+    for (MTKObservationInsertionBlock block in self.afterInsertionBlocks) {
         block(self.target, new, indexes);
     }
 }
 
 - (void)executeAfterRemovalBlocksOld:(id)old indexes:(NSIndexSet *)indexes {
-    for (void (^block)(__weak id self, id old, NSIndexSet *indexes) in self.afterRemovalBlocks) {
+    for (MTKObservationRemovalBlock block in self.afterRemovalBlocks) {
         block(self.target, old, indexes);
     }
 }
 
 - (void)executeAfterReplacementBlocksOld:(id)old new:(id)new indexes:(NSIndexSet *)indexes {
-    for (void (^block)(__weak id self, id old, id new, NSIndexSet *indexes) in self.afterReplacementBlocks) {
+    for (MTKObservationReplacementBlock block in self.afterReplacementBlocks) {
         block(self.target, old, new, indexes);
     }
 }

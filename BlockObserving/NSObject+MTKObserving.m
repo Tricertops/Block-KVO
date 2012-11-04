@@ -14,13 +14,14 @@
 
 
 
-
+///////////////
 @implementation NSObject (MTKObserving)
 
 
 
 #pragma mark Internal
 
+///
 - (NSMutableDictionary *)blockObservers {
     // Observer is a shadow object that has target this object (`self`) and specific key path.
     // There should never exist two or more observers with the same target AND key path.
@@ -37,6 +38,7 @@
     return blockObservers;
 }
 
+///
 - (MTKObserver *)observerForKeyPath:(NSString *)keyPath {
     // Key path is used as key to retrieve observer.
     MTKObserver *observer = [[self blockObservers] objectForKey:keyPath];
@@ -48,35 +50,52 @@
     return observer;
 }
 
-- (void)observeProperty:(NSString *)keyPath
-              withBlock:(void (^)(__weak id self,
-                                  id old,
-                                  id new))observationBlock {
+
+
+#pragma mark Property
+
+///
+- (void)observeProperty:(NSString *)keyPath withBlock:(MTKObservationChangeBlock)observationBlock {
     MTKObserver *observer = [self observerForKeyPath:keyPath];
     [observer addSettingObservationBlock:observationBlock];
 }
 
-- (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath transform:(id (^)(id))transformationBlock {
-    [self observeProperty:sourceKeyPath withBlock:^(__weak id self, id old, id new) {
-        id transformedValue = (transformationBlock? transformationBlock(new) : new);
-        [self setValue:transformedValue forKeyPath:destinationKeyPath];
+///
+- (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKObservationChangeBlockMany)observationBlock {
+    MTKObservationChangeBlock singleObservationBlock = ^(__weak id weakSelf, id old , id new){
+        observationBlock(weakSelf);
+    };
+    MTKObservationChangeBlock singleObservationBlockCopy = [singleObservationBlock copy];
+    for (NSString *keyPath in keyPaths) {
+        [self observeProperty:keyPath withBlock:singleObservationBlockCopy];
+    }
+}
+
+///
+- (void)observeProperty:(NSString *)keyPath withSelector:(SEL)observationSelector {
+    [self observeProperty:keyPath withBlock:^(__weak id self, id old, id new) {
+        [self performSelector:observationSelector withObject:old withObject:new];
     }];
 }
 
+///
+- (void)observeProperties:(NSArray *)keyPaths withSelector:(SEL)observationSelector {
+    for (NSString *keyPath in keyPaths) {
+        [self observeProperty:keyPath withSelector:observationSelector];
+    }
+}
+
+
+
+#pragma mark Relationship
+
+///
 - (void)observeRelationship:(NSString *)keyPath
-                changeBlock:(void (^)(id self,
-                                      id old,
-                                      id new))changeBlock
-             insertionBlock:(void (^)(id self,
-                                      id news,
-                                      NSIndexSet *indexes))insertionBlock
-               removalBlock:(void (^)(id self,
-                                      id olds,
-                                      NSIndexSet *indexes))removalBlock
-           replacementBlock:(void (^)(id self,
-                                      id olds,
-                                      id news,
-                                      NSIndexSet *indexes))replacementBlock {
+                changeBlock:(MTKObservationChangeBlock)changeBlock
+             insertionBlock:(MTKObservationInsertionBlock)insertionBlock
+               removalBlock:(MTKObservationRemovalBlock)removalBlock
+           replacementBlock:(MTKObservationReplacementBlock)replacementBlock
+{
     MTKObserver *observer = [self observerForKeyPath:keyPath];
     [observer addSettingObservationBlock:changeBlock];
     [observer addInsertionObservationBlock: insertionBlock ?: ^(__weak id self, id new, NSIndexSet *indexes) {
@@ -93,6 +112,40 @@
     }];
 }
 
+///
+- (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKObservationChangeBlock)changeBlock {
+    [self observeRelationship:keyPath changeBlock:changeBlock insertionBlock:nil removalBlock:nil replacementBlock:nil];
+}
+
+
+
+#pragma mark Mapping
+
+///
+- (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath null:(id)nullReplacement {
+    [self map:sourceKeyPath to:destinationKeyPath transform:^id(id value) {
+        return value ?: nullReplacement;
+    }];
+}
+
+///
+- (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath transform:(id (^)(id))transformationBlock {
+    [self observeProperty:sourceKeyPath withBlock:^(__weak id self, id old, id new) {
+        id transformedValue = (transformationBlock? transformationBlock(new) : new);
+        id existingValue = [self valueForKeyPath:destinationKeyPath];
+        // Equality check including `nil` == `nil`
+        if (existingValue != transformedValue && ! (existingValue && [transformedValue isEqual:existingValue])) {
+            [self setValue:transformedValue forKeyPath:destinationKeyPath];
+        }
+     
+    }];
+}
+
+
+
+#pragma Cleanup
+
+///
 - (void)removeAllObservations {
     [[self.blockObservers allValues] makeObjectsPerformSelector:@selector(detach)];
     [self.blockObservers removeAllObjects];

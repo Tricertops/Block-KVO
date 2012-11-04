@@ -7,16 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "MTKObserver.h"
 
 
 
+//////////
 @interface NSObject (MTKObserving)
 
 
+
 /**
- 
  Registers observation block for the specified key-path relative to the receiver. **Object should only observe itself,
  so call this method on `self`.**
  
@@ -25,7 +25,7 @@
  
  This block has also reference to the receiver (which should always be the caller). This internal `self` makes it easier
  to avoid retain cycles. It overrides local variable `self` (method argument) and declares it as weak. **Use of this weak
-`self` inside the block does not create retain cycle.** To make sure “outside” and “inside” `self` variables contains the same
+ `self` inside the block does not create retain cycle.** To make sure “outside” and “inside” `self` variables contains the same
  object, caller should always be the receiver.
  
  If you call this method multiple times on the same key-path it is guaranteed they will be executed in the same order.
@@ -35,20 +35,51 @@
  
  @param observationBlock
  Block to be executed when the value on specified key-path changes. This value must not be `nil`.
- 
  */
-- (void)observeProperty:(NSString *)keyPath
-              withBlock:(void (^)(__weak id self,
-                                  id old,
-                                  id new))observationBlock;
+- (void)observeProperty:(NSString *)keyPath withBlock:(MTKObservationChangeBlock)observationBlock;
+
 
 /**
- 
+ Calls `-observeProperty:withBlock:` for each key-path.
+ */
+- (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKObservationChangeBlockMany)observationBlock;
+
+
+/**
+ Calls `-observeProperty:withBlock:` with block that performs given selector. Selector may optionaly receive up to two arguments: old and new value.
+ */
+- (void)observeProperty:(NSString *)keyPath withSelector:(SEL)observationSelector;
+
+
+/**
+ Calls `-observeProperty:withSelector:` for each key-path.
+ */
+- (void)observeProperties:(NSArray *)keyPaths withSelector:(SEL)observationSelector;
+
+
+/**
+ (To be added.)
+ */
+- (void)observeRelationship:(NSString *)keyPath
+                changeBlock:(MTKObservationChangeBlock)changeBlock
+             insertionBlock:(MTKObservationInsertionBlock)insertionBlock
+               removalBlock:(MTKObservationRemovalBlock)removalBlock
+           replacementBlock:(MTKObservationReplacementBlock)replacementBlock;
+
+/**
+ Calls `- (void)observeRelationship:changeBlock:insertionBlock:removalBlock:replacementBlock:` with only change block.
+ */
+- (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKObservationChangeBlock)changeBlock;
+
+
+/**
  Creates one direntional binding from source to destination key-paths. This method calls `-observeProperty:withBlock:`,
  so the same rules apply.
  
  This method begins observing the source key-path and everytime time value changes, executes transformatinon block, if
  any. Then it sets this value to destination key-path.
+ 
+ Method is recursion-safe, so you can create bi-directional bindings.
  
  @param sourceKeyPath
  Key-path relative to the receiver that will be observed. This value must not be `nil`.
@@ -59,36 +90,18 @@
  @param transformationBlock
  Optional block that takes the value from source as argument and its returned value will be set to destination. Here you
  are supposed to make any transformations needed. There is no internal check for returned value.
- 
  */
-- (void)map:(NSString *)sourceKeyPath
-         to:(NSString *)destinationKeyPath
-  transform:(id (^)(id value))transformationBlock;
+- (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath transform:(id (^)(id value))transformationBlock;
+
 
 /**
- 
- ...
- 
+ Calls `- (void)map:to:transform:` with transformation block that replaces `nil` value by given object.
  */
-- (void)observeRelationship:(NSString *)keyPath
-                changeBlock:(void (^)(id self,
-                                      id old,
-                                      id new))changeBlock
-             insertionBlock:(void (^)(id self,
-                                      id news,
-                                      NSIndexSet *indexes))insertionBlock
-               removalBlock:(void (^)(id self,
-                                      id olds,
-                                      NSIndexSet *indexes))removalBlock
-           replacementBlock:(void (^)(id self,
-                                      id olds,
-                                      id news,
-                                      NSIndexSet *indexes))replacementBlock;
+- (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath null:(id)nullReplacement;
+
 
 /**
- 
- Removes all observations registered with the receiver. Should be always called on `self` in `dealloc` method.
- 
+ Removes all observations registered with the receiver. Should be always called on `self` in `-dealloc` method.
  */
 - (void)removeAllObservations;
 

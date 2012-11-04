@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 
 
+typedef void(^MTKObservationChangeBlock)(__weak id self, id old, id new);
+typedef void(^MTKObservationChangeBlockMany)(__weak id self);
+typedef void(^MTKObservationInsertionBlock)(__weak id self, id new, NSIndexSet *indexes);
+typedef void(^MTKObservationRemovalBlock)(__weak id self, id old, NSIndexSet *indexes);
+typedef void(^MTKObservationReplacementBlock)(__weak id self, id old, id new, NSIndexSet *indexes);
+
 
 @interface MTKObserver : NSObject
 
@@ -18,9 +24,9 @@
 
 - (id)initWithTarget:(NSObject *)target keyPath:(NSString *)keyPath;
 
-- (void)addSettingObservationBlock:(void (^)(__weak id self, id old, id new))block;
-- (void)addInsertionObservationBlock:(void (^)(__weak id self, id new, NSIndexSet *indexes))block;
-- (void)addRemovalObservationBlock:(void (^)(__weak id self, id old, NSIndexSet *indexes))block;
-- (void)addReplacementObservationBlock:(void (^)(__weak id self, id old, id new, NSIndexSet *indexes))block;
+- (void)addSettingObservationBlock:(MTKObservationChangeBlock)block;
+- (void)addInsertionObservationBlock:(MTKObservationInsertionBlock)block;
+- (void)addRemovalObservationBlock:(MTKObservationRemovalBlock)block;
+- (void)addReplacementObservationBlock:(MTKObservationReplacementBlock)block;
 
 @end

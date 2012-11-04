@@ -10,6 +10,8 @@
 		5B4781F216160823006609A1 /* MTKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B4781F016160823006609A1 /* MTKObserver.h */; };
 		5B4781F316160823006609A1 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4781F116160823006609A1 /* MTKObserver.m */; };
 		5B4781F516162174006609A1 /* MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD91D015B18C4800E3A100 /* MTKObserving.h */; };
+		5B9C0F6C1646A75F004F157B /* MTKObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B9C0F6B1646A75F004F157B /* MTKObservable.h */; };
+		5B9C0F6F1646B201004F157B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B9C0F6E1646B201004F157B /* Default-568h@2x.png */; };
 		5BAD91CC15B18C4800E3A100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91BC15B18BF700E3A100 /* Foundation.framework */; };
 		5BAD91F215B18DD700E3A100 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91F115B18DD700E3A100 /* UIKit.framework */; };
 		5BAD91F315B18DD700E3A100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91BC15B18BF700E3A100 /* Foundation.framework */; };
@@ -34,6 +36,8 @@
 /* Begin PBXFileReference section */
 		5B4781F016160823006609A1 /* MTKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserver.h; sourceTree = "<group>"; };
 		5B4781F116160823006609A1 /* MTKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKObserver.m; sourceTree = "<group>"; };
+		5B9C0F6B1646A75F004F157B /* MTKObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObservable.h; sourceTree = "<group>"; };
+		5B9C0F6E1646B201004F157B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5BAD91BC15B18BF700E3A100 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlockObserving.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BAD91D015B18C4800E3A100 /* MTKObserving.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTKObserving.h; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 		5BAD91AC15B18B1200E3A100 = {
 			isa = PBXGroup;
 			children = (
+				5B9C0F6E1646B201004F157B /* Default-568h@2x.png */,
 				5BAD91CD15B18C4800E3A100 /* BlockObserving */,
 				5BAD91F615B18DD700E3A100 /* BlockObservingAppIOS */,
 				5BAD91BB15B18BF700E3A100 /* Frameworks */,
@@ -107,6 +112,7 @@
 				5BAD91D015B18C4800E3A100 /* MTKObserving.h */,
 				5BAD920E15B18F1700E3A100 /* NSObject+MTKObserving.h */,
 				5BAD920F15B18F1700E3A100 /* NSObject+MTKObserving.m */,
+				5B9C0F6B1646A75F004F157B /* MTKObservable.h */,
 				5B4781F016160823006609A1 /* MTKObserver.h */,
 				5B4781F116160823006609A1 /* MTKObserver.m */,
 			);
@@ -135,6 +141,7 @@
 				5BAD921015B18F1700E3A100 /* NSObject+MTKObserving.h in Headers */,
 				5B4781F216160823006609A1 /* MTKObserver.h in Headers */,
 				5B4781F516162174006609A1 /* MTKObserving.h in Headers */,
+				5B9C0F6C1646A75F004F157B /* MTKObservable.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +216,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B9C0F6F1646B201004F157B /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +289,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
 			name = Debug;
 		};
@@ -303,6 +312,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
+				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
 			name = Release;
 		};
