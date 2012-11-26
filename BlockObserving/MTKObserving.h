@@ -8,3 +8,5 @@
 
 #import "MTKObserver.h"
 #import "NSObject+MTKObserving.h"
+
+#import "keypath.h" // for the cool `@keypath` syntax
