@@ -41,7 +41,7 @@
         self.keyPath = keyPath;
         
         self.afterSettingBlocks = [[NSMutableArray alloc] init];
-        self.afterSettingBlocks = [[NSMutableArray alloc] init];
+        self.afterInsertionBlocks = [[NSMutableArray alloc] init];
         self.afterRemovalBlocks = [[NSMutableArray alloc] init];
         self.afterReplacementBlocks = [[NSMutableArray alloc] init];
     }
@@ -52,6 +52,7 @@
 
 - (void)addSettingObservationBlock:(MTKObservationChangeBlock)block {
     [self.afterSettingBlocks addObject:[block copy]];
+    block(self.target, nil, [self.target valueForKeyPath:self.keyPath]);
 }
 
 - (void)addInsertionObservationBlock:(MTKObservationInsertionBlock)block {
