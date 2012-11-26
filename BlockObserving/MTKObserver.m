@@ -124,24 +124,33 @@
 }
 
 - (void)executeAfterSettingBlocksOld:(id)old new:(id)new {
+    if (old == new || (old && [new isEqual:old])) return;
+    
     for (MTKObservationChangeBlock block in self.afterSettingBlocks) {
         block(self.target, old, new);
     }
 }
 
 - (void)executeAfterInsertionBlocksNew:(id)new indexes:(NSIndexSet *)indexes {
+    if ([new respondsToSelector:@selector(count)] && [new count] == 0) return;
+    
     for (MTKObservationInsertionBlock block in self.afterInsertionBlocks) {
         block(self.target, new, indexes);
     }
 }
 
 - (void)executeAfterRemovalBlocksOld:(id)old indexes:(NSIndexSet *)indexes {
+    if ([old respondsToSelector:@selector(count)] && [old count] == 0) return;
+    
     for (MTKObservationRemovalBlock block in self.afterRemovalBlocks) {
         block(self.target, old, indexes);
     }
 }
 
 - (void)executeAfterReplacementBlocksOld:(id)old new:(id)new indexes:(NSIndexSet *)indexes {
+    if ([old respondsToSelector:@selector(count)] && [old count] == 0) return;
+    if ([new respondsToSelector:@selector(count)] && [new count] == 0) return;
+    
     for (MTKObservationReplacementBlock block in self.afterReplacementBlocks) {
         block(self.target, old, new, indexes);
     }

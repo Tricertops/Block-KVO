@@ -132,12 +132,7 @@
 - (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath transform:(id (^)(id))transformationBlock {
     [self observeProperty:sourceKeyPath withBlock:^(__weak id self, id old, id new) {
         id transformedValue = (transformationBlock? transformationBlock(new) : new);
-        id existingValue = [self valueForKeyPath:destinationKeyPath];
-        // Equality check including `nil` == `nil`
-        if (existingValue != transformedValue && ! (existingValue && [transformedValue isEqual:existingValue])) {
-            [self setValue:transformedValue forKeyPath:destinationKeyPath];
-        }
-     
+        [self setValue:transformedValue forKeyPath:destinationKeyPath];
     }];
 }
 
