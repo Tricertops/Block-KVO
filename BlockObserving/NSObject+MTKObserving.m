@@ -73,8 +73,27 @@
 
 ///
 - (void)observeProperty:(NSString *)keyPath withSelector:(SEL)observationSelector {
+    NSMethodSignature *signature = [self methodSignatureForSelector:observationSelector];
+    NSInteger numberOfArguments = [signature numberOfArguments];
     [self observeProperty:keyPath withBlock:^(__weak id self, id old, id new) {
-        [self performSelector:observationSelector withObject:old withObject:new];
+        switch (numberOfArguments) {
+            case 0:
+            case 1:
+                [NSException raise:NSInternalInconsistencyException format:@"What the fuck?! Method should have at least two arguments!"];
+                break;
+                
+            case 2:
+                [self performSelector:observationSelector];
+                break;
+                
+            case 3:
+                [self performSelector:observationSelector withObject:new];
+                break;
+                
+            default:
+                [self performSelector:observationSelector withObject:old withObject:new];
+                break;
+        }
     }];
 }
 
