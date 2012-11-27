@@ -72,6 +72,7 @@
     if (attached != NO) {
         attached = YES;
     }
+    // Do not catch exceptions, observing invalid key-path is considered programmer error.
     if (self->_attached != attached) {
         self->_attached = attached;
         if (attached) {

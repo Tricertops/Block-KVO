@@ -16,17 +16,35 @@ typedef void(^MTKObservationRemovalBlock)(__weak id self, id old, NSIndexSet *in
 typedef void(^MTKObservationReplacementBlock)(__weak id self, id old, id new, NSIndexSet *indexes);
 
 
+
 @interface MTKObserver : NSObject
 
-@property (nonatomic, readwrite, assign) BOOL attached;
-- (void)attach;
-- (void)detach;
 
+#pragma mark Initialization
+/// Do not use. Observation target will be nil, so any calls to it will have no effect.
+- (id)init;
+/// Designated initializer.
 - (id)initWithTarget:(NSObject *)target keyPath:(NSString *)keyPath;
 
+
+#pragma mark Attaching
+/// Attached means, that this object really observes the key-path it was initialized with. Set it to add/remove this observer.
+@property (nonatomic, readwrite, assign) BOOL attached;
+/// Convenience method to set `attached` to YES.
+- (void)attach;
+/// Convenience method to set `attached` to NO.
+- (void)detach;
+
+
+#pragma mark Blocks
+/// Append block to be executed on key-path setting.
 - (void)addSettingObservationBlock:(MTKObservationChangeBlock)block;
+/// Append block to be executed on key-path relationship insertion.
 - (void)addInsertionObservationBlock:(MTKObservationInsertionBlock)block;
+/// Append block to be executed on key-path relationship removal.
 - (void)addRemovalObservationBlock:(MTKObservationRemovalBlock)block;
+/// Append block to be executed on key-path relationship replacement.
 - (void)addReplacementObservationBlock:(MTKObservationReplacementBlock)block;
+
 
 @end

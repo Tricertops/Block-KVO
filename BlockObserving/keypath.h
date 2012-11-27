@@ -6,6 +6,7 @@
 //  Copyright (C) 2012 Justin Spahr-Summers.
 //  Released under the MIT license.
 //
+//  Source file from: https://github.com/jspahrsummers/libextobjc
 
 #import <Foundation/Foundation.h>
 #import "metamacros.h"
