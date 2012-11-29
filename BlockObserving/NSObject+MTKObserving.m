@@ -22,7 +22,7 @@
 #pragma mark Internal
 
 /// Getter for dictionary containing all registered observers for this object. Keys are observed key-paths.
-- (NSMutableDictionary *)blockObservers {
+- (NSMutableDictionary *)mtk_keyPathBlockObservers {
     // Observer is a shadow object that has target this object (`self`) and specific key path.
     // There should never exist two or more observers with the same target AND key path.
     // Observer has multiple observation block which are executed in order they were added.
@@ -39,12 +39,12 @@
 }
 
 /// Find existing observer or create new for this key-path. Multiple uses of one key-path return the same observer.
-- (MTKObserver *)observerForKeyPath:(NSString *)keyPath {
+- (MTKObserver *)mtk_observerForKeyPath:(NSString *)keyPath {
     // Key path is used as key to retrieve observer.
-    MTKObserver *observer = [[self blockObservers] objectForKey:keyPath];
+    MTKObserver *observer = [[self mtk_keyPathBlockObservers] objectForKey:keyPath];
     if ( ! observer) {
         observer = [[MTKObserver alloc] initWithTarget:self keyPath:keyPath];
-        [self.blockObservers setObject:observer forKey:keyPath];
+        [self.mtk_keyPathBlockObservers setObject:observer forKey:keyPath];
         [observer attach];
     }
     return observer;
@@ -56,19 +56,16 @@
 
 /// Add observation block to appropriate observer for setting the value.
 - (void)observeProperty:(NSString *)keyPath withBlock:(MTKObservationChangeBlock)observationBlock {
-    MTKObserver *observer = [self observerForKeyPath:keyPath];
+    MTKObserver *observer = [self mtk_observerForKeyPath:keyPath];
     [observer addSettingObservationBlock:observationBlock];
 }
 
 /// Copy the block and register it for all given key-paths.
 - (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKObservationChangeBlockMany)observationBlock {
-    MTKObservationChangeBlock singleObservationBlock = ^(__weak id weakSelf, id old , id new){
-        observationBlock(weakSelf);
-    };
-    // This should reduce memroy footprint, the block should have only one copy (not sure how blocks are stored in memory, so this may be useless)
-    MTKObservationChangeBlock singleObservationBlockCopy = [singleObservationBlock copy];
     for (NSString *keyPath in keyPaths) {
-        [self observeProperty:keyPath withBlock:singleObservationBlockCopy];
+        [self observeProperty:keyPath withBlock:^(__weak id weakSelf, id old , id new){
+            observationBlock(weakSelf, keyPath, old, new);
+        }];
     }
 }
 
@@ -116,7 +113,7 @@
                removalBlock:(MTKObservationRemovalBlock)removalBlock
            replacementBlock:(MTKObservationReplacementBlock)replacementBlock
 {
-    MTKObserver *observer = [self observerForKeyPath:keyPath];
+    MTKObserver *observer = [self mtk_observerForKeyPath:keyPath];
     [observer addSettingObservationBlock:changeBlock];
     [observer addInsertionObservationBlock: insertionBlock ?: ^(__weak id self, id new, NSIndexSet *indexes) {
         // If no insertion block was specified, call general change block.
@@ -162,8 +159,9 @@
 
 /// Called usually from dealloc (may be called at any time). Detach all observers. The associated dictionary is released once the deallocation process finishes.
 - (void)removeAllObservations {
-    [[self.blockObservers allValues] makeObjectsPerformSelector:@selector(detach)];
-    [self.blockObservers removeAllObjects];
+    NSMutableDictionary *keyPathBlockObservers = self.mtk_keyPathBlockObservers;
+    [[keyPathBlockObservers allValues] makeObjectsPerformSelector:@selector(detach)];
+    [keyPathBlockObservers removeAllObjects];
 }
 
 

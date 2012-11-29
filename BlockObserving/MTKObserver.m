@@ -34,6 +34,10 @@
 
 
 
+- (id)init {
+    return [self initWithTarget:nil keyPath:nil];
+}
+
 - (id)initWithTarget:(NSObject *)target keyPath:(NSString *)keyPath {
     self = [super init];
     if (self) {

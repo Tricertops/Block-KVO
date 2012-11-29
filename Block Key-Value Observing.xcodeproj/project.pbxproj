@@ -10,7 +10,6 @@
 		5B4781F216160823006609A1 /* MTKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B4781F016160823006609A1 /* MTKObserver.h */; };
 		5B4781F316160823006609A1 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4781F116160823006609A1 /* MTKObserver.m */; };
 		5B4781F516162174006609A1 /* MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD91D015B18C4800E3A100 /* MTKObserving.h */; };
-		5B9C0F6C1646A75F004F157B /* MTKObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B9C0F6B1646A75F004F157B /* MTKObservable.h */; };
 		5B9C0F6F1646B201004F157B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B9C0F6E1646B201004F157B /* Default-568h@2x.png */; };
 		5BA9CDB1166396940090819D /* keypath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BA9CDAF166396940090819D /* keypath.h */; };
 		5BA9CDB2166396940090819D /* metamacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BA9CDB0166396940090819D /* metamacros.h */; };
@@ -38,7 +37,6 @@
 /* Begin PBXFileReference section */
 		5B4781F016160823006609A1 /* MTKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserver.h; sourceTree = "<group>"; };
 		5B4781F116160823006609A1 /* MTKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKObserver.m; sourceTree = "<group>"; };
-		5B9C0F6B1646A75F004F157B /* MTKObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObservable.h; sourceTree = "<group>"; };
 		5B9C0F6E1646B201004F157B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		5BA9CDAF166396940090819D /* keypath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keypath.h; sourceTree = "<group>"; };
 		5BA9CDB0166396940090819D /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 				5BAD91D015B18C4800E3A100 /* MTKObserving.h */,
 				5BAD920E15B18F1700E3A100 /* NSObject+MTKObserving.h */,
 				5BAD920F15B18F1700E3A100 /* NSObject+MTKObserving.m */,
-				5B9C0F6B1646A75F004F157B /* MTKObservable.h */,
 				5B4781F016160823006609A1 /* MTKObserver.h */,
 				5B4781F116160823006609A1 /* MTKObserver.m */,
 				5BA9CDAF166396940090819D /* keypath.h */,
@@ -147,7 +144,6 @@
 				5BAD921015B18F1700E3A100 /* NSObject+MTKObserving.h in Headers */,
 				5B4781F216160823006609A1 /* MTKObserver.h in Headers */,
 				5B4781F516162174006609A1 /* MTKObserving.h in Headers */,
-				5B9C0F6C1646A75F004F157B /* MTKObservable.h in Headers */,
 				5BA9CDB1166396940090819D /* keypath.h in Headers */,
 				5BA9CDB2166396940090819D /* metamacros.h in Headers */,
 			);
