@@ -6,7 +6,11 @@
 //  Copyright (c) 2012 iMartin Kiss. All rights reserved.
 //
 
-#import "MTKObserver.h"
+/// Contains the public interface
 #import "NSObject+MTKObserving.h"
 
-#import "keypath.h" // for the cool `@keypath` syntax
+/// Internal Implementation
+#import "MTKObserver.h"
+
+/// For the cool `@keypath` syntax
+#import "keypath.h"

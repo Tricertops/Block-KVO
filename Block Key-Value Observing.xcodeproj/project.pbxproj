@@ -7,26 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B4781F216160823006609A1 /* MTKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B4781F016160823006609A1 /* MTKObserver.h */; };
-		5B4781F316160823006609A1 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4781F116160823006609A1 /* MTKObserver.m */; };
-		5B4781F516162174006609A1 /* MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD91D015B18C4800E3A100 /* MTKObserving.h */; };
-		5BA9CDB1166396940090819D /* keypath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BA9CDAF166396940090819D /* keypath.h */; };
-		5BA9CDB2166396940090819D /* metamacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BA9CDB0166396940090819D /* metamacros.h */; };
+		5B7A2BFE16AFDE05009214C9 /* keypath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BF716AFDE05009214C9 /* keypath.h */; };
+		5B7A2BFF16AFDE05009214C9 /* metamacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BF816AFDE05009214C9 /* metamacros.h */; };
+		5B7A2C0016AFDE05009214C9 /* MTKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BF916AFDE05009214C9 /* MTKObserver.h */; };
+		5B7A2C0116AFDE05009214C9 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A2BFA16AFDE05009214C9 /* MTKObserver.m */; };
+		5B7A2C0216AFDE05009214C9 /* MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFB16AFDE05009214C9 /* MTKObserving.h */; };
+		5B7A2C0316AFDE05009214C9 /* NSObject+MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFC16AFDE05009214C9 /* NSObject+MTKObserving.h */; };
+		5B7A2C0416AFDE05009214C9 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */; };
 		5BAD91CC15B18C4800E3A100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91BC15B18BF700E3A100 /* Foundation.framework */; };
-		5BAD921015B18F1700E3A100 /* NSObject+MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BAD920E15B18F1700E3A100 /* NSObject+MTKObserving.h */; };
-		5BAD921115B18F1700E3A100 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD920F15B18F1700E3A100 /* NSObject+MTKObserving.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5B4781F016160823006609A1 /* MTKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserver.h; sourceTree = "<group>"; };
-		5B4781F116160823006609A1 /* MTKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKObserver.m; sourceTree = "<group>"; };
-		5BA9CDAF166396940090819D /* keypath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keypath.h; sourceTree = "<group>"; };
-		5BA9CDB0166396940090819D /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
+		5B7A2BF716AFDE05009214C9 /* keypath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keypath.h; sourceTree = "<group>"; };
+		5B7A2BF816AFDE05009214C9 /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
+		5B7A2BF916AFDE05009214C9 /* MTKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserver.h; sourceTree = "<group>"; };
+		5B7A2BFA16AFDE05009214C9 /* MTKObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKObserver.m; sourceTree = "<group>"; };
+		5B7A2BFB16AFDE05009214C9 /* MTKObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTKObserving.h; path = Sources/MTKObserving.h; sourceTree = "<group>"; };
+		5B7A2BFC16AFDE05009214C9 /* NSObject+MTKObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MTKObserving.h"; sourceTree = "<group>"; };
+		5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MTKObserving.m"; sourceTree = "<group>"; };
 		5BAD91BC15B18BF700E3A100 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlockObserving.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5BAD91D015B18C4800E3A100 /* MTKObserving.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTKObserving.h; sourceTree = "<group>"; };
-		5BAD920E15B18F1700E3A100 /* NSObject+MTKObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MTKObserving.h"; sourceTree = "<group>"; };
-		5BAD920F15B18F1700E3A100 /* NSObject+MTKObserving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MTKObserving.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,10 +41,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B7A2BF516AFDE05009214C9 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5B7A2BF916AFDE05009214C9 /* MTKObserver.h */,
+				5B7A2BFA16AFDE05009214C9 /* MTKObserver.m */,
+				5B7A2BFC16AFDE05009214C9 /* NSObject+MTKObserving.h */,
+				5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */,
+				5B7A2BF616AFDE05009214C9 /* Keypath */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		5B7A2BF616AFDE05009214C9 /* Keypath */ = {
+			isa = PBXGroup;
+			children = (
+				5B7A2BF716AFDE05009214C9 /* keypath.h */,
+				5B7A2BF816AFDE05009214C9 /* metamacros.h */,
+			);
+			path = Keypath;
+			sourceTree = "<group>";
+		};
 		5BAD91AC15B18B1200E3A100 = {
 			isa = PBXGroup;
 			children = (
-				5BAD91CD15B18C4800E3A100 /* BlockObserving */,
+				5B7A2BFB16AFDE05009214C9 /* MTKObserving.h */,
+				5B7A2BF516AFDE05009214C9 /* Sources */,
 				5BAD91BB15B18BF700E3A100 /* Frameworks */,
 				5BAD91BA15B18BF700E3A100 /* Products */,
 			);
@@ -66,20 +88,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5BAD91CD15B18C4800E3A100 /* BlockObserving */ = {
-			isa = PBXGroup;
-			children = (
-				5BAD91D015B18C4800E3A100 /* MTKObserving.h */,
-				5BAD920E15B18F1700E3A100 /* NSObject+MTKObserving.h */,
-				5BAD920F15B18F1700E3A100 /* NSObject+MTKObserving.m */,
-				5B4781F016160823006609A1 /* MTKObserver.h */,
-				5B4781F116160823006609A1 /* MTKObserver.m */,
-				5BA9CDAF166396940090819D /* keypath.h */,
-				5BA9CDB0166396940090819D /* metamacros.h */,
-			);
-			path = BlockObserving;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -87,11 +95,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BAD921015B18F1700E3A100 /* NSObject+MTKObserving.h in Headers */,
-				5B4781F216160823006609A1 /* MTKObserver.h in Headers */,
-				5B4781F516162174006609A1 /* MTKObserving.h in Headers */,
-				5BA9CDB1166396940090819D /* keypath.h in Headers */,
-				5BA9CDB2166396940090819D /* metamacros.h in Headers */,
+				5B7A2BFE16AFDE05009214C9 /* keypath.h in Headers */,
+				5B7A2BFF16AFDE05009214C9 /* metamacros.h in Headers */,
+				5B7A2C0016AFDE05009214C9 /* MTKObserver.h in Headers */,
+				5B7A2C0216AFDE05009214C9 /* MTKObserving.h in Headers */,
+				5B7A2C0316AFDE05009214C9 /* NSObject+MTKObserving.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,8 +155,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BAD921115B18F1700E3A100 /* NSObject+MTKObserving.m in Sources */,
-				5B4781F316160823006609A1 /* MTKObserver.m in Sources */,
+				5B7A2C0116AFDE05009214C9 /* MTKObserver.m in Sources */,
+				5B7A2C0416AFDE05009214C9 /* NSObject+MTKObserving.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
