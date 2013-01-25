@@ -58,7 +58,34 @@
 
 
 /**
- (To be added.)
+ Observe relationship. See KVC documentation for full explanation how relationships work. Basically there are two options:
+ 
+	1. You implement KVC methods for relationship yourself.
+ 
+	2. Use Core Data relationships.
+ 
+ Relationship is a collection object (NSArray, NSSet, NSOrderedSet, maybe some other...) with accessor methods.
+ This collection should be modified only through these accessor for changes to be observable.
+ There are 3 way how the collection may be modified:
+ 
+	1. Insert one or more objects.
+	
+	2. Remove one or more objects.
+	
+	3. Replace one or more objects with the same number of other objects.
+ 
+ In addition there is fourth case of modification - you assign completely new collection object to the property (in case it has setter).
+ This method allows you to observe all 4 modifications to the relationship with one call using blocks.
+ 
+ Blocks that receive old and new values have declared arguments type as `id`. They are always of the same class as observed collection.
+ Some of the blocks have argument `indexes`. In case of non-indexed collection it contains `nil`.
+ This behavior is consistent with standard KVO observation method.
+ 
+ @param changeBlock Called when the collection is completely replaced by new collection. Called also for any other modification type where you do not specify any block.
+ @param insertionBlock Called when some objects are inserted into relationship. You receive those objects (in the same collection class) and their indexes (if the colelction is indexed). You may pass nil value and `changeBlock` will be invoked instead.
+ @param removalBlock Called when some objects are removed from relationship. You receive those objects (in the same collection class) and their past indexes (if the colelction is indexed). You may pass nil value and `changeBlock` will be invoked instead.
+ @param replacementBlock Called when some objects are replacedby other objects. You receive old and new objects (in the same collection class) and indexes (if the colelction is indexed). You may pass nil value and `changeBlock` will be invoked instead.
+ 
  */
 - (void)observeRelationship:(NSString *)keyPath
                 changeBlock:(MTKObservationChangeBlock)changeBlock
