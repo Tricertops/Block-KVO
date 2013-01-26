@@ -14,8 +14,8 @@
 
 @interface MTKObserver ()
 
-@property (nonatomic, readwrite, strong) id target;
-@property (nonatomic, readwrite, strong) NSString *keyPath;
+@property (nonatomic, readwrite, assign) id target;
+@property (nonatomic, readwrite, copy) NSString *keyPath;
 
 @property (nonatomic, readwrite, strong) NSMutableArray *afterSettingBlocks;
 @property (nonatomic, readwrite, strong) NSMutableArray *afterInsertionBlocks;
