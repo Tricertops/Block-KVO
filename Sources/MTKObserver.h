@@ -32,7 +32,12 @@ typedef void(^MTKObservationNotificationBlock)(__weak id self, NSNotification *n
 /// Do not use. Observation target will be nil, so any calls to it will have no effect.
 - (id)init;
 /// Designated initializer.
-- (id)initWithTarget:(NSObject *)target keyPath:(NSString *)keyPath;
+- (id)initWithTarget:(NSObject *)target keyPath:(NSString *)keyPath owner:(id)owner;
+
+
+#pragma mark Ownership
+/// Object that 'owns' all blocks in this observer. This object was the caller of observation method.
+@property (nonatomic, readonly, assign) id owner;
 
 
 #pragma mark Attaching

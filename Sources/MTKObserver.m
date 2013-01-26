@@ -14,8 +14,9 @@
 
 @interface MTKObserver ()
 
-@property (nonatomic, readwrite, strong) id target;
-@property (nonatomic, readwrite, strong) NSString *keyPath;
+@property (nonatomic, readwrite, assign) id target;
+@property (nonatomic, readwrite, copy) NSString *keyPath;
+@property (nonatomic, readwrite, assign) id owner;
 
 @property (nonatomic, readwrite, strong) NSMutableArray *afterSettingBlocks;
 @property (nonatomic, readwrite, strong) NSMutableArray *afterInsertionBlocks;
@@ -39,14 +40,15 @@
 #pragma mark Initialization
 
 - (id)init {
-    return [self initWithTarget:nil keyPath:nil];
+    return [self initWithTarget:nil keyPath:nil owner:nil];
 }
 
-- (id)initWithTarget:(NSObject *)target keyPath:(NSString *)keyPath {
+- (id)initWithTarget:(NSObject *)target keyPath:(NSString *)keyPath owner:(id)owner {
     self = [super init];
     if (self) {
         self.target = target;
         self.keyPath = keyPath;
+		self.owner = owner;
         
         self.afterSettingBlocks = [[NSMutableArray alloc] init];
         self.afterInsertionBlocks = [[NSMutableArray alloc] init];
@@ -54,6 +56,10 @@
         self.afterReplacementBlocks = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (void)dealloc {
+	NSLog(@"Observer dealloc %@ %@", self.target, self.keyPath);
 }
 
 

@@ -160,7 +160,15 @@
 
 
 
+#pragma mark Remote Property
+
+- (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKObservationChangeBlock)block;
+
+
+
 #pragma mark Removing
+
+- (void)removeAllObservationsForOwner:(id)owner;
 
 /**
  Removes all observations registered with the receiver. Should be always called on `self` in `-dealloc` method.
