@@ -52,7 +52,7 @@
 
 
 
-#pragma mark Property
+#pragma mark Observe Properties
 
 /// Add observation block to appropriate observer for setting the value.
 - (void)observeProperty:(NSString *)keyPath withBlock:(MTKObservationChangeBlock)observationBlock {
@@ -77,7 +77,7 @@
         switch (numberOfArguments) {
             case 0:
             case 1:
-                [NSException raise:NSInternalInconsistencyException format:@"What the fuck?! Method should have at least two arguments!"];
+                [NSException raise:NSInternalInconsistencyException format:@"WTF?! Method should have at least two arguments: self and _cmd!"];
                 break;
                 
             case 2:
@@ -104,7 +104,7 @@
 
 
 
-#pragma mark Relationship
+#pragma mark Observe Relationships
 
 /// Add observation blocks to appropriate observer. If some block was not specified, use the `changeBlock`.
 - (void)observeRelationship:(NSString *)keyPath
@@ -136,7 +136,7 @@
 
 
 
-#pragma mark Mapping
+#pragma mark Map Properties
 
 /// Call `-map:to:transform:` with transform block that uses returns the same value, or null replacement.
 - (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath null:(id)nullReplacement {
@@ -155,7 +155,7 @@
 
 
 
-#pragma Cleanup
+#pragma Removing
 
 /// Called usually from dealloc (may be called at any time). Detach all observers. The associated dictionary is released once the deallocation process finishes.
 - (void)removeAllObservations {

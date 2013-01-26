@@ -16,6 +16,8 @@
 
 
 
+#pragma mark Observe Properties
+
 /**
  Registers observation block for the specified key-path relative to the receiver. **Object should only observe itself,
  so call this method on `self`.**
@@ -56,6 +58,9 @@
  */
 - (void)observeProperties:(NSArray *)keyPaths withSelector:(SEL)observationSelector;
 
+
+
+#pragma mark Observe Relationships
 
 /**
  Observe relationship. See KVC documentation for full explanation how relationships work. Basically there are two options:
@@ -99,6 +104,9 @@
 - (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKObservationChangeBlock)changeBlock;
 
 
+
+#pragma mark Map Properties
+
 /**
  Creates one direntional binding from source to destination key-paths. This method calls `-observeProperty:withBlock:`,
  so the same rules apply.
@@ -126,6 +134,10 @@
  */
 - (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath null:(id)nullReplacement;
 
+
+
+
+#pragma mark Removing
 
 /**
  Removes all observations registered with the receiver. Should be always called on `self` in `-dealloc` method.
