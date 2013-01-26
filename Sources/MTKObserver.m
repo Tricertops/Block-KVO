@@ -18,6 +18,7 @@
 @property (nonatomic, readwrite, copy) NSString *keyPath;
 @property (nonatomic, readwrite, assign) id owner;
 
+
 @property (nonatomic, readwrite, strong) NSMutableArray *afterSettingBlocks;
 @property (nonatomic, readwrite, strong) NSMutableArray *afterInsertionBlocks;
 @property (nonatomic, readwrite, strong) NSMutableArray *afterRemovalBlocks;
