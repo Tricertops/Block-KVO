@@ -60,6 +60,18 @@
 
 
 
+#pragma mark Remote Property
+
+/**
+ Equivalents of above methods but allows you to observe specified object.
+ */
+- (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKObservationForeignChangeBlock)block;
+- (void)observeObject:(id)object property:(NSString *)keyPath withSelector:(SEL)selector;
+- (void)observeObject:(id)object properties:(NSArray *)keyPaths withBlock:(MTKObservationForeignChangeBlockMany)block;
+- (void)observeObject:(id)object properties:(NSArray *)keyPaths withSelector:(SEL)selector;
+
+
+
 #pragma mark Observe Relationships
 
 /**
@@ -160,20 +172,17 @@
 
 
 
-#pragma mark Remote Property
-
-- (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKObservationChangeBlock)block;
-
-
-
 #pragma mark Removing
 
-- (void)removeAllObservationsForOwner:(id)owner;
-
 /**
- Removes all observations registered with the receiver. Should be always called on `self` in `-dealloc` method.
+ Removes all observations registered with the receiver. Should be always called on `self`.
  */
 - (void)removeAllObservations;
+
+/**
+ Removes all observations registered on given object. Should be always called on `self`.
+ */
+- (void)removeAllObservationsOfObject:(id)object;
 
 
 
