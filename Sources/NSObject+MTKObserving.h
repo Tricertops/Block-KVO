@@ -99,7 +99,7 @@
            replacementBlock:(MTKObservationReplacementBlock)replacementBlock;
 
 /**
- Calls `- (void)observeRelationship:changeBlock:insertionBlock:removalBlock:replacementBlock:` with only change block.
+ Calls `-observeRelationship:changeBlock:insertionBlock:removalBlock:replacementBlock:` with only change block.
  */
 - (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKObservationChangeBlock)changeBlock;
 
@@ -130,10 +130,33 @@
 
 
 /**
- Calls `- (void)map:to:transform:` with transformation block that replaces `nil` value by given object.
+ Calls `-map:to:transform:` with transformation block that replaces `nil` value by given object.
  */
 - (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath null:(id)nullReplacement;
 
+
+
+#pragma mark Notifications
+
+/**
+ Registers block observer using NSNotificationCenter and current operation queue.
+ See `-[NSNotificationCenter addObserverForName:object:queue:usingBlock:]` for more info.
+ 
+ Once you call -removeAllObservations, all those blocks are removed from notification center.
+ */
+- (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKObservationNotificationBlock)block;
+
+
+/**
+ Calls `-observeNotification:fromObject:withBlock:` with nil object.
+ */
+- (void)observeNotification:(NSString *)name withBlock:(MTKObservationNotificationBlock)block;
+
+
+/**
+ Calls `-observeNotification:fromObject:withBlock:` fro each combination of name and object. Objects may be nil, but can not be an empty array, because nothign will be registered.
+ */
+- (void)observeNotifications:(NSArray *)names fromObjects:(NSArray *)objects withBlock:(MTKObservationNotificationBlock)block;
 
 
 

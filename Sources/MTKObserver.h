@@ -17,6 +17,8 @@ typedef void(^MTKObservationChangeBlockMany)(__weak id self, NSString *keyPath, 
 typedef void(^MTKObservationInsertionBlock)(__weak id self, id new, NSIndexSet *indexes);
 typedef void(^MTKObservationRemovalBlock)(__weak id self, id old, NSIndexSet *indexes);
 typedef void(^MTKObservationReplacementBlock)(__weak id self, id old, id new, NSIndexSet *indexes);
+typedef void(^MTKObservationNotificationBlock)(__weak id self, NSNotification *notification);
+
 
 
 /**
