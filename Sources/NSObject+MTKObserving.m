@@ -95,6 +95,8 @@
                 break;
                 
             case 2:
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                 [weakSelf performSelector:observationSelector];
                 break;
                 
@@ -104,6 +106,7 @@
                 
             default:
                 [weakSelf performSelector:observationSelector withObject:old withObject:new];
+                #pragma clang diagnostic pop
                 break;
         }
     }];
