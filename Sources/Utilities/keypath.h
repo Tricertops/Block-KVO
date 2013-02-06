@@ -40,4 +40,4 @@ NSString *versionPath = @keypath(NSObject.class, version);
     (((void)(NO && ((void)OBJ.PATH, NO)), # PATH))
 
 #define keypathClass(CLASS, PATH) \
-(((void)(NO && ((void)((CLASS *)[CLASS new]).PATH, NO)), # PATH))
+    keypath2(CLASS.new, PATH)

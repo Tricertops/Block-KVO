@@ -23,6 +23,7 @@
 		5B7A2C0216AFDE05009214C9 /* MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFB16AFDE05009214C9 /* MTKObserving.h */; };
 		5B7A2C0316AFDE05009214C9 /* NSObject+MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFC16AFDE05009214C9 /* NSObject+MTKObserving.h */; };
 		5B7A2C0416AFDE05009214C9 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */; };
+		5B8AF2EF16C285A5002135D2 /* scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B8AF2EE16C285A5002135D2 /* scope.h */; };
 		5BAD91CC15B18C4800E3A100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91BC15B18BF700E3A100 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		5B7A2BFB16AFDE05009214C9 /* MTKObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTKObserving.h; path = Sources/MTKObserving.h; sourceTree = "<group>"; };
 		5B7A2BFC16AFDE05009214C9 /* NSObject+MTKObserving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MTKObserving.h"; sourceTree = "<group>"; };
 		5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MTKObserving.m"; sourceTree = "<group>"; };
+		5B8AF2EE16C285A5002135D2 /* scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scope.h; sourceTree = "<group>"; };
 		5BAD91BC15B18BF700E3A100 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlockObserving.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -99,18 +101,19 @@
 				5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */,
 				5B7A2BF916AFDE05009214C9 /* MTKObserver.h */,
 				5B7A2BFA16AFDE05009214C9 /* MTKObserver.m */,
-				5B7A2BF616AFDE05009214C9 /* Keypath */,
+				5B7A2BF616AFDE05009214C9 /* Utilities */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		5B7A2BF616AFDE05009214C9 /* Keypath */ = {
+		5B7A2BF616AFDE05009214C9 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				5B7A2BF716AFDE05009214C9 /* keypath.h */,
+				5B8AF2EE16C285A5002135D2 /* scope.h */,
 				5B7A2BF816AFDE05009214C9 /* metamacros.h */,
 			);
-			path = Keypath;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		5B7A2C5916B2B1ED009214C9 /* Example */ = {
@@ -168,6 +171,7 @@
 				5B7A2C0016AFDE05009214C9 /* MTKObserver.h in Headers */,
 				5B7A2C0216AFDE05009214C9 /* MTKObserving.h in Headers */,
 				5B7A2C0316AFDE05009214C9 /* NSObject+MTKObserving.h in Headers */,
+				5B8AF2EF16C285A5002135D2 /* scope.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +432,7 @@
 				5B18EAD216B2F47A00362576 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5BAD91B115B18B1200E3A100 /* Build configuration list for PBXProject "Block Key-Value Observing" */ = {
 			isa = XCConfigurationList;
