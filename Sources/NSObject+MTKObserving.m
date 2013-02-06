@@ -12,6 +12,26 @@
 
 
 
+//////////
+MTKMappingTransformBlock const MTKMappingIsNilBlock = ^NSNumber *(id value){
+    return @( value == nil );
+};
+
+MTKMappingTransformBlock const MTKMappingIsNotNilBlock = ^NSNumber *(id value){
+    return @( value != nil );
+};
+
+MTKMappingTransformBlock const MTKMappingInvertBooleanBlock = ^NSNumber *(NSNumber *value){
+    return @( ! value.boolValue );
+};
+
+MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString *value){
+    return [NSURL URLWithString:value];
+};
+
+
+
+
 
 
 ///////////////

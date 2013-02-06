@@ -10,6 +10,14 @@
 #import "MTKObserver.h"
 
 
+/// Transformation blocks that can be used for map methods.
+typedef id(^MTKMappingTransformBlock)(id);
+extern MTKMappingTransformBlock const MTKMappingIsNilBlock;         // return @( value == nil );
+extern MTKMappingTransformBlock const MTKMappingIsNotNilBlock;      // return @(  value != nil );
+extern MTKMappingTransformBlock const MTKMappingInvertBooleanBlock; // return @( ! value.boolValue );
+extern MTKMappingTransformBlock const MTKMappingURLFromString;      // return [NSURL URLWithString:value];
+
+
 
 //////////
 @interface NSObject (MTKObserving)
