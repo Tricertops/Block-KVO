@@ -10,17 +10,12 @@
 #import "MTKObserver.h"
 
 
-/// Transformation blocks that can be used for map methods.
-typedef id(^MTKMappingTransformBlock)(id);
-extern MTKMappingTransformBlock const MTKMappingIsNilBlock;         // return @( value == nil );
-extern MTKMappingTransformBlock const MTKMappingIsNotNilBlock;      // return @(  value != nil );
-extern MTKMappingTransformBlock const MTKMappingInvertBooleanBlock; // return @( ! value.boolValue );
-extern MTKMappingTransformBlock const MTKMappingURLFromString;      // return [NSURL URLWithString:value];
 
 
 
-//////////
 @interface NSObject (MTKObserving)
+
+
 
 
 
@@ -46,25 +41,18 @@ extern MTKMappingTransformBlock const MTKMappingURLFromString;      // return [N
  @param observationBlock
  Block to be executed when the value on specified key-path changes. This value must not be `nil`.
  */
-- (void)observeProperty:(NSString *)keyPath withBlock:(MTKObservationChangeBlock)observationBlock;
+- (void)observeProperty:(NSString *)keyPath withBlock:(MTKBlockChange)observationBlock;
 
+/// Calls `-observeProperty:withBlock:` for each key-path.
+- (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKBlockChangeMany)observationBlock;
 
-/**
- Calls `-observeProperty:withBlock:` for each key-path.
- */
-- (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKObservationChangeBlockMany)observationBlock;
-
-
-/**
- Calls `-observeProperty:withBlock:` with block that performs given selector. Selector may optionaly receive up to two arguments: old and new value.
- */
+/// Calls `-observeProperty:withBlock:` with block that performs given selector. Selector may optionaly receive up to two arguments: old and new value.
 - (void)observeProperty:(NSString *)keyPath withSelector:(SEL)observationSelector;
 
-
-/**
- Calls `-observeProperty:withSelector:` for each key-path.
- */
+/// Calls `-observeProperty:withSelector:` for each key-path.
 - (void)observeProperties:(NSArray *)keyPaths withSelector:(SEL)observationSelector;
+
+
 
 
 
@@ -101,22 +89,22 @@ extern MTKMappingTransformBlock const MTKMappingURLFromString;      // return [N
  
  */
 - (void)observeRelationship:(NSString *)keyPath
-                changeBlock:(MTKObservationChangeBlock)changeBlock
-             insertionBlock:(MTKObservationInsertionBlock)insertionBlock
-               removalBlock:(MTKObservationRemovalBlock)removalBlock
-           replacementBlock:(MTKObservationReplacementBlock)replacementBlock;
+                changeBlock:(MTKBlockChange)changeBlock
+             insertionBlock:(MTKBlockInsert)insertionBlock
+               removalBlock:(MTKBlockRemove)removalBlock
+           replacementBlock:(MTKBlockReplace)replacementBlock;
 
-/**
- Calls `-observeRelationship:changeBlock:insertionBlock:removalBlock:replacementBlock:` with only change block.
- */
-- (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKObservationChangeBlock)changeBlock;
+/// Calls `-observeRelationship:changeBlock:insertionBlock:removalBlock:replacementBlock:` with only change block.
+- (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKBlockGeneric)changeBlock;
+
+
 
 
 
 #pragma mark Map Properties
 
 /**
- Creates one direntional binding from source to destination key-paths. This method calls `-observeProperty:withBlock:`,
+ Creates one directional binding from source to destination key-paths. This method calls `-observeProperty:withBlock:`,
  so the same rules apply.
  
  This method begins observing the source key-path and everytime time value changes, executes transformatinon block, if
@@ -136,11 +124,10 @@ extern MTKMappingTransformBlock const MTKMappingURLFromString;      // return [N
  */
 - (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath transform:(id (^)(id value))transformationBlock;
 
-
-/**
- Calls `-map:to:transform:` with transformation block that replaces `nil` value by given object.
- */
+/// Calls `-map:to:transform:` with transformation block that replaces `nil` value by given object.
 - (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath null:(id)nullReplacement;
+
+
 
 
 
@@ -152,19 +139,15 @@ extern MTKMappingTransformBlock const MTKMappingURLFromString;      // return [N
  
  Once you call -removeAllObservations, all those blocks are removed from notification center.
  */
-- (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKObservationNotificationBlock)block;
+- (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKBlockNotify)block;
+
+/// Calls `-observeNotification:fromObject:withBlock:` with nil object.
+- (void)observeNotification:(NSString *)name withBlock:(MTKBlockNotify)block;
+
+/// Calls `-observeNotification:fromObject:withBlock:` for each combination of name and object. `objects` may be nil, but can not be an empty array, because nothing will be registered.
+- (void)observeNotifications:(NSArray *)names fromObjects:(NSArray *)objects withBlock:(MTKBlockNotify)block;
 
 
-/**
- Calls `-observeNotification:fromObject:withBlock:` with nil object.
- */
-- (void)observeNotification:(NSString *)name withBlock:(MTKObservationNotificationBlock)block;
-
-
-/**
- Calls `-observeNotification:fromObject:withBlock:` fro each combination of name and object. Objects may be nil, but can not be an empty array, because nothign will be registered.
- */
-- (void)observeNotifications:(NSArray *)names fromObjects:(NSArray *)objects withBlock:(MTKObservationNotificationBlock)block;
 
 
 
@@ -177,4 +160,17 @@ extern MTKMappingTransformBlock const MTKMappingURLFromString;      // return [N
 
 
 
+
+
 @end
+
+
+
+/// Transformation blocks that can be used for map methods.
+typedef id(^MTKMappingTransformBlock)(id);
+extern MTKMappingTransformBlock const MTKMappingIsNilBlock;         // return @( value == nil );
+extern MTKMappingTransformBlock const MTKMappingIsNotNilBlock;      // return @(  value != nil );
+extern MTKMappingTransformBlock const MTKMappingInvertBooleanBlock; // return @( ! value.boolValue );
+extern MTKMappingTransformBlock const MTKMappingURLFromString;      // return [NSURL URLWithString:value];
+
+

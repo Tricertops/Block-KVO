@@ -12,26 +12,6 @@
 
 
 
-//////////
-MTKMappingTransformBlock const MTKMappingIsNilBlock = ^NSNumber *(id value){
-    return @( value == nil );
-};
-
-MTKMappingTransformBlock const MTKMappingIsNotNilBlock = ^NSNumber *(id value){
-    return @( value != nil );
-};
-
-MTKMappingTransformBlock const MTKMappingInvertBooleanBlock = ^NSNumber *(NSNumber *value){
-    return @( ! value.boolValue );
-};
-
-MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString *value){
-    return [NSURL URLWithString:value];
-};
-
-
-
-
 
 
 ///////////////
@@ -43,7 +23,7 @@ MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString 
 
 /// Getter for dictionary containing all registered observers for this object. Keys are observed key-paths.
 - (NSMutableDictionary *)mtk_keyPathBlockObservers {
-    // Observer is a shadow object that has target this object (`self`) and specific key path.
+    // Observer is hidden object that has target this object (`self`) and specific key path.
     // There should never exist two or more observers with the same target AND key path.
     // Observer has multiple observation block which are executed in order they were added.
     static char associationKey;
@@ -86,18 +66,21 @@ MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString 
 
 
 
+
+
 #pragma mark Observe Properties
 
 /// Add observation block to appropriate observer for setting the value.
-- (void)observeProperty:(NSString *)keyPath withBlock:(MTKObservationChangeBlock)observationBlock {
+- (void)observeProperty:(NSString *)keyPath withBlock:(MTKBlockChange)observationBlock {
     MTKObserver *observer = [self mtk_observerForKeyPath:keyPath];
     [observer addSettingObservationBlock:observationBlock];
 }
 
-/// Copy the block and register it for all given key-paths.
-- (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKObservationChangeBlockMany)observationBlock {
+/// Register the block for all given key-paths.
+- (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKBlockChangeMany)observationBlock {
     for (NSString *keyPath in keyPaths) {
         [self observeProperty:keyPath withBlock:^(__weak id weakSelf, id old , id new){
+            // Different arguments
             observationBlock(weakSelf, keyPath, old, new);
         }];
     }
@@ -115,8 +98,8 @@ MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString 
                 break;
                 
             case 2:
-                #pragma clang diagnostic push
-                #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                 [weakSelf performSelector:observationSelector];
                 break;
                 
@@ -126,7 +109,7 @@ MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString 
                 
             default:
                 [weakSelf performSelector:observationSelector withObject:old withObject:new];
-                #pragma clang diagnostic pop
+#pragma clang diagnostic pop
                 break;
         }
     }];
@@ -141,14 +124,16 @@ MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString 
 
 
 
+
+
 #pragma mark Observe Relationships
 
 /// Add observation blocks to appropriate observer. If some block was not specified, use the `changeBlock`.
 - (void)observeRelationship:(NSString *)keyPath
-                changeBlock:(MTKObservationChangeBlock)changeBlock
-             insertionBlock:(MTKObservationInsertionBlock)insertionBlock
-               removalBlock:(MTKObservationRemovalBlock)removalBlock
-           replacementBlock:(MTKObservationReplacementBlock)replacementBlock
+                changeBlock:(MTKBlockChange)changeBlock
+             insertionBlock:(MTKBlockInsert)insertionBlock
+               removalBlock:(MTKBlockRemove)removalBlock
+           replacementBlock:(MTKBlockReplace)replacementBlock
 {
     MTKObserver *observer = [self mtk_observerForKeyPath:keyPath];
     [observer addSettingObservationBlock:changeBlock];
@@ -167,9 +152,17 @@ MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString 
 }
 
 /// Call main `-observeRelationship:...` method with only first argument.
-- (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKObservationChangeBlock)changeBlock {
-    [self observeRelationship:keyPath changeBlock:changeBlock insertionBlock:nil removalBlock:nil replacementBlock:nil];
+- (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKBlockGeneric)changeBlock {
+    [self observeRelationship:keyPath
+                  changeBlock:^(__weak id weakSelf, id old, id new) {
+                      changeBlock(weakSelf);
+                  }
+               insertionBlock:nil
+                 removalBlock:nil
+             replacementBlock:nil];
 }
+
+
 
 
 
@@ -192,15 +185,17 @@ MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString 
 
 
 
+
+
 #pragma mark Notifications
 
 /// Call another one.
-- (void)observeNotification:(NSString *)name withBlock:(MTKObservationNotificationBlock)block {
+- (void)observeNotification:(NSString *)name withBlock:(MTKBlockNotify)block {
 	[self observeNotification:name fromObject:nil withBlock:block];
 }
 
 /// Add block observer on current operation queue and the resulting internal opaque observe is stored in associated mutable set.
-- (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKObservationNotificationBlock)block {
+- (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKBlockNotify)block {
 	__weak typeof(self) weakSelf = self;
 	id internalObserver = [[NSNotificationCenter defaultCenter] addObserverForName:name
 																			object:object
@@ -212,7 +207,7 @@ MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString 
 }
 
 /// Make all combination of name and object (if any are given) and call main notification observing method.
-- (void)observeNotifications:(NSArray *)names fromObjects:(NSArray *)objects withBlock:(MTKObservationNotificationBlock)block {
+- (void)observeNotifications:(NSArray *)names fromObjects:(NSArray *)objects withBlock:(MTKBlockNotify)block {
 	for (NSString *name in names) {
 		if (objects) {
 			for (id object in objects) {
@@ -224,6 +219,8 @@ MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString 
 		}
 	}
 }
+
+
 
 
 
@@ -246,5 +243,26 @@ MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString 
 
 
 @end
+
+
+
+
+
+//////////
+MTKMappingTransformBlock const MTKMappingIsNilBlock = ^NSNumber *(id value){
+    return @( value == nil );
+};
+
+MTKMappingTransformBlock const MTKMappingIsNotNilBlock = ^NSNumber *(id value){
+    return @( value != nil );
+};
+
+MTKMappingTransformBlock const MTKMappingInvertBooleanBlock = ^NSNumber *(NSNumber *value){
+    return @( ! value.boolValue );
+};
+
+MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString *value){
+    return [NSURL URLWithString:value];
+};
 
 
