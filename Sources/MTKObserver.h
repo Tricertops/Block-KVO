@@ -13,20 +13,16 @@
 #pragma mark Block Typedefs
 
 typedef void(^MTKBlockGeneric)      (__weak id self);
-typedef void(^MTKBlockChange)       (__weak id self, id old, id new);
+typedef void(^MTKBlockChange)       (__weak id self,                    id old, id new);
 typedef void(^MTKBlockChangeMany)   (__weak id self, NSString *keyPath, id old, id new);
-typedef void(^MTKBlockInsert)       (__weak id self, id new, NSIndexSet *indexes);
-typedef void(^MTKBlockRemove)       (__weak id self, id old, NSIndexSet *indexes);
-typedef void(^MTKBlockReplace)      (__weak id self, id old, id new, NSIndexSet *indexes);
+typedef void(^MTKBlockInsert)       (__weak id self,                            id new, NSIndexSet *indexes);
+typedef void(^MTKBlockRemove)       (__weak id self,                    id old,         NSIndexSet *indexes);
+typedef void(^MTKBlockReplace)      (__weak id self,                    id old, id new, NSIndexSet *indexes);
+
+typedef void(^MTKBlockForeignChange)    (__weak id self, __weak id object,                      id old, id new);
+typedef void(^MTKBlockForeignChangeMany)(__weak id self, __weak id object, NSString *keyPath,   id old, id new);
+
 typedef void(^MTKBlockNotify)       (__weak id self, NSNotification *notification);
-
-typedef void(^MTKObservationForeignChangeBlock)		(__weak id object,						id old, id new);
-typedef void(^MTKObservationForeignChangeBlockMany)	(__weak id object, NSString *keyPath,	id old, id new);
-typedef void(^MTKObservationForeignInsertionBlock)	(__weak id object,								id new,	NSIndexSet *indexes);
-typedef void(^MTKObservationForeignRemovalBlock)	(__weak id object,						id old,			NSIndexSet *indexes);
-typedef void(^MTKObservationForeignReplacementBlock)(__weak id object,						id old, id new,	NSIndexSet *indexes);
-
-typedef void(^MTKObservationNotificationBlock)(__weak id self, NSNotification *notification);
 
 
 

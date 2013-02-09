@@ -104,11 +104,17 @@
 #pragma mark Observe Properties
 
 - (void)observeProperty:(NSString *)keyPath withBlock:(MTKBlockChange)observationBlock {
-    [self observeObject:self property:keyPath withBlock:observationBlock];
+    [self observeObject:self property:keyPath withBlock:^(__weak id weakSelf, __weak id weakObject, id old, id new) {
+        // weakSelf and weakObject are the same
+        observationBlock(weakSelf, old, new);
+    }];
 }
 
 - (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKBlockChangeMany)observationBlock {
-    [self observeObject:self properties:keyPaths withBlock:observationBlock];
+    [self observeObject:self properties:keyPaths withBlock:^(__weak id weakSelf, __weak id weakObject, NSString *keyPath, id old, id new) {
+        // weakSelf and weakObject are the same
+        observationBlock(weakSelf, keyPath, old, new);
+    }];
 }
 
 - (void)observeProperty:(NSString *)keyPath withSelector:(SEL)observationSelector {
@@ -126,16 +132,19 @@
 #pragma mark Foreign Property
 
 /// Add observation block to appropriate observer.
-- (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKObservationForeignChangeBlock)observationBlock {
+- (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKBlockForeignChange)observationBlock {
+    __weak typeof(self) weakSelf = self;
 	MTKObserver *observer = [object mtk_observerForKeyPath:keyPath owner:self];
-	[observer addSettingObservationBlock:observationBlock];
+	[observer addSettingObservationBlock:^(__weak id weakObject, id old, id new) {
+        observationBlock(weakSelf, weakObject, old, new);
+    }];
 }
 
 /// Register the block for all given key-paths.
-- (void)observeObject:(id)object properties:(NSArray *)keyPaths withBlock:(MTKObservationForeignChangeBlockMany)observationBlock {
+- (void)observeObject:(id)object properties:(NSArray *)keyPaths withBlock:(MTKBlockForeignChangeMany)observationBlock {
 	for (NSString *keyPath in keyPaths) {
-        [self observeObject:object property:keyPath withBlock:^(__weak id weakObject, id old , id new){
-            observationBlock(weakObject, keyPath, old, new);
+        [self observeObject:object property:keyPath withBlock:^(__weak id weakSelf, __weak id weakObject, id old , id new){
+            observationBlock(weakSelf, weakObject, keyPath, old, new);
         }];
     }
 }
@@ -144,7 +153,7 @@
 - (void)observeObject:(id)object property:(NSString *)keyPath withSelector:(SEL)observationSelector {
 	NSMethodSignature *signature = [self methodSignatureForSelector:observationSelector];
     NSInteger numberOfArguments = [signature numberOfArguments];
-	[self observeObject:object property:keyPath withBlock:^(__weak id object, id old, id new) {
+	[self observeObject:object property:keyPath withBlock:^(__weak id weakSelf, __weak id weakObject, id old, id new) {
 		switch (numberOfArguments) {
             case 0:
             case 1:
@@ -154,20 +163,20 @@
             case 2: // +0
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                [self performSelector:observationSelector];
+                [weakSelf performSelector:observationSelector];
                 break;
                 
             case 3: // +1
-                [self performSelector:observationSelector withObject:new];
+                [weakSelf performSelector:observationSelector withObject:new];
                 break;
             
 			case 4: // +2
-				[self performSelector:observationSelector withObject:old withObject:new];
+				[weakSelf performSelector:observationSelector withObject:old withObject:new];
 #pragma clang diagnostic pop
 				
             default:// +3
 				// Fuck off NSInvocation!
-                objc_msgSend(self, observationSelector, object, old, new);
+                objc_msgSend(weakSelf, observationSelector, object, old, new);
                 break;
         }
 	}];

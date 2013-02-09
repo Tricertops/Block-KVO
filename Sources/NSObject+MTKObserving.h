@@ -91,10 +91,10 @@
  @param observationBlock
  Block to be executed when the value on specified key-path changes. This value must not be `nil`.
  */
-- (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKObservationForeignChangeBlock)block;
+- (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKBlockForeignChange)block;
 
 /// Calls `-observeObject:property:withBlock:` for each property.
-- (void)observeObject:(id)object properties:(NSArray *)keyPaths withBlock:(MTKObservationForeignChangeBlockMany)block;
+- (void)observeObject:(id)object properties:(NSArray *)keyPaths withBlock:(MTKBlockForeignChangeMany)block;
 
 /// Calls `-observeObject:property:withBlock:` with block that invokes selector. Allowed selectors of format: `-objectDidChangeTitle:`, `-object:didChangeTitle:`, `-object:didChangeTitleFrom:to:`.
 - (void)observeObject:(id)object property:(NSString *)keyPath withSelector:(SEL)selector;
