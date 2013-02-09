@@ -24,7 +24,7 @@
 
 /// Getter for dictionary containing all registered observers for this object. Keys are observed key-paths.
 - (NSMutableDictionary *)mtk_keyPathBlockObservers {
-    // Observer is a shadow object that has target this object (`self`) and specific key path.
+    // Observer is hidden object that has target this object (`self`) and specific key path.
     // There should never exist two or more observers with the same target AND key path.
     // Observer has multiple observation block which are executed in order they were added.
     static char associationKey;
@@ -81,15 +81,17 @@
 
 
 
+
+
 #pragma mark Observe Properties
 
 /// Add observation block to appropriate observer for setting the value.
-- (void)observeProperty:(NSString *)keyPath withBlock:(MTKObservationChangeBlock)observationBlock {
+- (void)observeProperty:(NSString *)keyPath withBlock:(MTKBlockChange)observationBlock {
     [self observeObject:self property:keyPath withBlock:observationBlock];
 }
 
-/// Copy the block and register it for all given key-paths.
-- (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKObservationChangeBlockMany)observationBlock {
+/// Register the block for all given key-paths.
+- (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKBlockChangeMany)observationBlock {
     [self observeObject:self properties:keyPaths withBlock:observationBlock];
 }
 
@@ -123,6 +125,8 @@
                 break;
                 
             case 2: // +0
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                 [self performSelector:observationSelector];
                 break;
                 
@@ -132,6 +136,7 @@
             
 			case 4: // +2
 				[self performSelector:observationSelector withObject:old withObject:new];
+#pragma clang diagnostic pop
 				
             default:// +3
 				// Fuck off NSInvocation!
@@ -157,14 +162,15 @@
 
 
 
+
 #pragma mark Observe Relationships
 
 /// Add observation blocks to appropriate observer. If some block was not specified, use the `changeBlock`.
 - (void)observeRelationship:(NSString *)keyPath
-                changeBlock:(MTKObservationChangeBlock)changeBlock
-             insertionBlock:(MTKObservationInsertionBlock)insertionBlock
-               removalBlock:(MTKObservationRemovalBlock)removalBlock
-           replacementBlock:(MTKObservationReplacementBlock)replacementBlock
+                changeBlock:(MTKBlockChange)changeBlock
+             insertionBlock:(MTKBlockInsert)insertionBlock
+               removalBlock:(MTKBlockRemove)removalBlock
+           replacementBlock:(MTKBlockReplace)replacementBlock
 {
     MTKObserver *observer = [self mtk_observerForKeyPath:keyPath owner:self];
     [observer addSettingObservationBlock:changeBlock];
@@ -183,9 +189,17 @@
 }
 
 /// Call main `-observeRelationship:...` method with only first argument.
-- (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKObservationChangeBlock)changeBlock {
-    [self observeRelationship:keyPath changeBlock:changeBlock insertionBlock:nil removalBlock:nil replacementBlock:nil];
+- (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKBlockGeneric)changeBlock {
+    [self observeRelationship:keyPath
+                  changeBlock:^(__weak id weakSelf, id old, id new) {
+                      changeBlock(weakSelf);
+                  }
+               insertionBlock:nil
+                 removalBlock:nil
+             replacementBlock:nil];
 }
+
+
 
 
 
@@ -208,15 +222,17 @@
 
 
 
+
+
 #pragma mark Notifications
 
 /// Call another one.
-- (void)observeNotification:(NSString *)name withBlock:(MTKObservationNotificationBlock)block {
+- (void)observeNotification:(NSString *)name withBlock:(MTKBlockNotify)block {
 	[self observeNotification:name fromObject:nil withBlock:block];
 }
 
 /// Add block observer on current operation queue and the resulting internal opaque observe is stored in associated mutable set.
-- (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKObservationNotificationBlock)block {
+- (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKBlockNotify)block {
 	__weak typeof(self) weakSelf = self;
 	id internalObserver = [[NSNotificationCenter defaultCenter] addObserverForName:name
 																			object:object
@@ -228,7 +244,7 @@
 }
 
 /// Make all combination of name and object (if any are given) and call main notification observing method.
-- (void)observeNotifications:(NSArray *)names fromObjects:(NSArray *)objects withBlock:(MTKObservationNotificationBlock)block {
+- (void)observeNotifications:(NSArray *)names fromObjects:(NSArray *)objects withBlock:(MTKBlockNotify)block {
 	for (NSString *name in names) {
 		if (objects) {
 			for (id object in objects) {
@@ -240,6 +256,8 @@
 		}
 	}
 }
+
+
 
 
 
@@ -282,5 +300,26 @@
 
 
 @end
+
+
+
+
+
+//////////
+MTKMappingTransformBlock const MTKMappingIsNilBlock = ^NSNumber *(id value){
+    return @( value == nil );
+};
+
+MTKMappingTransformBlock const MTKMappingIsNotNilBlock = ^NSNumber *(id value){
+    return @( value != nil );
+};
+
+MTKMappingTransformBlock const MTKMappingInvertBooleanBlock = ^NSNumber *(NSNumber *value){
+    return @( ! value.boolValue );
+};
+
+MTKMappingTransformBlock const MTKMappingURLFromStringBlock = ^NSURL *(NSString *value){
+    return [NSURL URLWithString:value];
+};
 
 

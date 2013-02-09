@@ -12,11 +12,13 @@
 
 #pragma mark Block Typedefs
 
-typedef void(^MTKObservationChangeBlock)		(__weak id self,					id old, id new);
-typedef void(^MTKObservationChangeBlockMany)	(__weak id self, NSString *keyPath, id old, id new);
-typedef void(^MTKObservationInsertionBlock)		(__weak id self,							id new,	NSIndexSet *indexes);
-typedef void(^MTKObservationRemovalBlock)		(__weak id self,					id old,			NSIndexSet *indexes);
-typedef void(^MTKObservationReplacementBlock)	(__weak id self,					id old, id new,	NSIndexSet *indexes);
+typedef void(^MTKBlockGeneric)      (__weak id self);
+typedef void(^MTKBlockChange)       (__weak id self, id old, id new);
+typedef void(^MTKBlockChangeMany)   (__weak id self, NSString *keyPath, id old, id new);
+typedef void(^MTKBlockInsert)       (__weak id self, id new, NSIndexSet *indexes);
+typedef void(^MTKBlockRemove)       (__weak id self, id old, NSIndexSet *indexes);
+typedef void(^MTKBlockReplace)      (__weak id self, id old, id new, NSIndexSet *indexes);
+typedef void(^MTKBlockNotify)       (__weak id self, NSNotification *notification);
 
 typedef void(^MTKObservationForeignChangeBlock)		(__weak id object,						id old, id new);
 typedef void(^MTKObservationForeignChangeBlockMany)	(__weak id object, NSString *keyPath,	id old, id new);
@@ -25,6 +27,8 @@ typedef void(^MTKObservationForeignRemovalBlock)	(__weak id object,						id old,
 typedef void(^MTKObservationForeignReplacementBlock)(__weak id object,						id old, id new,	NSIndexSet *indexes);
 
 typedef void(^MTKObservationNotificationBlock)(__weak id self, NSNotification *notification);
+
+
 
 
 
@@ -58,13 +62,13 @@ typedef void(^MTKObservationNotificationBlock)(__weak id self, NSNotification *n
 
 #pragma mark Blocks
 /// Add block to be executed on key-path setting of simple property or relationship.
-- (void)addSettingObservationBlock:(MTKObservationChangeBlock)block;
+- (void)addSettingObservationBlock:(MTKBlockChange)block;
 /// Add block to be executed on key-path relationship insertion.
-- (void)addInsertionObservationBlock:(MTKObservationInsertionBlock)block;
+- (void)addInsertionObservationBlock:(MTKBlockInsert)block;
 /// Append block to be executed on key-path relationship removal.
-- (void)addRemovalObservationBlock:(MTKObservationRemovalBlock)block;
+- (void)addRemovalObservationBlock:(MTKBlockRemove)block;
 /// Add block to be executed on key-path relationship replacement.
-- (void)addReplacementObservationBlock:(MTKObservationReplacementBlock)block;
+- (void)addReplacementObservationBlock:(MTKBlockReplace)block;
 
 
 @end

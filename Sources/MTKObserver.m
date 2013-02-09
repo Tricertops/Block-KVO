@@ -67,20 +67,20 @@
 
 #pragma Adding Blocks
 
-- (void)addSettingObservationBlock:(MTKObservationChangeBlock)block {
+- (void)addSettingObservationBlock:(MTKBlockChange)block {
     [self.afterSettingBlocks addObject:[block copy]];
     block(self.target, nil, [self.target valueForKeyPath:self.keyPath]);
 }
 
-- (void)addInsertionObservationBlock:(MTKObservationInsertionBlock)block {
+- (void)addInsertionObservationBlock:(MTKBlockInsert)block {
     [self.afterInsertionBlocks addObject:block];
 }
 
-- (void)addRemovalObservationBlock:(MTKObservationRemovalBlock)block {
+- (void)addRemovalObservationBlock:(MTKBlockRemove)block {
     [self.afterRemovalBlocks addObject:block];
 }
 
-- (void)addReplacementObservationBlock:(MTKObservationReplacementBlock)block {
+- (void)addReplacementObservationBlock:(MTKBlockReplace)block {
     [self.afterReplacementBlocks addObject:block];
 }
 
@@ -162,7 +162,7 @@
 	// Here we check for equality. Two values are equal when they have equal pointers (e.g. nils) or they respond to -isEqual: with YES.
     if (old == new || (old && [new isEqual:old])) return;
     
-    for (MTKObservationChangeBlock block in self.afterSettingBlocks) {
+    for (MTKBlockChange block in self.afterSettingBlocks) {
         block(self.target, old, new);
     }
 }
@@ -171,7 +171,7 @@
 	// Prevent calling blocks when really nothing was inserted.
     if ([new respondsToSelector:@selector(count)] && [new count] == 0) return;
     
-    for (MTKObservationInsertionBlock block in self.afterInsertionBlocks) {
+    for (MTKBlockInsert block in self.afterInsertionBlocks) {
         block(self.target, new, indexes);
     }
 }
@@ -180,7 +180,7 @@
 	// Prevent calling blocks when really nothing was removed.
     if ([old respondsToSelector:@selector(count)] && [old count] == 0) return;
     
-    for (MTKObservationRemovalBlock block in self.afterRemovalBlocks) {
+    for (MTKBlockRemove block in self.afterRemovalBlocks) {
         block(self.target, old, indexes);
     }
 }
@@ -190,7 +190,7 @@
     if ([old respondsToSelector:@selector(count)] && [old count] == 0) return;
     if ([new respondsToSelector:@selector(count)] && [new count] == 0) return;
     
-    for (MTKObservationReplacementBlock block in self.afterReplacementBlocks) {
+    for (MTKBlockReplace block in self.afterReplacementBlocks) {
         block(self.target, old, new, indexes);
     }
 }

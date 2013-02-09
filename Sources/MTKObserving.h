@@ -8,9 +8,13 @@
 
 /// Contains the public interface
 #import "NSObject+MTKObserving.h"
+#import "MTKObservingMacros.h"
 
 /// Internal Implementation
 #import "MTKObserver.h"
 
-/// For the cool `@keypath` syntax
+/// Utilities
+// For the cool `@keypath` syntax
 #import "keypath.h"
+// To avoid retain cycles
+#import "scope.h"
