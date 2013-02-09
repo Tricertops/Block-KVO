@@ -8,6 +8,7 @@
 
 /// Contains the public interface
 #import "NSObject+MTKObserving.h"
+#import "MTKObservingMacros.h"
 
 /// Internal Implementation
 #import "MTKObserver.h"
