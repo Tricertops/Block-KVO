@@ -7,11 +7,13 @@
 //
 
 /// Contains the public interface
-#import "NSObject+MTKObserving.h"
-#import "MTKObservingMacros.h"
+#import "NSObject+MTKObserving.h"   // Methods
+#import "MTKObservingMacros.h"      // Macros
 
 /// Internal Implementation
 #import "MTKObserver.h"
+
+
 
 /// Utilities
 // For the cool `@keypath` syntax

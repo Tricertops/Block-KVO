@@ -22,11 +22,14 @@
 #pragma mark Observe Properties
 
 /**
- Registers observation block for the specified key-path relative to the receiver. **Object should only observe itself,
- so call this method on `self`.**
+ Registers observation block for the specified key-path relative to the receiver. **Always call this on `self`.**
+ For foreign observations, see methods below.
  
  Observation block is executed immediately and at least once for every change of value in the property.
  The block receives old and new value of the property. First call to this block will have `nil` as `old` and current value as `new`.
+ 
+ Internal check prevents calling the block when the value actualy did not changed, so old and new should never be equal.
+ Assignment that do not really change the value (e.g. self.title = self.title) is ignored. Checking is done using `==` and `-isEqual:`.
  
  This block has also reference to the receiver (which should always be the caller). This internal `self` makes it easier
  to avoid retain cycles. It overrides local variable `self` (method argument) and declares it as weak. **Use of this weak
@@ -34,6 +37,8 @@
  object, caller should always be the receiver.
  
  If you call this method multiple times on the same key-path it is guaranteed they will be executed in the same order.
+ 
+ For cleanup, call `-removeAllObservations` in dealloc.
  
  @param keyPath
  The key-path, relative to the receiver, of the property to observe. This value must not be `nil`.
@@ -46,7 +51,7 @@
 /// Calls `-observeProperty:withBlock:` for each key-path.
 - (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKBlockChangeMany)observationBlock;
 
-/// Calls `-observeProperty:withBlock:` with block that performs given selector. Selector may optionaly receive up to two arguments: old and new value.
+/// Calls `-observeProperty:withBlock:` with block that performs given selector. Allowed formats: `-didChangeProperty`, `-didChangePropertyTo:`, `-didChangePropertyFrom:to:`
 - (void)observeProperty:(NSString *)keyPath withSelector:(SEL)observationSelector;
 
 /// Calls `-observeProperty:withSelector:` for each key-path.
@@ -57,15 +62,47 @@
 
 
 
-#pragma mark Remote Property
+#pragma mark Observe Foreign Property
 
 /**
- Equivalents of above methods but allows you to observe specified object.
+ Registers observation block for the specified key-path relative to the object. **You should call this method on `self`,
+ since you are the owner of the observation.**
+ Owner of the block itself is observed object, but you can use it in block since it comes as an argument (use __weak).
+ 
+ Observation block is executed immediately and at least once for every change of value in the property.
+ The block receives old and new value of the property. First call to this block will have `nil` as `old` and current value as `new`.
+ 
+ Internal check prevents calling the block when the value actualy did not changed, so old and new should never be equal.
+ Assignment that do not really change the value (e.g. self.title = self.title) is ignored. Checking is done using `==` and `-isEqual:`.
+ 
+ This block has also reference to the receiver (which should always be the caller).
+ This prevents potential retain cycles, but is not so important as in `-observeProperty:withBlock:`
+ 
+ If you call this method multiple times on the same key-path it is guaranteed they will be executed in the same order.
+ 
+ For cleanup, call `-removeAllObservationsOfObject:` once you do not need that object.
+ 
+ @param keyPath
+ The key-path, relative to the receiver, of the property to observe. This value must not be `nil`.
+ 
+ @param object
+ Observed object.
+ 
+ @param observationBlock
+ Block to be executed when the value on specified key-path changes. This value must not be `nil`.
  */
 - (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKObservationForeignChangeBlock)block;
-- (void)observeObject:(id)object property:(NSString *)keyPath withSelector:(SEL)selector;
+
+/// Calls `-observeObject:property:withBlock:` for each property.
 - (void)observeObject:(id)object properties:(NSArray *)keyPaths withBlock:(MTKObservationForeignChangeBlockMany)block;
+
+/// Calls `-observeObject:property:withBlock:` with block that invokes selector. Allowed selectors of format: `-objectDidChangeTitle:`, `-object:didChangeTitle:`, `-object:didChangeTitleFrom:to:`.
+- (void)observeObject:(id)object property:(NSString *)keyPath withSelector:(SEL)selector;
+
+/// Calls `-observeObject:property:withSelector:` for each property.
 - (void)observeObject:(id)object properties:(NSArray *)keyPaths withSelector:(SEL)selector;
+
+
 
 
 
@@ -95,6 +132,8 @@
  Some of the blocks have argument `indexes`. In case of non-indexed collection it contains `nil`.
  This behavior is consistent with standard KVO observation method.
  
+ For cleanup, call `-removeAllObservations` in dealloc.
+ 
  @param changeBlock Called when the collection is completely replaced by new collection. Called also for any other modification type where you do not specify any block.
  @param insertionBlock Called when some objects are inserted into relationship. You receive those objects (in the same collection class) and their indexes (if the colelction is indexed). You may pass nil value and `changeBlock` will be invoked instead.
  @param removalBlock Called when some objects are removed from relationship. You receive those objects (in the same collection class) and their past indexes (if the colelction is indexed). You may pass nil value and `changeBlock` will be invoked instead.
@@ -114,6 +153,12 @@
 
 
 
+// No foreign relationships yet, but do you really need this kind of stuff?
+
+
+
+
+
 #pragma mark Map Properties
 
 /**
@@ -124,6 +169,8 @@
  any. Then it sets this value to destination key-path.
  
  Method is recursion-safe, so you can create bi-directional bindings.
+ 
+ For cleanup, call `-removeAllObservations` in dealloc.
  
  @param sourceKeyPath
  Key-path relative to the receiver that will be observed. This value must not be `nil`.
@@ -144,13 +191,19 @@
 
 
 
+// No foreign mapping yet, but do you really need this kind of stuff?
+
+
+
+
+
 #pragma mark Notifications
 
 /**
  Registers block observer using NSNotificationCenter and current operation queue.
  See `-[NSNotificationCenter addObserverForName:object:queue:usingBlock:]` for more info.
  
- Once you call -removeAllObservations, all those blocks are removed from notification center.
+ For cleanup, call `-removeAllObservations` in dealloc.
  */
 - (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKBlockNotify)block;
 
@@ -159,6 +212,8 @@
 
 /// Calls `-observeNotification:fromObject:withBlock:` for each combination of name and object. `objects` may be nil, but can not be an empty array, because nothing will be registered.
 - (void)observeNotifications:(NSArray *)names fromObjects:(NSArray *)objects withBlock:(MTKBlockNotify)block;
+
+
 
 
 
@@ -178,7 +233,11 @@
 
 
 
+
+
 @end
+
+
 
 
 
@@ -188,5 +247,7 @@ extern MTKMappingTransformBlock const MTKMappingIsNilBlock;         // return @(
 extern MTKMappingTransformBlock const MTKMappingIsNotNilBlock;      // return @(  value != nil );
 extern MTKMappingTransformBlock const MTKMappingInvertBooleanBlock; // return @( ! value.boolValue );
 extern MTKMappingTransformBlock const MTKMappingURLFromString;      // return [NSURL URLWithString:value];
+
+
 
 

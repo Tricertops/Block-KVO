@@ -15,8 +15,9 @@
 
 
 
-///////////////
 @implementation NSObject (MTKObserving)
+
+
 
 
 
@@ -24,8 +25,8 @@
 
 /// Getter for dictionary containing all registered observers for this object. Keys are observed key-paths.
 - (NSMutableDictionary *)mtk_keyPathBlockObservers {
-    // Observer is hidden object that has target this object (`self`) and specific key path.
-    // There should never exist two or more observers with the same target AND key path.
+    // Observer is hidden object that has target (this object), key path and owner.
+    // There should never exist two or more observers with the same target, key path and owner.
     // Observer has multiple observation block which are executed in order they were added.
     static char associationKey;
     NSMutableDictionary *keyPathObservers = objc_getAssociatedObject(self, &associationKey);
@@ -44,12 +45,16 @@
 	MTKObserver *observer = nil;
     // Key path is used as key to retrieve observer.
 	// For one key-path may be more observers with different owners.
+    
+    // Obtain the set
     NSMutableSet *observersForKeyPath = [[self mtk_keyPathBlockObservers] objectForKey:keyPath];
 	if ( ! observersForKeyPath) {
+        // Nothing found for this key-path
 		observersForKeyPath = [[NSMutableSet alloc] init];
 		[[self mtk_keyPathBlockObservers] setObject:observersForKeyPath forKey:keyPath];
 	}
 	else {
+        // Find the one with this owner
 		for (MTKObserver *existingObserver in observersForKeyPath) {
 			if (existingObserver.owner == owner) {
 				observer = existingObserver;
@@ -57,6 +62,7 @@
 			}
 		}
 	}
+    // Now the observer itself
 	if ( ! observer) {
 		observer = [[MTKObserver alloc] initWithTarget:self keyPath:keyPath owner:owner];
         [observersForKeyPath addObject:observer];
@@ -79,41 +85,62 @@
     return notificationObservers;
 }
 
+/// Called internally by the owner.
+- (void)mtk_removeAllObservationsForOwner:(id)owner {
+	for (NSMutableSet *observersForKeyPath in [[self mtk_keyPathBlockObservers] allValues]) {
+		for (MTKObserver *observer in observersForKeyPath) {
+			if (observer.owner == owner) {
+				[observer detach];
+				[observersForKeyPath removeObject:observer];
+			}
+		}
+	}
+}
+
 
 
 
 
 #pragma mark Observe Properties
 
-/// Add observation block to appropriate observer for setting the value.
 - (void)observeProperty:(NSString *)keyPath withBlock:(MTKBlockChange)observationBlock {
     [self observeObject:self property:keyPath withBlock:observationBlock];
 }
 
-/// Register the block for all given key-paths.
 - (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKBlockChangeMany)observationBlock {
     [self observeObject:self properties:keyPaths withBlock:observationBlock];
 }
 
-/// Register block invoking given selector. Smart detecting of number of arguments.
 - (void)observeProperty:(NSString *)keyPath withSelector:(SEL)observationSelector {
 	[self observeObject:self property:keyPath withSelector:observationSelector];
 }
 
-/// Register the selector for each key-path.
 - (void)observeProperties:(NSArray *)keyPaths withSelector:(SEL)observationSelector {
     [self observeObject:self properties:keyPaths withSelector:observationSelector];
 }
 
 
 
+
+
 #pragma mark Foreign Property
 
+/// Add observation block to appropriate observer.
 - (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKObservationForeignChangeBlock)observationBlock {
 	MTKObserver *observer = [object mtk_observerForKeyPath:keyPath owner:self];
 	[observer addSettingObservationBlock:observationBlock];
 }
 
+/// Register the block for all given key-paths.
+- (void)observeObject:(id)object properties:(NSArray *)keyPaths withBlock:(MTKObservationForeignChangeBlockMany)observationBlock {
+	for (NSString *keyPath in keyPaths) {
+        [self observeObject:object property:keyPath withBlock:^(__weak id weakObject, id old , id new){
+            observationBlock(weakObject, keyPath, old, new);
+        }];
+    }
+}
+
+/// Register block invoking given selector. Smart detecting of number of arguments.
 - (void)observeObject:(id)object property:(NSString *)keyPath withSelector:(SEL)observationSelector {
 	NSMethodSignature *signature = [self methodSignatureForSelector:observationSelector];
     NSInteger numberOfArguments = [signature numberOfArguments];
@@ -146,19 +173,13 @@
 	}];
 }
 
-- (void)observeObject:(id)object properties:(NSArray *)keyPaths withBlock:(MTKObservationForeignChangeBlockMany)observationBlock {
-	for (NSString *keyPath in keyPaths) {
-        [self observeObject:object property:keyPath withBlock:^(__weak id weakObject, id old , id new){
-            observationBlock(weakObject, keyPath, old, new);
-        }];
-    }
-}
-
+/// Register the selector for each key-path.
 - (void)observeObject:(id)object properties:(NSArray *)keyPaths withSelector:(SEL)observationSelector {
 	for (NSString *keyPath in keyPaths) {
         [self observeObject:object property:keyPath withSelector:observationSelector];
     }
 }
+
 
 
 
@@ -265,16 +286,15 @@
 
 /// Called usually from dealloc (may be called at any time). Detach all observers. The associated objects are released once the deallocation process finishes.
 - (void)removeAllObservations {
-	
+	// Key-Path Observers
     NSMutableDictionary *keyPathBlockObservers = [self mtk_keyPathBlockObservers];
 	for (NSMutableSet *observersForKeyPath in [[self mtk_keyPathBlockObservers] allValues]) {
-		for (MTKObserver *observer in observersForKeyPath) {
-			[observer detach];
-			[observersForKeyPath removeObject:observer];
-		}
+        [observersForKeyPath makeObjectsPerformSelector:@selector(detach)];
+        [observersForKeyPath removeAllObjects];
 	}
     [keyPathBlockObservers removeAllObjects];
 	
+    // NSNotification Observers
 	NSMutableSet *notificationObservers = [self mtk_notificationBlockObservers];
 	for (id internalObserver in notificationObservers) {
 		[[NSNotificationCenter defaultCenter] removeObserver:internalObserver];
@@ -286,16 +306,7 @@
 	[object mtk_removeAllObservationsForOwner:self];
 }
 
-- (void)mtk_removeAllObservationsForOwner:(id)owner {
-	for (NSMutableSet *observersForKeyPath in [[self mtk_keyPathBlockObservers] allValues]) {
-		for (MTKObserver *observer in observersForKeyPath) {
-			if (observer.owner == owner) {
-				[observer detach];
-				[observersForKeyPath removeObject:observer];
-			}
-		}
-	}
-}
+
 
 
 
