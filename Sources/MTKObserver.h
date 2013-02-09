@@ -13,11 +13,15 @@
 #pragma mark Block Typedefs
 
 typedef void(^MTKBlockGeneric)      (__weak id self);
-typedef void(^MTKBlockChange)       (__weak id self, id old, id new);
+typedef void(^MTKBlockChange)       (__weak id self,                    id old, id new);
 typedef void(^MTKBlockChangeMany)   (__weak id self, NSString *keyPath, id old, id new);
-typedef void(^MTKBlockInsert)       (__weak id self, id new, NSIndexSet *indexes);
-typedef void(^MTKBlockRemove)       (__weak id self, id old, NSIndexSet *indexes);
-typedef void(^MTKBlockReplace)      (__weak id self, id old, id new, NSIndexSet *indexes);
+typedef void(^MTKBlockInsert)       (__weak id self,                            id new, NSIndexSet *indexes);
+typedef void(^MTKBlockRemove)       (__weak id self,                    id old,         NSIndexSet *indexes);
+typedef void(^MTKBlockReplace)      (__weak id self,                    id old, id new, NSIndexSet *indexes);
+
+typedef void(^MTKBlockForeignChange)    (__weak id self, __weak id object,                      id old, id new);
+typedef void(^MTKBlockForeignChangeMany)(__weak id self, __weak id object, NSString *keyPath,   id old, id new);
+
 typedef void(^MTKBlockNotify)       (__weak id self, NSNotification *notification);
 
 
@@ -35,7 +39,12 @@ typedef void(^MTKBlockNotify)       (__weak id self, NSNotification *notificatio
 /// Do not use. Observation target will be nil, so any calls to it will have no effect.
 - (id)init;
 /// Designated initializer.
-- (id)initWithTarget:(NSObject *)target keyPath:(NSString *)keyPath;
+- (id)initWithTarget:(NSObject *)target keyPath:(NSString *)keyPath owner:(id)owner;
+
+
+#pragma mark Ownership
+/// Object that 'owns' all blocks in this observer. This object was the caller of observation method.
+@property (nonatomic, readonly, assign) id owner;
 
 
 #pragma mark Attaching
