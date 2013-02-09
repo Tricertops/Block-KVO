@@ -143,8 +143,9 @@
 /// Register the block for all given key-paths.
 - (void)observeObject:(id)object properties:(NSArray *)keyPaths withBlock:(MTKBlockForeignChangeMany)observationBlock {
 	for (NSString *keyPath in keyPaths) {
+        NSString *keyPathCopy = [keyPath copy]; // If some fool uses mutable key-paths
         [self observeObject:object property:keyPath withBlock:^(__weak id weakSelf, __weak id weakObject, id old , id new){
-            observationBlock(weakSelf, weakObject, keyPath, old, new);
+            observationBlock(weakSelf, weakObject, keyPathCopy, old, new);
         }];
     }
 }
@@ -311,6 +312,7 @@
 	[notificationObservers removeAllObjects];
 }
 
+/// Called at any time, tell the observed object to remove our observation blocks.
 - (void)removeAllObservationsOfObject:(id)object {
 	[object mtk_removeAllObservationsForOwner:self];
 }
@@ -325,7 +327,7 @@
 
 
 
-//////////
+
 MTKMappingTransformBlock const MTKMappingIsNilBlock = ^NSNumber *(id value){
     return @( value == nil );
 };
