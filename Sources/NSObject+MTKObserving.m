@@ -168,16 +168,26 @@
                 break;
                 
             case 3: // +1
-                [weakSelf performSelector:observationSelector withObject:new];
+                if (weakSelf == weakObject) {
+                    [weakSelf performSelector:observationSelector withObject:new]; // Observing self, we dont need self
+                }
+                else {
+                    [weakSelf performSelector:observationSelector withObject:weakObject]; // Observing another object
+                }
                 break;
             
 			case 4: // +2
-				[weakSelf performSelector:observationSelector withObject:old withObject:new];
+                if (weakSelf == weakObject) {
+                    [weakSelf performSelector:observationSelector withObject:old withObject:new];
+                }
+				else {
+                    [weakSelf performSelector:observationSelector withObject:weakObject withObject:new];
+                }
 #pragma clang diagnostic pop
 				
             default:// +3
 				// Fuck off NSInvocation!
-                objc_msgSend(weakSelf, observationSelector, object, old, new);
+                objc_msgSend(weakSelf, observationSelector, weakObject, old, new);
                 break;
         }
 	}];
