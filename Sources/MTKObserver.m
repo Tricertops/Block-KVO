@@ -60,7 +60,7 @@
 }
 
 - (void)dealloc {
-	NSLog(@"Observer dealloc %@ %@", self.target, self.keyPath);
+	//NSLog(@"Observer dealloc %@ %@", self.target, self.keyPath);
 }
 
 
