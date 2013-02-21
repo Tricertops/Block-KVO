@@ -69,7 +69,6 @@
 
 - (void)addSettingObservationBlock:(MTKBlockChange)block {
     [self.afterSettingBlocks addObject:[block copy]];
-    block(self.target, nil, [self.target valueForKeyPath:self.keyPath]);
 }
 
 - (void)addInsertionObservationBlock:(MTKBlockInsert)block {
