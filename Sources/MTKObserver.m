@@ -68,7 +68,7 @@
 #pragma Adding Blocks
 
 - (void)addSettingObservationBlock:(MTKBlockChange)block {
-    [self.afterSettingBlocks addObject:[block copy]];
+    [self.afterSettingBlocks addObject:block];
 }
 
 - (void)addInsertionObservationBlock:(MTKBlockInsert)block {
