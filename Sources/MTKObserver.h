@@ -12,7 +12,7 @@
 
 #pragma mark Block Typedefs
 
-typedef void(^MTKBlockGeneric)      (__weak id self);
+typedef void(^MTKBlockGeneric)      (__weak id self,                            id new);
 typedef void(^MTKBlockChange)       (__weak id self,                    id old, id new);
 typedef void(^MTKBlockChangeMany)   (__weak id self, NSString *keyPath, id old, id new);
 typedef void(^MTKBlockInsert)       (__weak id self,                            id new, NSIndexSet *indexes);

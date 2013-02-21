@@ -164,30 +164,36 @@
             case 2: // +0
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                // -someObjectDidChangeSomething
                 [weakSelf performSelector:observationSelector];
                 break;
                 
             case 3: // +1
                 if (weakSelf == weakObject) {
+                    // -didChangeSomethingTo:
                     [weakSelf performSelector:observationSelector withObject:new]; // Observing self, we dont need self
                 }
                 else {
+                    // -someObjectDidChangeSomething:
                     [weakSelf performSelector:observationSelector withObject:weakObject]; // Observing another object
                 }
                 break;
             
 			case 4: // +2
                 if (weakSelf == weakObject) {
+                    // -didChangeSomethingFrom:to:
                     [weakSelf performSelector:observationSelector withObject:old withObject:new];
                 }
 				else {
+                    // -someObject: didChangeSomethingTo:
                     [weakSelf performSelector:observationSelector withObject:weakObject withObject:new];
                 }
+                break;
 #pragma clang diagnostic pop
 				
             default:// +3
-				// Fuck off NSInvocation!
-                objc_msgSend(weakSelf, observationSelector, weakObject, old, new);
+                // -someObject:didChangeSomethingFrom:to:
+                objc_msgSend(weakSelf, observationSelector, weakObject, old, new); // Fuck off NSInvocation!
                 break;
         }
 	}];
@@ -233,7 +239,7 @@
 - (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKBlockGeneric)changeBlock {
     [self observeRelationship:keyPath
                   changeBlock:^(__weak id weakSelf, id old, id new) {
-                      changeBlock(weakSelf);
+                      changeBlock(weakSelf, new);
                   }
                insertionBlock:nil
                  removalBlock:nil
