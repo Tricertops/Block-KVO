@@ -281,6 +281,8 @@
 /// Add block observer on current operation queue and the resulting internal opaque observe is stored in associated mutable set.
 - (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKBlockNotify)block {
 	__weak typeof(self) weakSelf = self;
+    // Invoke manually for the first time.
+    block(weakSelf, nil);
 	id internalObserver = [[NSNotificationCenter defaultCenter] addObserverForName:name
 																			object:object
 																			 queue:[NSOperationQueue currentQueue]
