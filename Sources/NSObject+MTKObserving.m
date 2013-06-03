@@ -88,7 +88,7 @@
 /// Called internally by the owner.
 - (void)mtk_removeAllObservationsForOwner:(id)owner {
 	for (NSMutableSet *observersForKeyPath in [[self mtk_keyPathBlockObservers] allValues]) {
-		for (MTKObserver *observer in observersForKeyPath) {
+		for (MTKObserver *observer in [observersForKeyPath copy]) {
 			if (observer.owner == owner) {
 				[observer detach];
 				[observersForKeyPath removeObject:observer];
