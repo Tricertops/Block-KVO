@@ -88,7 +88,7 @@
 /// Called internally by the owner.
 - (void)mtk_removeAllObservationsForOwner:(id)owner {
 	for (NSMutableSet *observersForKeyPath in [[self mtk_keyPathBlockObservers] allValues]) {
-		for (MTKObserver *observer in observersForKeyPath) {
+		for (MTKObserver *observer in [observersForKeyPath copy]) {
 			if (observer.owner == owner) {
 				[observer detach];
 				[observersForKeyPath removeObject:observer];
@@ -281,6 +281,8 @@
 /// Add block observer on current operation queue and the resulting internal opaque observe is stored in associated mutable set.
 - (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKBlockNotify)block {
 	__weak typeof(self) weakSelf = self;
+    // Invoke manually for the first time.
+    block(weakSelf, nil);
 	id internalObserver = [[NSNotificationCenter defaultCenter] addObserverForName:name
 																			object:object
 																			 queue:[NSOperationQueue currentQueue]
