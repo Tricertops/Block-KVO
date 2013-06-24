@@ -61,7 +61,7 @@ MTKObservePropertySelf(profile.username, NSString *, {
 ### Equality check ###
 **IMPORTANT: This is different from the standard KVO.**
 
-Once the value of observed property changes, but the values are _equal_ (using `-isEqual:` method) the observation blocks are _not_ invoked. For example `self.title = self.title;` will _not_ trigger observation.
+Once the value of observed property changes, but the values are _equal_ (using `-isEqual:` method) the observation blocks are _not_ invoked. For example `self.title == self.title;` will _not_ trigger observation.
 
 
 ### No retain cycles inside the blocks ###
@@ -81,7 +81,7 @@ There are methods that take an array of key-paths and one block (or selector).
 
 
 ### One-way binding (mapping) ###
-Map property to another property. Once the source key-path changes, destination si updated with the new value. Transform the value as you wish.
+Map property to another property. Once the source key-path changes, destination is updated with the new value. Transform the value as you wish.
 
 ```
 [self map:@keypath(self.profile.isLogged) to:@keypath(self.isLoggedLabel.text) transform:
