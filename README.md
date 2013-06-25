@@ -81,7 +81,7 @@ There are methods that take an array of key-paths and one block (or selector).
 
 
 ### One-way binding (mapping) ###
-Map property to another property. Once the source key-path changes, destination si updated with the new value. Transform the value as you wish.
+Map property to another property. Once the source key-path changes, destination is updated with the new value. Transform the value as you wish.
 
 ```
 [self map:@keypath(self.profile.isLogged) to:@keypath(self.isLoggedLabel.text) transform:
