@@ -61,7 +61,7 @@ MTKObservePropertySelf(profile.username, NSString *, {
 ### Equality check ###
 **IMPORTANT: This is different from the standard KVO.**
 
-Once the value of observed property changes, but the values are _equal_ (using `-isEqual:` method) the observation blocks are _not_ invoked. For example `self.title == self.title;` will _not_ trigger observation.
+Once the value of observed property changes, but the values are _equal_ (using `-isEqual:` method) the observation blocks are _not_ invoked. For example `self.title = self.title;` will _not_ trigger observation.
 
 
 ### No retain cycles inside the blocks ###
