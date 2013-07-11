@@ -1,4 +1,4 @@
-Block Observing 2.1
+Block Observing 2.2
 =============
 
 
@@ -107,6 +107,6 @@ Improved observation of notifications using blocks. `NSNotificationCenter` provi
 
 ---
 
-_MIT License, Copyright (c) 2012-2013 Martin Kiss_
+_MIT License, Copyright (c) 2012—2013 Martin Kiss_
 
 `THE SOFTWARE IS PROVIDED "AS IS", and so on …`
