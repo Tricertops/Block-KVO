@@ -27,7 +27,13 @@ Integration
 3. Add `libBlockObserving.a` to _**Link Binary With Libraries**_ in _Build Phases_.
 4. Add **`-ObjC` and `-all_load`** as _Other Linker Flags_ in _Build Settings_.
 5. Make sure you have _Header Search Paths_ in _Build Settings_ set up (e.g. `Libraries/**`).
-6. Import **`MTKObserving.h`** to your files (usually in `Prefix.pch`).
+6. Import `MTKObserving.h` to your files (usually in `Prefix.pch`).
+
+
+Integration using [CocoaPods](http://cocoapods.org "CocoaPods")
+---------------------------
+1. Add `pod 'Block-KVO'` to your *Podfile*.
+2. Import `<Block-KVO/MTKObserving.h>` to your files (usually in `Prefix.pch`).
 
 
 Features
