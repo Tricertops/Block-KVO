@@ -538,7 +538,6 @@
 		5BAD91B315B18B1300E3A100 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -547,7 +546,6 @@
 		5BAD91B415B18B1300E3A100 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
