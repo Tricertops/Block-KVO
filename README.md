@@ -104,7 +104,12 @@ Also, there is convenience method for specifying replacement for null value.
 
 
 ### Two-way binding (mapping) ###
-Two-way binding can be achieved by using two one-way bindings. Don't worry about recursion, because observation is supressed if the values are equal. With this you can map `user.name` to `textField.text`, so it will always display the name and then map `textField.text` to `user.name` for the name to be updated once the user make changes.
+Two-way binding can be achieved by using two one-way bindings. Don't worry about recursion, because observation is supressed if the values are equal.
+
+```
+[self map:@keypath(self.task.isDone) to:@keypath(self.doneButton.selected) null:nil];
+[self map:@keypath(self.doneButton.selected) to:@keypath(self.task.isDone) null:nil];
+```
 
 
 ### Observe NSNotifications using blocks ###
