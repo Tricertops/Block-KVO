@@ -44,7 +44,7 @@ Features
 Any object can observe _its own_ key-path using block handler. _Caller and receiver must be the same object and the key-path must be relative to the receiver._
 
 ```
-[self observe:@keypath(self.profile.username) withBlock:
+[self observeProperty:@keypath(self.profile.username) withBlock:
  ^(__weak typeof(self) self, NSString *oldUsername, NSString *newUsername) {
      self.usernameLabel.text = newUsername;
  }];
@@ -78,7 +78,7 @@ All observation blocks have first argument the receive/caller with name `self`. 
 If you want to get out of the current scope, you can just provide selector instead of block.
 
 ```
-[self observe:@keypath(self.profile.username) withSelector:@selector(didChangeUsernameFrom:to:)];
+[self observeProperty:@keypath(self.profile.username) withSelector:@selector(didChangeUsernameFrom:to:)];
 ```
 
 
