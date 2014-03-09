@@ -191,10 +191,13 @@
                 break;
 #pragma clang diagnostic pop
 				
-            default:// +3
+            default: {
+                // +3
                 // -someObject:didChangeSomethingFrom:to:
-                objc_msgSend(weakSelf, observationSelector, weakObject, old, new); // Fuck off NSInvocation!
+                void(*msgSend)(id, SEL, id, id, id) = (typeof(msgSend))objc_msgSend;
+                msgSend(weakSelf, observationSelector, weakObject, old, new);
                 break;
+            }
         }
 	}];
 }
