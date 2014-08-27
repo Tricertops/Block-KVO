@@ -32,6 +32,18 @@
 		5B7A2C0416AFDE05009214C9 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */; };
 		5B8AF2EF16C285A5002135D2 /* scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B8AF2EE16C285A5002135D2 /* scope.h */; };
 		5BAD91CC15B18C4800E3A100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91BC15B18BF700E3A100 /* Foundation.framework */; };
+		85388ED219AE3BCA00FD9225 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85388ED119AE3BCA00FD9225 /* Cocoa.framework */; };
+		85388EDC19AE3BCA00FD9225 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85388EDA19AE3BCA00FD9225 /* InfoPlist.strings */; };
+		85388EFA19AE3BEB00FD9225 /* MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFB16AFDE05009214C9 /* MTKObserving.h */; };
+		85388EFB19AE3BEB00FD9225 /* MTKObservingMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B1DAF0016C63A7D007EE428 /* MTKObservingMacros.h */; };
+		85388EFC19AE3BEB00FD9225 /* NSObject+MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFC16AFDE05009214C9 /* NSObject+MTKObserving.h */; };
+		85388EFD19AE3BEB00FD9225 /* MTKObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BF916AFDE05009214C9 /* MTKObserver.h */; };
+		85388EFE19AE3BEB00FD9225 /* keypath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BF716AFDE05009214C9 /* keypath.h */; };
+		85388EFF19AE3BEB00FD9225 /* scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B8AF2EE16C285A5002135D2 /* scope.h */; };
+		85388F0019AE3BEB00FD9225 /* metamacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BF816AFDE05009214C9 /* metamacros.h */; };
+		85388F0119AE3C0400FD9225 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */; };
+		85388F0219AE3C0400FD9225 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A2BFA16AFDE05009214C9 /* MTKObserver.m */; };
+		85388F0419AE3C1200FD9225 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85388F0319AE3C1200FD9225 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +87,16 @@
 		5B8AF2EE16C285A5002135D2 /* scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scope.h; sourceTree = "<group>"; };
 		5BAD91BC15B18BF700E3A100 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlockObserving.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		85388ED019AE3BCA00FD9225 /* BlockObservingOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlockObservingOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85388ED119AE3BCA00FD9225 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		85388ED419AE3BCA00FD9225 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		85388ED519AE3BCA00FD9225 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		85388ED619AE3BCA00FD9225 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		85388ED919AE3BCA00FD9225 /* BlockObservingOSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlockObservingOSX-Info.plist"; sourceTree = "<group>"; };
+		85388EDB19AE3BCA00FD9225 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		85388EDD19AE3BCA00FD9225 /* BlockObservingOSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlockObservingOSX-Prefix.pch"; sourceTree = "<group>"; };
+		85388EE619AE3BCA00FD9225 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		85388F0319AE3C1200FD9225 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +127,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BAD91CC15B18C4800E3A100 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85388ECC19AE3BCA00FD9225 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85388F0419AE3C1200FD9225 /* Foundation.framework in Frameworks */,
+				85388ED219AE3BCA00FD9225 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +208,7 @@
 				5B7A2BF516AFDE05009214C9 /* Sources */,
 				5B7A2C5916B2B1ED009214C9 /* Example */,
 				5B1DAF1116C67E24007EE428 /* Tests */,
+				85388ED719AE3BCA00FD9225 /* BlockObservingOSX */,
 				5BAD91BB15B18BF700E3A100 /* Frameworks */,
 				5BAD91BA15B18BF700E3A100 /* Products */,
 			);
@@ -188,6 +220,7 @@
 				5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */,
 				5B18EAB716B2F47A00362576 /* Example.app */,
 				5B1DAF0C16C67E24007EE428 /* Tests.octest */,
+				85388ED019AE3BCA00FD9225 /* BlockObservingOSX.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,12 +228,44 @@
 		5BAD91BB15B18BF700E3A100 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				85388F0319AE3C1200FD9225 /* Foundation.framework */,
 				5B18EAE016B2F5CA00362576 /* UIKit.framework */,
 				5BAD91BC15B18BF700E3A100 /* Foundation.framework */,
 				5B18EADE16B2F5B800362576 /* CoreGraphics.framework */,
 				5B1DAF0D16C67E24007EE428 /* SenTestingKit.framework */,
+				85388ED119AE3BCA00FD9225 /* Cocoa.framework */,
+				85388EE619AE3BCA00FD9225 /* XCTest.framework */,
+				85388ED319AE3BCA00FD9225 /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		85388ED319AE3BCA00FD9225 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				85388ED419AE3BCA00FD9225 /* Foundation.framework */,
+				85388ED519AE3BCA00FD9225 /* CoreData.framework */,
+				85388ED619AE3BCA00FD9225 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		85388ED719AE3BCA00FD9225 /* BlockObservingOSX */ = {
+			isa = PBXGroup;
+			children = (
+				85388ED819AE3BCA00FD9225 /* Supporting Files */,
+			);
+			path = BlockObservingOSX;
+			sourceTree = "<group>";
+		};
+		85388ED819AE3BCA00FD9225 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				85388ED919AE3BCA00FD9225 /* BlockObservingOSX-Info.plist */,
+				85388EDA19AE3BCA00FD9225 /* InfoPlist.strings */,
+				85388EDD19AE3BCA00FD9225 /* BlockObservingOSX-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +282,20 @@
 				5B7A2C0316AFDE05009214C9 /* NSObject+MTKObserving.h in Headers */,
 				5B8AF2EF16C285A5002135D2 /* scope.h in Headers */,
 				5B1DAF0416C64619007EE428 /* MTKObservingMacros.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85388ECD19AE3BCA00FD9225 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85388EFA19AE3BEB00FD9225 /* MTKObserving.h in Headers */,
+				85388EFB19AE3BEB00FD9225 /* MTKObservingMacros.h in Headers */,
+				85388EFC19AE3BEB00FD9225 /* NSObject+MTKObserving.h in Headers */,
+				85388EFD19AE3BEB00FD9225 /* MTKObserver.h in Headers */,
+				85388EFE19AE3BEB00FD9225 /* keypath.h in Headers */,
+				85388EFF19AE3BEB00FD9225 /* scope.h in Headers */,
+				85388F0019AE3BEB00FD9225 /* metamacros.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +355,24 @@
 			productReference = 5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		85388ECF19AE3BCA00FD9225 /* BlockObservingOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85388EF819AE3BCA00FD9225 /* Build configuration list for PBXNativeTarget "BlockObservingOSX" */;
+			buildPhases = (
+				85388ECB19AE3BCA00FD9225 /* Sources */,
+				85388ECC19AE3BCA00FD9225 /* Frameworks */,
+				85388ECD19AE3BCA00FD9225 /* Headers */,
+				85388ECE19AE3BCA00FD9225 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BlockObservingOSX;
+			productName = BlockObservingOSX;
+			productReference = 85388ED019AE3BCA00FD9225 /* BlockObservingOSX.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -301,6 +398,7 @@
 				5BAD91CA15B18C4800E3A100 /* BlockObserving */,
 				5B18EAB616B2F47A00362576 /* Example */,
 				5B1DAF0B16C67E24007EE428 /* Tests */,
+				85388ECF19AE3BCA00FD9225 /* BlockObservingOSX */,
 			);
 		};
 /* End PBXProject section */
@@ -320,6 +418,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85388ECE19AE3BCA00FD9225 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85388EDC19AE3BCA00FD9225 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +475,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85388ECB19AE3BCA00FD9225 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85388F0119AE3C0400FD9225 /* NSObject+MTKObserving.m in Sources */,
+				85388F0219AE3C0400FD9225 /* MTKObserver.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -378,6 +493,17 @@
 			targetProxy = 5B18EADB16B2F5A200362576 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		85388EDA19AE3BCA00FD9225 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85388EDB19AE3BCA00FD9225 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5B18EAD116B2F47A00362576 /* Debug */ = {
@@ -602,6 +728,101 @@
 			};
 			name = Release;
 		};
+		85388EF419AE3BCA00FD9225 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BlockObservingOSX/BlockObservingOSX-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "BlockObservingOSX/BlockObservingOSX-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		85388EF519AE3BCA00FD9225 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BlockObservingOSX/BlockObservingOSX-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "BlockObservingOSX/BlockObservingOSX-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -637,6 +858,15 @@
 			buildConfigurations = (
 				5BAD91D415B18C4800E3A100 /* Debug */,
 				5BAD91D515B18C4800E3A100 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85388EF819AE3BCA00FD9225 /* Build configuration list for PBXNativeTarget "BlockObservingOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85388EF419AE3BCA00FD9225 /* Debug */,
+				85388EF519AE3BCA00FD9225 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
