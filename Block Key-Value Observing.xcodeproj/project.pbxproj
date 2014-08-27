@@ -33,7 +33,6 @@
 		5B8AF2EF16C285A5002135D2 /* scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B8AF2EE16C285A5002135D2 /* scope.h */; };
 		5BAD91CC15B18C4800E3A100 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91BC15B18BF700E3A100 /* Foundation.framework */; };
 		85388ED219AE3BCA00FD9225 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85388ED119AE3BCA00FD9225 /* Cocoa.framework */; };
-		85388EDC19AE3BCA00FD9225 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85388EDA19AE3BCA00FD9225 /* InfoPlist.strings */; };
 		85388EFA19AE3BEB00FD9225 /* MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFB16AFDE05009214C9 /* MTKObserving.h */; };
 		85388EFB19AE3BEB00FD9225 /* MTKObservingMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B1DAF0016C63A7D007EE428 /* MTKObservingMacros.h */; };
 		85388EFC19AE3BEB00FD9225 /* NSObject+MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFC16AFDE05009214C9 /* NSObject+MTKObserving.h */; };
@@ -77,6 +76,7 @@
 		5B1DAF1F16C67F50007EE428 /* Tests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		5B1DAF2116C67FC4007EE428 /* MTKTestingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKTestingObject.h; sourceTree = "<group>"; };
 		5B1DAF2216C67FC4007EE428 /* MTKTestingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKTestingObject.m; sourceTree = "<group>"; };
+		5B24B48019AE7D4200518E54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B7A2BF716AFDE05009214C9 /* keypath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keypath.h; sourceTree = "<group>"; };
 		5B7A2BF816AFDE05009214C9 /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
 		5B7A2BF916AFDE05009214C9 /* MTKObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKObserver.h; sourceTree = "<group>"; };
@@ -92,9 +92,6 @@
 		85388ED419AE3BCA00FD9225 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		85388ED519AE3BCA00FD9225 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		85388ED619AE3BCA00FD9225 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		85388ED919AE3BCA00FD9225 /* BlockObservingOSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BlockObservingOSX-Info.plist"; sourceTree = "<group>"; };
-		85388EDB19AE3BCA00FD9225 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		85388EDD19AE3BCA00FD9225 /* BlockObservingOSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlockObservingOSX-Prefix.pch"; sourceTree = "<group>"; };
 		85388EE619AE3BCA00FD9225 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		85388F0319AE3C1200FD9225 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -165,6 +162,14 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		5B24B47F19AE7D4200518E54 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				5B24B48019AE7D4200518E54 /* Info.plist */,
+			);
+			path = "OS X";
+			sourceTree = "<group>";
+		};
 		5B7A2BF516AFDE05009214C9 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,7 +213,7 @@
 				5B7A2BF516AFDE05009214C9 /* Sources */,
 				5B7A2C5916B2B1ED009214C9 /* Example */,
 				5B1DAF1116C67E24007EE428 /* Tests */,
-				85388ED719AE3BCA00FD9225 /* BlockObservingOSX */,
+				5B24B47F19AE7D4200518E54 /* OS X */,
 				5BAD91BB15B18BF700E3A100 /* Frameworks */,
 				5BAD91BA15B18BF700E3A100 /* Products */,
 			);
@@ -248,24 +253,6 @@
 				85388ED619AE3BCA00FD9225 /* AppKit.framework */,
 			);
 			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
-		85388ED719AE3BCA00FD9225 /* BlockObservingOSX */ = {
-			isa = PBXGroup;
-			children = (
-				85388ED819AE3BCA00FD9225 /* Supporting Files */,
-			);
-			path = BlockObservingOSX;
-			sourceTree = "<group>";
-		};
-		85388ED819AE3BCA00FD9225 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				85388ED919AE3BCA00FD9225 /* BlockObservingOSX-Info.plist */,
-				85388EDA19AE3BCA00FD9225 /* InfoPlist.strings */,
-				85388EDD19AE3BCA00FD9225 /* BlockObservingOSX-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,7 +412,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85388EDC19AE3BCA00FD9225 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,17 +479,6 @@
 			targetProxy = 5B18EADB16B2F5A200362576 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		85388EDA19AE3BCA00FD9225 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				85388EDB19AE3BCA00FD9225 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5B18EAD116B2F47A00362576 /* Debug */ = {
@@ -757,8 +732,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BlockObservingOSX/BlockObservingOSX-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -770,7 +743,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "BlockObservingOSX/BlockObservingOSX-Info.plist";
+				INFOPLIST_FILE = "OS X/Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -807,15 +780,13 @@
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BlockObservingOSX/BlockObservingOSX-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "BlockObservingOSX/BlockObservingOSX-Info.plist";
+				INFOPLIST_FILE = "OS X/Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
