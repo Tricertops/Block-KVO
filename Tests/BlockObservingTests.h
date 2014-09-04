@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 iMartin Kiss. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
 
-@interface BlockObservingTests : SenTestCase
+
+@interface BlockObservingTests : XCTestCase
 
 @end

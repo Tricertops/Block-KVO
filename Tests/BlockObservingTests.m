@@ -46,9 +46,9 @@
         initialNewValue = new;
     }];
     
-    STAssertTrue(initialDidRun, @"Failed to run initial observation");
-    STAssertEqualObjects(initialOldValue, nil, @"Initial old value must be nil");
-    STAssertEqualObjects(initialNewValue, self.simple, @"Initial new value must be current value");
+    XCTAssertTrue(initialDidRun, @"Failed to run initial observation");
+    XCTAssertEqualObjects(initialOldValue, nil, @"Initial old value must be nil");
+    XCTAssertEqualObjects(initialNewValue, self.simple, @"Initial new value must be current value");
     
     [self removeAllObservations];
     self.simple = nil;
@@ -62,10 +62,10 @@
             
         }];
         [self removeAllObservations];
-        STFail(@"This should throw exception");
+        XCTFail(@"This should throw exception");
     }
     @catch (NSException *exception) {
-        STAssertEqualObjects(exception.name, @"NSUnknownKeyException", @"Expected another exception");
+        XCTAssertEqualObjects(exception.name, @"NSUnknownKeyException", @"Expected another exception");
     }
 }
 
