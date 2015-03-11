@@ -338,7 +338,19 @@
 	[object mtk_removeAllObservationsForOwner:self];
 }
 
-
+- (void)removeObservationOfObject:(id)object forKeyPath:(NSString *)keyPath {
+    NSMutableSet *observersForKeyPath = [object mtk_keyPathBlockObservers][keyPath];
+    if(observersForKeyPath.count <= 0) {
+        return;
+    }
+    
+    for (MTKObserver *observer in [observersForKeyPath copy]) {
+        if (observer.owner == self) {
+            [observer detach];
+            [observersForKeyPath removeObject:observer];
+        }
+    }
+}
 
 
 

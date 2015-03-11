@@ -69,6 +69,25 @@
     }
 }
 
-
+- (void)testRemoveAllObservationsForKeyPath {
+    [self removeAllObservations];
+    self.simple = @"testing remove observer for key path";
+    
+    __block BOOL observeAfterRemoveDidRun = NO;
+    [self observeProperty:@keypath(self.simple) withBlock:^(__weak typeof(self) self, MTKTestingObject *old, MTKTestingObject *new) {
+        if(new != nil) {
+            return;
+        }
+        
+        observeAfterRemoveDidRun = YES;
+    }];
+    
+    [self removeObservationOfObject:self forKeyPath:@keypath(self.simple)];
+    self.simple = nil;
+    
+    XCTAssertTrue(!observeAfterRemoveDidRun, @"Failed to remove observation for keypath");
+    
+    [self removeAllObservations];
+}
 
 @end
