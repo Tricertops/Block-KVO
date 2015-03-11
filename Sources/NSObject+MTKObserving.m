@@ -87,14 +87,20 @@
 
 /// Called internally by the owner.
 - (void)mtk_removeAllObservationsForOwner:(id)owner {
-	for (NSMutableSet *observersForKeyPath in [[self mtk_keyPathBlockObservers] allValues]) {
-		for (MTKObserver *observer in [observersForKeyPath copy]) {
-			if (observer.owner == owner) {
-				[observer detach];
-				[observersForKeyPath removeObject:observer];
-			}
-		}
+	for (NSString *keyPath in [self mtk_keyPathBlockObservers]) {
+        [self mtk_removeAllObservationsForOwner:owner keyPath:keyPath];
 	}
+}
+
+/// Called internally by the owner.
+- (void)mtk_removeObservationsForOwner:(id)owner keyPath:(NSString *)keyPath {
+    NSMutableSet *observersForKeyPath = [self mtk_keyPathBlockObservers][keyPath];
+    for (MTKObserver *observer in [observersForKeyPath copy]) {
+        if (observer.owner == owner) {
+            [observer detach];
+            [observersForKeyPath removeObject:observer];
+        }
+    }
 }
 
 
@@ -339,17 +345,7 @@
 }
 
 - (void)removeObservationOfObject:(id)object forKeyPath:(NSString *)keyPath {
-    NSMutableSet *observersForKeyPath = [object mtk_keyPathBlockObservers][keyPath];
-    if(observersForKeyPath.count <= 0) {
-        return;
-    }
-    
-    for (MTKObserver *observer in [observersForKeyPath copy]) {
-        if (observer.owner == self) {
-            [observer detach];
-            [observersForKeyPath removeObject:observer];
-        }
-    }
+    [object mtk_removeObservationsForOwner:self keyPath:keyPath];
 }
 
 
