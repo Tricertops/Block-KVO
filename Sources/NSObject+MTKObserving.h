@@ -234,7 +234,7 @@
 /**
  Remove observation registered on given object for specified keypath. Should be always called on `self`.
  */
-- (void)removeObservationOfObject:(id)object forKeyPath:(NSString *)keyPath;
+- (void)removeObservationsOfObject:(id)object forKeyPath:(NSString *)keyPath;
 
 
 

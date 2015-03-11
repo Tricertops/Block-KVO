@@ -344,7 +344,8 @@
 	[object mtk_removeAllObservationsForOwner:self];
 }
 
-- (void)removeObservationOfObject:(id)object forKeyPath:(NSString *)keyPath {
+/// Called at any time, tell the observed object to remove our observation blocks for given key-path.
+- (void)removeObservationsOfObject:(id)object forKeyPath:(NSString *)keyPath {
     [object mtk_removeObservationsForOwner:self keyPath:keyPath];
 }
 
