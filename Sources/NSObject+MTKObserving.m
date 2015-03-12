@@ -88,7 +88,7 @@
 /// Called internally by the owner.
 - (void)mtk_removeAllObservationsForOwner:(id)owner {
 	for (NSString *keyPath in [self mtk_keyPathBlockObservers]) {
-        [self mtk_removeAllObservationsForOwner:owner keyPath:keyPath];
+        [self mtk_removeObservationsForOwner:owner keyPath:keyPath];
 	}
 }
 
