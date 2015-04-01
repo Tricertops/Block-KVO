@@ -29,12 +29,8 @@ Integration
 5. Make sure you have _Header Search Paths_ in _Build Settings_ set up (e.g. `Libraries/**`).
 6. Import `MTKObserving.h` to your files (usually in `Prefix.pch`).
 
-
-Integration using [CocoaPods](http://cocoapods.org "CocoaPods")
----------------------------
-1. Add `pod 'Block-KVO'` to your *Podfile*.
-2. Import `<Block-KVO/MTKObserving.h>` to your files (usually in `Prefix.pch`).
-
+> **CocoaPods** central repositary will no longer be updated. Use this:
+> `pod 'KeepLayout', :git => 'https://github.com/iMartinKiss/KeepLayout.git'`
 
 Features
 --------
@@ -118,6 +114,5 @@ Improved observation of notifications using blocks. `NSNotificationCenter` provi
 
 ---
 
-_MIT License, Copyright (c) 2012—2013 Martin Kiss_
-
-`THE SOFTWARE IS PROVIDED "AS IS", and so on …`
+_The MIT License_  
+_Copyright © 2012 – 2015 Martin Kiss_
