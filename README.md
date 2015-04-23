@@ -30,7 +30,7 @@ Integration
 6. Import `MTKObserving.h` to your files (usually in `Prefix.pch`).
 
 > **CocoaPods** central repositary will no longer be updated. Use this:
-> `pod 'KeepLayout', :git => 'https://github.com/iMartinKiss/KeepLayout.git'`
+> `pod 'Block-KVO', :git => 'https://github.com/iMartinKiss/Block-KVO.git'`
 
 Features
 --------
