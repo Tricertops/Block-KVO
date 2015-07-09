@@ -14,12 +14,6 @@ You should be familiar with the concepts of [Key-Value Observing](http://develop
 Library and example app in this project are for iOS, but you can use in OS X project too by importing the source files directly.
 
 
-Requirements
--------------
-  - **ARC**
-  - **iOS 5** and higher (because of `__weak`)
-
-
 Integration
 -----------
 1. **Drag** the project into your project (as a child or sibling).
@@ -111,6 +105,15 @@ Two-way binding can be achieved by using two one-way bindings. Don't worry about
 ### Observe NSNotifications using blocks ###
 Improved observation of notifications using blocks. `NSNotificationCenter` provides some support for this, but here you don't need to worry about removing those blocks or retain cycles.
 
+
+### Remove Observations
+
+```objc
+- (void)dealloc {
+    [self removeAllObservations]; // Observations of self
+    [self removeAllObservationsOfObject:someObject]; // Observations of other objects
+}
+```
 
 ---
 
