@@ -39,7 +39,7 @@ Features
 ### Observe using block ###
 Any object can observe _its own_ key-path using block handler. _Caller and receiver must be the same object and the key-path must be relative to the receiver._
 
-```
+```objc
 [self observeProperty:@keypath(self.profile.username) withBlock:
  ^(__weak typeof(self) self, NSString *oldUsername, NSString *newUsername) {
      self.usernameLabel.text = newUsername;
@@ -53,7 +53,7 @@ Block arguments has no specific type (so they are `id`). You are supposed to spe
 
 The above code example using provided macro:
 
-```
+```objc
 MTKObservePropertySelf(profile.username, NSString *, {
     self.usernameLabel.text = newUsername;
 });
@@ -73,7 +73,7 @@ All observation blocks have first argument the receive/caller with name `self`. 
 ### Observe Using Selector ###
 If you want to get out of the current scope, you can just provide selector instead of block.
 
-```
+```objc
 [self observeProperty:@keypath(self.profile.username) withSelector:@selector(didChangeUsernameFrom:to:)];
 ```
 
@@ -85,7 +85,7 @@ There are methods that take an array of key-paths and one block (or selector).
 ### One-way binding (mapping) ###
 Map property to another property. Once the source key-path changes, destination is updated with the new value. Transform the value as you wish.
 
-```
+```objc
 [self map:@keypath(self.profile.isLogged) to:@keypath(self.isLoggedLabel.text) transform:
  ^NSString *(NSNumber *isLogged) {
      return (isLogged.boolValue ? @"Logged In" : @"Not Logged In");
@@ -94,7 +94,7 @@ Map property to another property. Once the source key-path changes, destination 
 
 Also, there is convenience method for specifying replacement for null value.
 
-```
+```objc
 [self map:@keypath(self.profile.username) to:@(self.usernameLabel.text) null:@"Unknown"];
 ```
 
@@ -102,7 +102,7 @@ Also, there is convenience method for specifying replacement for null value.
 ### Two-way binding (mapping) ###
 Two-way binding can be achieved by using two one-way bindings. Don't worry about recursion, because observation is supressed if the values are equal.
 
-```
+```objc
 [self map:@keypath(self.task.isDone) to:@keypath(self.doneButton.selected) null:nil];
 [self map:@keypath(self.doneButton.selected) to:@keypath(self.task.isDone) null:nil];
 ```
