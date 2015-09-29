@@ -28,7 +28,7 @@
  
  @endcode
  */
-#define MTKObservePropertySelf(KEYPATH, TYPE, CODE) \
+#define MTKObservePropertySelf(KEYPATH, TYPE, CODE...) \
 [self observeProperty:@(((void)(NO && ((void)self.KEYPATH, NO)), # KEYPATH)) withBlock:^(__weak typeof(self) self, TYPE old, TYPE new) CODE ];
 
 
