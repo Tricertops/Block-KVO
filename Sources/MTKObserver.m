@@ -64,7 +64,7 @@
     if (self.attached) {
         [self.target removeObserver:self forKeyPath:self.keyPath];
     }
-	NSLog(@"Observer dealloc %@ %@", self.target, self.keyPath);
+	//NSLog(@"Observer dealloc %@ %@", self.target, self.keyPath);
 }
 
 
