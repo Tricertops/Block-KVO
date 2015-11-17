@@ -49,7 +49,7 @@
     if (self) {
         self.target = target;
         self.keyPath = keyPath;
-		self.owner = owner;
+        self.owner = owner;
         
         self.afterSettingBlocks = [[NSMutableArray alloc] init];
         self.afterInsertionBlocks = [[NSMutableArray alloc] init];
@@ -133,18 +133,18 @@
                        context:(void *)context {
     if (self.target == object && [self.keyPath isEqualToString:keyPath]) {
         
-		BOOL isPrior = [[change objectForKey:NSKeyValueChangeNotificationIsPriorKey] boolValue];
+        BOOL isPrior = [[change objectForKey:NSKeyValueChangeNotificationIsPriorKey] boolValue];
         NSKeyValueChange changeKind = [[change objectForKey:NSKeyValueChangeKindKey] integerValue];
-		
+        
         id old = [change objectForKey:NSKeyValueChangeOldKey];
         if (old == [NSNull null]) old = nil;
         
-		id new = [change objectForKey:NSKeyValueChangeNewKey];
+        id new = [change objectForKey:NSKeyValueChangeNewKey];
         if (new == [NSNull null]) new = nil;
         
-		NSIndexSet *indexes = [change objectForKey:NSKeyValueChangeIndexesKey];
+        NSIndexSet *indexes = [change objectForKey:NSKeyValueChangeIndexesKey];
         
-		if (isPrior) {
+        if (isPrior) {
             // May be added in future.
         }
         else {
@@ -163,7 +163,7 @@
 #pragma mark Execute Blocks
 
 - (void)executeAfterSettingBlocksOld:(id)old new:(id)new {
-	// Here we check for equality. Two values are equal when they have equal pointers (e.g. nils) or they respond to -isEqual: with YES.
+    // Here we check for equality. Two values are equal when they have equal pointers (e.g. nils) or they respond to -isEqual: with YES.
     if (old == new || (old && [new isEqual:old])) return;
     
     for (MTKBlockChange block in [self.afterSettingBlocks copy]) {
@@ -172,7 +172,7 @@
 }
 
 - (void)executeAfterInsertionBlocksNew:(id)new indexes:(NSIndexSet *)indexes {
-	// Prevent calling blocks when really nothing was inserted.
+    // Prevent calling blocks when really nothing was inserted.
     if ([new respondsToSelector:@selector(count)] && [new count] == 0) return;
     
     for (MTKBlockInsert block in [self.afterInsertionBlocks copy]) {
@@ -181,7 +181,7 @@
 }
 
 - (void)executeAfterRemovalBlocksOld:(id)old indexes:(NSIndexSet *)indexes {
-	// Prevent calling blocks when really nothing was removed.
+    // Prevent calling blocks when really nothing was removed.
     if ([old respondsToSelector:@selector(count)] && [old count] == 0) return;
     
     for (MTKBlockRemove block in [self.afterRemovalBlocks copy]) {
@@ -190,7 +190,7 @@
 }
 
 - (void)executeAfterReplacementBlocksOld:(id)old new:(id)new indexes:(NSIndexSet *)indexes {
-	// Prevent calling blocks when really nothing was replaced.
+    // Prevent calling blocks when really nothing was replaced.
     if ([old respondsToSelector:@selector(count)] && [old count] == 0) return;
     if ([new respondsToSelector:@selector(count)] && [new count] == 0) return;
     
