@@ -110,16 +110,14 @@
 #pragma mark Observe Properties
 
 - (void)observeProperty:(NSString *)keyPath withBlock:(MTKBlockChange)observationBlock {
-    [self observeObject:self property:keyPath withBlock:^(__weak id weakSelf, __weak id weakObject, id old, id new) {
-        // weakSelf and weakObject are the same
-        observationBlock(weakSelf, old, new);
+    [self observeObject:self property:keyPath withBlock:^(id self, id object, id old, id new) {
+        observationBlock(self, old, new);
     }];
 }
 
 - (void)observeProperties:(NSArray *)keyPaths withBlock:(MTKBlockChangeMany)observationBlock {
-    [self observeObject:self properties:keyPaths withBlock:^(__weak id weakSelf, __weak id weakObject, NSString *keyPath, id old, id new) {
-        // weakSelf and weakObject are the same
-        observationBlock(weakSelf, keyPath, old, new);
+    [self observeObject:self properties:keyPaths withBlock:^(id self, id object, NSString *keyPath, id old, id new) {
+        observationBlock(self, keyPath, old, new);
     }];
 }
 
@@ -141,8 +139,8 @@
 - (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKBlockForeignChange)observationBlock {
     __weak typeof(self) weakSelf = self;
 	MTKObserver *observer = [object mtk_observerForKeyPath:keyPath owner:self];
-	[observer addSettingObservationBlock:^(__weak id weakObject, id old, id new) {
-        observationBlock(weakSelf, weakObject, old, new);
+	[observer addSettingObservationBlock:^(id object, id old, id new) {
+        observationBlock(weakSelf, object, old, new);
     }];
 }
 
@@ -150,8 +148,8 @@
 - (void)observeObject:(id)object properties:(NSArray *)keyPaths withBlock:(MTKBlockForeignChangeMany)observationBlock {
 	for (NSString *keyPath in keyPaths) {
         NSString *keyPathCopy = [keyPath copy]; // If some fool uses mutable key-paths
-        [self observeObject:object property:keyPath withBlock:^(__weak id weakSelf, __weak id weakObject, id old , id new){
-            observationBlock(weakSelf, weakObject, keyPathCopy, old, new);
+        [self observeObject:object property:keyPath withBlock:^(id self, id object, id old , id new){
+            observationBlock(self, object, keyPathCopy, old, new);
         }];
     }
 }
@@ -160,7 +158,7 @@
 - (void)observeObject:(id)object property:(NSString *)keyPath withSelector:(SEL)observationSelector {
 	NSMethodSignature *signature = [self methodSignatureForSelector:observationSelector];
     NSInteger numberOfArguments = [signature numberOfArguments];
-	[self observeObject:object property:keyPath withBlock:^(__weak id weakSelf, __weak id weakObject, id old, id new) {
+	[self observeObject:object property:keyPath withBlock:^(id self, id object, id old, id new) {
 		switch (numberOfArguments) {
             case 0:
             case 1:
@@ -171,28 +169,28 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                 // -someObjectDidChangeSomething
-                [weakSelf performSelector:observationSelector];
+                [self performSelector:observationSelector];
                 break;
                 
             case 3: // +1
-                if (weakSelf == weakObject) {
+                if (self == object) {
                     // -didChangeSomethingTo:
-                    [weakSelf performSelector:observationSelector withObject:new]; // Observing self, we dont need self
+                    [self performSelector:observationSelector withObject:new]; // Observing self, we dont need self
                 }
                 else {
                     // -someObjectDidChangeSomething:
-                    [weakSelf performSelector:observationSelector withObject:weakObject]; // Observing another object
+                    [self performSelector:observationSelector withObject:object]; // Observing another object
                 }
                 break;
             
 			case 4: // +2
-                if (weakSelf == weakObject) {
+                if (self == object) {
                     // -didChangeSomethingFrom:to:
-                    [weakSelf performSelector:observationSelector withObject:old withObject:new];
+                    [self performSelector:observationSelector withObject:old withObject:new];
                 }
 				else {
                     // -someObject: didChangeSomethingTo:
-                    [weakSelf performSelector:observationSelector withObject:weakObject withObject:new];
+                    [self performSelector:observationSelector withObject:object withObject:new];
                 }
                 break;
 #pragma clang diagnostic pop
@@ -201,7 +199,7 @@
                 // +3
                 // -someObject:didChangeSomethingFrom:to:
                 void(*msgSend)(id, SEL, id, id, id) = (typeof(msgSend))objc_msgSend;
-                msgSend(weakSelf, observationSelector, weakObject, old, new);
+                msgSend(self, observationSelector, object, old, new);
                 break;
             }
         }
@@ -230,25 +228,25 @@
 {
     MTKObserver *observer = [self mtk_observerForKeyPath:keyPath owner:self];
     [observer addSettingObservationBlock:changeBlock];
-    [observer addInsertionObservationBlock: insertionBlock ?: ^(__weak id weakSelf, id new, NSIndexSet *indexes) {
+    [observer addInsertionObservationBlock: insertionBlock ?: ^(id self, id new, NSIndexSet *indexes) {
         // If no insertion block was specified, call general change block.
-        changeBlock(weakSelf, nil, [weakSelf valueForKeyPath:keyPath]);
+        changeBlock(self, nil, [self valueForKeyPath:keyPath]);
     }];
-    [observer addRemovalObservationBlock: removalBlock ?: ^(__weak id weakSelf, id old, NSIndexSet *indexes) {
+    [observer addRemovalObservationBlock: removalBlock ?: ^(id self, id old, NSIndexSet *indexes) {
         // If no removal block was specified, call general change block.
-        changeBlock(weakSelf, nil, [weakSelf valueForKeyPath:keyPath]);
+        changeBlock(self, nil, [self valueForKeyPath:keyPath]);
     }];
-    [observer addReplacementObservationBlock: replacementBlock ?: ^(__weak id weakSelf, id old, id new, NSIndexSet *indexes) {
+    [observer addReplacementObservationBlock: replacementBlock ?: ^(id self, id old, id new, NSIndexSet *indexes) {
         // If no removal block was specified, call general change block.
-        changeBlock(weakSelf, nil, [weakSelf valueForKeyPath:keyPath]);
+        changeBlock(self, nil, [self valueForKeyPath:keyPath]);
     }];
 }
 
 /// Call main `-observeRelationship:...` method with only first argument.
 - (void)observeRelationship:(NSString *)keyPath changeBlock:(MTKBlockGeneric)changeBlock {
     [self observeRelationship:keyPath
-                  changeBlock:^(__weak id weakSelf, id old, id new) {
-                      changeBlock(weakSelf, new);
+                  changeBlock:^(id self, id old, id new) {
+                      changeBlock(self, new);
                   }
                insertionBlock:nil
                  removalBlock:nil
@@ -270,9 +268,9 @@
 
 /// Observe source key-path and set its new value to destination every time it changes. Use transformation block, if specified.
 - (void)map:(NSString *)sourceKeyPath to:(NSString *)destinationKeyPath transform:(id (^)(id))transformationBlock {
-    [self observeProperty:sourceKeyPath withBlock:^(__weak id weakSelf, id old, id new) {
+    [self observeProperty:sourceKeyPath withBlock:^(id self, id old, id new) {
         id transformedValue = (transformationBlock? transformationBlock(new) : new);
-        [weakSelf setValue:transformedValue forKeyPath:destinationKeyPath];
+        [self setValue:transformedValue forKeyPath:destinationKeyPath];
     }];
 }
 
@@ -289,9 +287,9 @@
 
 /// Add block observer on current operation queue and the resulting internal opaque observe is stored in associated mutable set.
 - (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKBlockNotify)block {
-	__weak typeof(self) weakSelf = self;
     // Invoke manually for the first time.
-    block(weakSelf, nil);
+    block(self, nil);
+    __weak typeof(self) weakSelf = self;
 	id internalObserver = [[NSNotificationCenter defaultCenter] addObserverForName:name
 																			object:object
 																			 queue:[NSOperationQueue currentQueue]

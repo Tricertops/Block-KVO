@@ -32,9 +32,8 @@
  Assignment that do not really change the value (e.g. self.title = self.title) is ignored. Checking is done using `==` and `-isEqual:`.
  
  This block has also reference to the receiver (which should always be the caller). This internal `self` makes it easier
- to avoid retain cycles. It overrides local variable `self` (method argument) and declares it as weak. **Use of this weak
- `self` inside the block does not create retain cycle.** To make sure “outside” and “inside” `self` variables contains the same
- object, caller should always be the receiver.
+ to avoid retain cycles. It overrides local variable `self` (method argument). **Use of this`self` inside the block does not create retain cycle.**
+ To make sure “outside” and “inside” `self` variables contains the same object, caller should always be the receiver.
  
  If you call this method multiple times on the same key-path it is guaranteed they will be executed in the same order.
  
@@ -67,7 +66,7 @@
 /**
  Registers observation block for the specified key-path relative to the object. **You should call this method on `self`,
  since you are the owner of the observation.**
- Owner of the block itself is observed object, but you can use it in block since it comes as an argument (use __weak).
+ Owner of the block itself is observed object, but you can use it in block since it comes as an argument.
  
  Observation block is executed immediately and at least once for every change of value in the property.
  The block receives old and new value of the property. First call to this block will have `nil` as `old` and current value as `new`.

@@ -12,17 +12,17 @@
 
 #pragma mark Block Typedefs
 
-typedef void(^MTKBlockGeneric)      (__weak id self,                            id newVal);
-typedef void(^MTKBlockChange)       (__weak id self,                    id old, id newVal);
-typedef void(^MTKBlockChangeMany)   (__weak id self, NSString *keyPath, id old, id newVal);
-typedef void(^MTKBlockInsert)       (__weak id self,                            id newVal, NSIndexSet *indexes);
-typedef void(^MTKBlockRemove)       (__weak id self,                    id old,         NSIndexSet *indexes);
-typedef void(^MTKBlockReplace)      (__weak id self,                    id old, id newVal, NSIndexSet *indexes);
+typedef void(^MTKBlockGeneric)          (id self, id newValue);
+typedef void(^MTKBlockChange)           (id self, id oldValue, id newValue);
+typedef void(^MTKBlockChangeMany)       (id self, NSString *keyPath, id oldValue, id newValue);
+typedef void(^MTKBlockInsert)           (id self, id newValue, NSIndexSet *indexes);
+typedef void(^MTKBlockRemove)           (id self, id oldValue,  NSIndexSet *indexes);
+typedef void(^MTKBlockReplace)          (id self, id oldValue, id newValue, NSIndexSet *indexes);
 
-typedef void(^MTKBlockForeignChange)    (__weak id self, __weak id object,                      id old, id newVal);
-typedef void(^MTKBlockForeignChangeMany)(__weak id self, __weak id object, NSString *keyPath,   id old, id newVal);
+typedef void(^MTKBlockForeignChange)    (id self, id object, id oldValue, id newValue);
+typedef void(^MTKBlockForeignChangeMany)(id self, id object, NSString *keyPath, id oldValue, id newValue);
 
-typedef void(^MTKBlockNotify)       (__weak id self, NSNotification *notification);
+typedef void(^MTKBlockNotify)           (id self, NSNotification *notification);
 
 
 
