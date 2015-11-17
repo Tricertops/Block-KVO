@@ -60,6 +60,10 @@
 }
 
 - (void)dealloc {
+    // RemoveObserver if it is still attached
+    if (self.attached) {
+        [self.target removeObserver:self forKeyPath:self.keyPath];
+    }
 	//NSLog(@"Observer dealloc %@ %@", self.target, self.keyPath);
 }
 
