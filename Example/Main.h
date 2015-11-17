@@ -16,7 +16,7 @@
 
 
 
-@interface Main : NSObject < UIApplicationDelegate >
+@interface Main : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) Example *property;

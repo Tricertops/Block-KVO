@@ -22,12 +22,10 @@
 		5B7A2C0316AFDE05009214C9 /* NSObject+MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFC16AFDE05009214C9 /* NSObject+MTKObserving.h */; };
 		5B7A2C0416AFDE05009214C9 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */; };
 		5B8AF2EF16C285A5002135D2 /* scope.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B8AF2EE16C285A5002135D2 /* scope.h */; };
-		5BC45C5F19B8646100AFE784 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC45C5E19B8646100AFE784 /* XCTest.framework */; };
-		5BC45C6119B8646100AFE784 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC45C6019B8646100AFE784 /* Foundation.framework */; };
-		5BC45C6319B8646100AFE784 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC45C6219B8646100AFE784 /* UIKit.framework */; };
 		5BC45C7219B864DB00AFE784 /* BlockObservingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DAF1816C67E24007EE428 /* BlockObservingTests.m */; };
 		5BC45C7319B864DB00AFE784 /* MTKTestingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1DAF2216C67FC4007EE428 /* MTKTestingObject.m */; };
 		5BC45C7419B8651900AFE784 /* libBlockObserving.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */; };
+		5BE8EEA31BFB2174004D2102 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE8EEA21BFB2174004D2102 /* UIKit.framework */; };
 		85388EFA19AE3BEB00FD9225 /* MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFB16AFDE05009214C9 /* MTKObserving.h */; };
 		85388EFB19AE3BEB00FD9225 /* MTKObservingMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B1DAF0016C63A7D007EE428 /* MTKObservingMacros.h */; };
 		85388EFC19AE3BEB00FD9225 /* NSObject+MTKObserving.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BFC16AFDE05009214C9 /* NSObject+MTKObserving.h */; };
@@ -85,10 +83,8 @@
 		5BAD91CB15B18C4800E3A100 /* libBlockObserving.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBlockObserving.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BC45C5519B863C600AFE784 /* BlockObservingOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BlockObservingOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BC45C5C19B8646100AFE784 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5BC45C5E19B8646100AFE784 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		5BC45C6019B8646100AFE784 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		5BC45C6219B8646100AFE784 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		5BCB3DD919B84DCB00C33E9D /* XCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BE8EEA21BFB2174004D2102 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BE8EEA31BFB2174004D2102 /* UIKit.framework in Frameworks */,
 				5B18EADD16B2F5AA00362576 /* libBlockObserving.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,9 +109,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BC45C7419B8651900AFE784 /* libBlockObserving.a in Frameworks */,
-				5BC45C5F19B8646100AFE784 /* XCTest.framework in Frameworks */,
-				5BC45C6319B8646100AFE784 /* UIKit.framework in Frameworks */,
-				5BC45C6119B8646100AFE784 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,9 +217,7 @@
 		5BC45C5D19B8646100AFE784 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5BC45C5E19B8646100AFE784 /* XCTest.framework */,
-				5BC45C6019B8646100AFE784 /* Foundation.framework */,
-				5BC45C6219B8646100AFE784 /* UIKit.framework */,
+				5BE8EEA21BFB2174004D2102 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
