@@ -10,15 +10,26 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "MTKObserver.h"
-
-
+#import "NSObject+MTKDeallocBlock.h"
 
 
 
 @implementation NSObject (MTKObserving)
 
-
-
+#pragma mark Dealloc Helper
+- (void)mtk_addDeallocExecutorIfNeeded
+{
+    @autoreleasepool {
+        static char associationKey;
+        if (objc_getAssociatedObject(self, &associationKey) == nil) {
+            __unsafe_unretained typeof(self) weakSelf = self; // NOTE: need to be __unsafe_unretained because __weak var will be reset to nil in dealloc
+            id deallocHelper = [self mtk_addDeallocBlock:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:kMTKObservingDeallocingNotification object:weakSelf]; // notify ASAP
+            }];
+            objc_setAssociatedObject(self, &associationKey, deallocHelper, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        }
+    }
+}
 
 
 #pragma mark Internal
@@ -45,6 +56,7 @@
 	MTKObserver *observer = nil;
     // Key path is used as key to retrieve observer.
 	// For one key-path may be more observers with different owners.
+    [self mtk_addDeallocExecutorIfNeeded];
     
     // Obtain the set
     NSMutableSet *observersForKeyPath = [[self mtk_keyPathBlockObservers] objectForKey:keyPath];
@@ -291,6 +303,7 @@
 - (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKBlockNotify)block {
 	__weak typeof(self) weakSelf = self;
     // Invoke manually for the first time.
+    [self mtk_addDeallocExecutorIfNeeded];
     block(weakSelf, nil);
 	id internalObserver = [[NSNotificationCenter defaultCenter] addObserverForName:name
 																			object:object

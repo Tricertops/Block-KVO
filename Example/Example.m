@@ -10,4 +10,8 @@
 
 @implementation Example
 
+- (void)dealloc
+{
+    NSLog(@"Example dealloc!");
+}
 @end

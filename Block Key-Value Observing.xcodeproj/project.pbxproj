@@ -37,6 +37,12 @@
 		85388F0019AE3BEB00FD9225 /* metamacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B7A2BF816AFDE05009214C9 /* metamacros.h */; };
 		85388F0119AE3C0400FD9225 /* NSObject+MTKObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */; };
 		85388F0219AE3C0400FD9225 /* MTKObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7A2BFA16AFDE05009214C9 /* MTKObserver.m */; };
+		EC4451CA1BF9DA3700BB5475 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC4451C91BF9DA3700BB5475 /* UIKit.framework */; };
+		EC4451DB1BFC36D500BB5475 /* MTKDeallocBlockExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = EC4451D91BFC36D500BB5475 /* MTKDeallocBlockExecutor.h */; };
+		EC4451DC1BFC36D600BB5475 /* MTKDeallocBlockExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = EC4451DA1BFC36D500BB5475 /* MTKDeallocBlockExecutor.m */; };
+		EC4451E01BFC370200BB5475 /* MTKDeallocBlockExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = EC4451DA1BFC36D500BB5475 /* MTKDeallocBlockExecutor.m */; };
+		EC4451E31BFC78B600BB5475 /* NSObject+MTKDeallocBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = EC4451E11BFC78B600BB5475 /* NSObject+MTKDeallocBlock.h */; };
+		EC4451E41BFC78B600BB5475 /* NSObject+MTKDeallocBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = EC4451E21BFC78B600BB5475 /* NSObject+MTKDeallocBlock.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +95,11 @@
 		5BC45C6019B8646100AFE784 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		5BC45C6219B8646100AFE784 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		5BCB3DD919B84DCB00C33E9D /* XCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC4451C91BF9DA3700BB5475 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EC4451D91BFC36D500BB5475 /* MTKDeallocBlockExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTKDeallocBlockExecutor.h; sourceTree = "<group>"; };
+		EC4451DA1BFC36D500BB5475 /* MTKDeallocBlockExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTKDeallocBlockExecutor.m; sourceTree = "<group>"; };
+		EC4451E11BFC78B600BB5475 /* NSObject+MTKDeallocBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MTKDeallocBlock.h"; sourceTree = "<group>"; };
+		EC4451E21BFC78B600BB5475 /* NSObject+MTKDeallocBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MTKDeallocBlock.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC4451CA1BF9DA3700BB5475 /* UIKit.framework in Frameworks */,
 				5B18EADD16B2F5AA00362576 /* libBlockObserving.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,7 +179,11 @@
 				5B7A2BFD16AFDE05009214C9 /* NSObject+MTKObserving.m */,
 				5B7A2BF916AFDE05009214C9 /* MTKObserver.h */,
 				5B7A2BFA16AFDE05009214C9 /* MTKObserver.m */,
+				EC4451D91BFC36D500BB5475 /* MTKDeallocBlockExecutor.h */,
+				EC4451DA1BFC36D500BB5475 /* MTKDeallocBlockExecutor.m */,
 				5B7A2BF616AFDE05009214C9 /* Utilities */,
+				EC4451E11BFC78B600BB5475 /* NSObject+MTKDeallocBlock.h */,
+				EC4451E21BFC78B600BB5475 /* NSObject+MTKDeallocBlock.m */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -223,6 +239,7 @@
 		5BC45C5D19B8646100AFE784 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EC4451C91BF9DA3700BB5475 /* UIKit.framework */,
 				5BC45C5E19B8646100AFE784 /* XCTest.framework */,
 				5BC45C6019B8646100AFE784 /* Foundation.framework */,
 				5BC45C6219B8646100AFE784 /* UIKit.framework */,
@@ -238,8 +255,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B7A2BFE16AFDE05009214C9 /* keypath.h in Headers */,
+				EC4451DB1BFC36D500BB5475 /* MTKDeallocBlockExecutor.h in Headers */,
 				5B7A2BFF16AFDE05009214C9 /* metamacros.h in Headers */,
 				5B7A2C0016AFDE05009214C9 /* MTKObserver.h in Headers */,
+				EC4451E31BFC78B600BB5475 /* NSObject+MTKDeallocBlock.h in Headers */,
 				5B7A2C0216AFDE05009214C9 /* MTKObserving.h in Headers */,
 				5B7A2C0316AFDE05009214C9 /* NSObject+MTKObserving.h in Headers */,
 				5B8AF2EF16C285A5002135D2 /* scope.h in Headers */,
@@ -413,7 +432,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B7A2C0116AFDE05009214C9 /* MTKObserver.m in Sources */,
+				EC4451DC1BFC36D600BB5475 /* MTKDeallocBlockExecutor.m in Sources */,
 				5B7A2C0416AFDE05009214C9 /* NSObject+MTKObserving.m in Sources */,
+				EC4451E41BFC78B600BB5475 /* NSObject+MTKDeallocBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85388F0119AE3C0400FD9225 /* NSObject+MTKObserving.m in Sources */,
+				EC4451E01BFC370200BB5475 /* MTKDeallocBlockExecutor.m in Sources */,
 				85388F0219AE3C0400FD9225 /* MTKObserver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

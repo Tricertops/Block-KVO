@@ -32,6 +32,10 @@ int main(int argc, char *argv[]) {
 	/// It is safe to call it multiple times or even ahen no observations are created.
 	[self removeAllObservations];
 	
+    [self.property observeProperty:@"title" withBlock:^(id example, id old, id new) {}];
+    self.property = nil;
+    NSLog(@"release self.property");
+    
 	return YES;
 }
 

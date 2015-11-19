@@ -8,7 +8,7 @@
 
 #import "MTKObserver.h"
 
-
+NSString *const kMTKObservingDeallocingNotification = @"kMTKObservingDeallocingNotification"; // Notification to notify target is deallocing
 
 #pragma mark Private Interface
 
@@ -60,13 +60,16 @@
 }
 
 - (void)dealloc {
-    // RemoveObserver if it is still attached
-    if (self.attached) {
-        [self.target removeObserver:self forKeyPath:self.keyPath];
-    }
-	//NSLog(@"Observer dealloc %@ %@", self.target, self.keyPath);
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+	//NSLog(@"Observer dealloc %@", self.keyPath);
 }
 
+#pragma mark Target Deallocing Notification
+- (void)onTargetDeallocing
+{
+    //NSLog(@"Target deallocing..");
+    [self detach];
+}
 
 
 #pragma Adding Blocks
@@ -112,9 +115,13 @@
              NSKeyValueObservingOptionOld |
              NSKeyValueObservingOptionNew
                              context:nil];
+            
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onTargetDeallocing) name:kMTKObservingDeallocingNotification object:self.target];
         }
         else {
             [self.target removeObserver:self forKeyPath:self.keyPath];
+            
+            [[NSNotificationCenter defaultCenter] removeObserver:self];
         }
     }
 }

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+NSString *const kMTKObservingDeallocingNotification;
 
 #pragma mark Block Typedefs
 
