@@ -37,7 +37,7 @@
         }
         
         [self mtk_addDeallocationCallback:^(id self) {
-            [self removeAllObservations];
+            [self internalRemoveAllObservations];
         }];
         
         return keyPathObservers;
@@ -331,8 +331,12 @@
 
 #pragma Removing
 
-/// Called usually from dealloc (may be called at any time). Detach all observers. The associated objects are released once the deallocation process finishes.
 - (void)removeAllObservations {
+    [self internalRemoveAllObservations];
+}
+
+/// Called usually from dealloc (may be called at any time). Detach all observers. The associated objects are released once the deallocation process finishes.
+- (void)internalRemoveAllObservations {
     // Key-Path Observers
     NSMutableDictionary *keyPathBlockObservers = [self mtk_keyPathBlockObservers];
     for (NSMutableSet *observersForKeyPath in [[self mtk_keyPathBlockObservers] allValues]) {
