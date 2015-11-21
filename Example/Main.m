@@ -28,17 +28,7 @@ int main(int argc, char *argv[]) {
     [self exampleMap];
     [self exampleKeypathMacro];
     
-    /// Do not forget to call this in dealloc. Basically you can call it anywhere but usually it is in dealloc.
-    /// It is safe to call it multiple times or even ahen no observations are created.
-    [self removeAllObservations];
-    
     return YES;
-}
-
-- (void)dealloc {
-    /// OMG, do not forget this in dealloc. Otherwise you will get bunch of KVO warning logs in debugger.
-    [self removeAllObservations];
-    /// Here, the dealloc is never called, because this is ap's delegate.
 }
 
 

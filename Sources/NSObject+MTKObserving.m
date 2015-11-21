@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "MTKObserver.h"
+#import "MTKDeallocator.h"
 
 
 
@@ -28,16 +29,19 @@
     // Observer is hidden object that has target (this object), key path and owner.
     // There should never exist two or more observers with the same target, key path and owner.
     // Observer has multiple observation block which are executed in order they were added.
-    static char associationKey;
-    NSMutableDictionary *keyPathObservers = objc_getAssociatedObject(self, &associationKey);
-    if ( ! keyPathObservers) {
-        keyPathObservers = [[NSMutableDictionary alloc] init];
-        objc_setAssociatedObject(self,
-                                 &associationKey,
-                                 keyPathObservers,
-                                 OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    @synchronized(self) {
+        NSMutableDictionary *keyPathObservers = objc_getAssociatedObject(self, _cmd);
+        if ( ! keyPathObservers) {
+            keyPathObservers = [[NSMutableDictionary alloc] init];
+            objc_setAssociatedObject(self, _cmd, keyPathObservers, OBJC_ASSOCIATION_RETAIN);
+        }
+        
+        [self mtk_addDeallocationCallback:^(id self) {
+            [self removeAllObservations];
+        }];
+        
+        return keyPathObservers;
     }
-    return keyPathObservers;
 }
 
 /// Find existing observer or create new for this key-path and owner. Multiple uses of one key-path per owner return the same observer.
@@ -140,7 +144,7 @@
     MTKObserver *observer = nil;
     @autoreleasepool {
         //! The autoreleasepool ensures the only reference to the MTKObserver is the associated reference.
-        observer = [self mtk_observerForKeyPath:keyPath owner:self];
+        observer = [object mtk_observerForKeyPath:keyPath owner:self];
     }
     __weak typeof(self) weakSelf = self;
     [observer addSettingObservationBlock:^(id object, id old, id new) {

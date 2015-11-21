@@ -82,12 +82,18 @@
         observeAfterRemoveDidRun = YES;
     }];
     
-    [self removeObservationOfObject:self forKeyPath:@keypath(self.simple)];
+    [self removeObservationsOfObject:self forKeyPath:@keypath(self.simple)];
     self.simple = nil;
     
     XCTAssertTrue(!observeAfterRemoveDidRun, @"Failed to remove observation for keypath");
     
     [self removeAllObservations];
+}
+
+- (void)testAutomaticRemoveOnDealloc {
+    MTKTestingObject *object = [MTKTestingObject new];
+    [self observeObject:object property:@keypath(object, title) withBlock:^(id self, id object, id old, id new) {}];
+    XCTAssertNoThrow({ object = nil; });
 }
 
 @end

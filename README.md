@@ -107,13 +107,7 @@ Improved observation of notifications using blocks. `NSNotificationCenter` provi
 
 
 ### Remove Observations
-
-```objc
-- (void)dealloc {
-    [self removeAllObservations]; // Observations of self
-    [self removeAllObservationsOfObject:someObject]; // Observations of other objects
-}
-```
+Removing is now automatic.
 
 ---
 

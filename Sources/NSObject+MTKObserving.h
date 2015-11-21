@@ -37,8 +37,6 @@
  
  If you call this method multiple times on the same key-path it is guaranteed they will be executed in the same order.
  
- For cleanup, call `-removeAllObservations` in dealloc.
- 
  @param keyPath
  The key-path, relative to the receiver, of the property to observe. This value must not be `nil`.
  
@@ -78,8 +76,6 @@
  This prevents potential retain cycles, but is not so important as in `-observeProperty:withBlock:`
  
  If you call this method multiple times on the same key-path it is guaranteed they will be executed in the same order.
- 
- For cleanup, call `-removeAllObservationsOfObject:` once you do not need that object.
  
  @param keyPath
  The key-path, relative to the receiver, of the property to observe. This value must not be `nil`.
@@ -131,8 +127,6 @@
  Some of the blocks have argument `indexes`. In case of non-indexed collection it contains `nil`.
  This behavior is consistent with standard KVO observation method.
  
- For cleanup, call `-removeAllObservations` in dealloc.
- 
  @param changeBlock Called when the collection is completely replaced by new collection. Called also for any other modification type where you do not specify any block.
  @param insertionBlock Called when some objects are inserted into relationship. You receive those objects (in the same collection class) and their indexes (if the colelction is indexed). You may pass nil value and `changeBlock` will be invoked instead.
  @param removalBlock Called when some objects are removed from relationship. You receive those objects (in the same collection class) and their past indexes (if the colelction is indexed). You may pass nil value and `changeBlock` will be invoked instead.
@@ -169,8 +163,6 @@
  
  Method is recursion-safe, so you can create bi-directional bindings.
  
- For cleanup, call `-removeAllObservations` in dealloc.
- 
  @param sourceKeyPath
  Key-path relative to the receiver that will be observed. This value must not be `nil`.
  
@@ -201,9 +193,7 @@
 /**
  Registers block observer using NSNotificationCenter and current operation queue.
  See `-[NSNotificationCenter addObserverForName:object:queue:usingBlock:]` for more info.
- 
- For cleanup, call `-removeAllObservations` in dealloc.
- */
+  */
 - (void)observeNotification:(NSString *)name fromObject:(id)object withBlock:(MTKBlockNotify)block;
 
 /// Calls `-observeNotification:fromObject:withBlock:` with nil object.
@@ -219,22 +209,16 @@
 
 
 #pragma mark Removing
+//! Removing observations is optional. Cleanup is performed automatically when objects deallocate. You may need to remove observation earlier, though.
 
-/**
- Removes all observations registered with the receiver. Should be always called on `self`.
- */
-- (void)removeAllObservations;
-
-/**
- Removes all observations registered on given object. Should be always called on `self`.
- */
+//! Optionally remove all observations registered on given object. Should be always called on `self`, called automatically on dealloc.
 - (void)removeAllObservationsOfObject:(id)object;
 
-/**
- Remove observation registered on given object for specified keypath. Should be always called on `self`.
- */
+//! Optionally remove observation registered on given object for specified keypath. Should be always called on `self`, called automatically on dealloc.
 - (void)removeObservationsOfObject:(id)object forKeyPath:(NSString *)keyPath;
 
+//! Deprecated. Called automatically on dealloc. There are very few cases when you need to remove observations earlier.
+- (void)removeAllObservations __deprecated_msg("Called automatically on dealloc of the receiver.");
 
 
 @end

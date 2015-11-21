@@ -7,6 +7,7 @@
 //
 
 #import "MTKObserver.h"
+#import "MTKDeallocator.h"
 
 
 
@@ -50,6 +51,13 @@
         self.target = target;
         self.keyPath = keyPath;
         self.owner = owner;
+        
+        [target mtk_addDeallocationCallback:^(id target) {
+            [self detach];
+        }];
+        [owner mtk_addDeallocationCallback:^(id owner) {
+            [self detach];
+        }];
         
         self.afterSettingBlocks = [[NSMutableArray alloc] init];
         self.afterInsertionBlocks = [[NSMutableArray alloc] init];
