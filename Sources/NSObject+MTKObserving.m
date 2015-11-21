@@ -137,8 +137,12 @@
 
 /// Add observation block to appropriate observer.
 - (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKBlockForeignChange)observationBlock {
+    MTKObserver *observer = nil;
+    @autoreleasepool {
+        //! The autoreleasepool ensures the only reference to the MTKObserver is the associated reference.
+        observer = [self mtk_observerForKeyPath:keyPath owner:self];
+    }
     __weak typeof(self) weakSelf = self;
-    MTKObserver *observer = [object mtk_observerForKeyPath:keyPath owner:self];
     [observer addSettingObservationBlock:^(id object, id old, id new) {
         observationBlock(weakSelf, object, old, new);
     }];
@@ -226,7 +230,11 @@
                removalBlock:(MTKBlockRemove)removalBlock
            replacementBlock:(MTKBlockReplace)replacementBlock
 {
-    MTKObserver *observer = [self mtk_observerForKeyPath:keyPath owner:self];
+    MTKObserver *observer = nil;
+    @autoreleasepool {
+        //! The autoreleasepool ensures the only reference to the MTKObserver is the associated reference.
+        observer = [self mtk_observerForKeyPath:keyPath owner:self];
+    }
     [observer addSettingObservationBlock:changeBlock];
     [observer addInsertionObservationBlock: insertionBlock ?: ^(id self, id new, NSIndexSet *indexes) {
         // If no insertion block was specified, call general change block.
