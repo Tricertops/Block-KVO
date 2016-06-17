@@ -49,7 +49,7 @@ The above code example using provided macro:
 
 ```objc
 MTKObservePropertySelf(profile.username, NSString *, {
-    self.usernameLabel.text = newUsername;
+    self.usernameLabel.text = new;
 });
 ```
 
