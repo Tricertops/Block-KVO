@@ -1,4 +1,4 @@
-Block Observing <a href="https://flattr.com/submit/auto?user_id=Tricertops&url=https%3A%2F%2Fgithub.com%2FiMartinKiss%2FBlock-KVO" target="_blank"><img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+Block Observing
 =============
 
 
@@ -24,7 +24,7 @@ Integration
 6. Import `MTKObserving.h` to your files (usually in `Prefix.pch`).
 
 > **CocoaPods** central repositary will no longer be updated. Use this:
-> `pod 'Block-KVO', :git => 'https://github.com/iMartinKiss/Block-KVO.git'`
+> `pod 'Block-KVO', :git => 'https://github.com/Tricertops/Block-KVO.git'`
 
 Features
 --------
@@ -112,4 +112,4 @@ Removing is now automatic.
 ---
 
 _The MIT License_  
-_Copyright © 2012 – 2015 Martin Kiss_
+_Copyright © 2012 – 2016 Martin Kiss_
