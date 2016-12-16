@@ -99,11 +99,18 @@
 /// Called internally by the owner.
 - (void)mtk_removeObservationsForOwner:(id)owner keyPath:(NSString *)keyPath {
     NSMutableSet *observersForKeyPath = [self mtk_keyPathBlockObservers][keyPath];
-    for (MTKObserver *observer in [observersForKeyPath copy]) {
+    
+    // Avoiding obscure memory issue. First, collect all observers with given owner and then detach them.
+    // This avoids using `observer.owner` after it might already got deallocated, because of detached observation.
+    NSMutableSet *observersForOwnerForKeyPath = [[NSMutableSet alloc] init];
+    for (MTKObserver *observer in observersForKeyPath) {
         if (observer.owner == owner) {
-            [observer detach];
-            [observersForKeyPath removeObject:observer];
+            [observersForOwnerForKeyPath addObject:observer];
         }
+    }
+    for (MTKObserver *observer in observersForOwnerForKeyPath) {
+        [observer detach];
+        [observersForKeyPath removeObject:observer];
     }
 }
 
