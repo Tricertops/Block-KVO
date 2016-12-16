@@ -26,7 +26,7 @@
 - (instancetype)initWithOwner:(NSObject*)owner {
     self = [super init];
     if (self) {
-        self->_owner = nil;
+        self->_owner = owner;
         self->_callbacks = [NSMutableArray new];
     }
     return self;
@@ -40,9 +40,13 @@
 
 
 - (void)invokeCallbacks {
+    NSArray<MTKDeallocatorCallback> *blocks = self->_callbacks;
+    self->_callbacks = nil;
+    
     __unsafe_unretained NSObject *owner = self->_owner;
-    for (MTKDeallocatorCallback block in self->_callbacks)
+    for (MTKDeallocatorCallback block in blocks) {
         block(owner);
+    }
 }
 
 

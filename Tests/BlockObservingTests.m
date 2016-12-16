@@ -93,7 +93,11 @@
 - (void)testAutomaticRemoveOnDealloc {
     MTKTestingObject *object = [MTKTestingObject new];
     [self observeObject:object property:@keypath(object, title) withBlock:^(id self, id object, id old, id new) {}];
+    __weak NSSet *observations = [object valueForKey:@"mtk_keyPathBlockObservers"][@"title"];
+    
+    XCTAssertEqual(observations.count, 1);
     XCTAssertNoThrow({ object = nil; });
+    XCTAssertEqual(observations.count, 0);
 }
 
 @end
