@@ -42,7 +42,11 @@ typedef void(^MTKBlockNotify)           (id self, NSNotification *notification);
 - (id)initWithTarget:(NSObject *)target keyPath:(NSString *)keyPath owner:(id)owner;
 
 
-#pragma mark Ownership
+#pragma mark Observation
+/// Object that is observed when the receiver is attached.
+@property (nonatomic, readonly, assign) id target;
+/// Key-path that is observed on the target.
+@property (nonatomic, readonly, copy) NSString *keyPath;
 /// Object that 'owns' all blocks in this observer. This object was the caller of observation method.
 @property (nonatomic, readonly, assign) id owner;
 

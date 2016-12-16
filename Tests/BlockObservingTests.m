@@ -100,4 +100,25 @@
     XCTAssertEqual(observations.count, 0);
 }
 
+- (void)testAutomaticRemovalOfOnOwnerDealloc {
+    // https://github.com/Tricertops/Block-KVO/issues/43
+    
+    MTKTestingObject *object = [MTKTestingObject new];
+    NSSet *observations = nil;
+    
+    @autoreleasepool {
+        MTKTestingObject *observer1 = [MTKTestingObject new];
+        [observer1 observeObject:object property:@keypath(object, title) withBlock:^(id self, id object, id oldValue, id newValue) {}];
+        observations = [object valueForKey:@"mtk_keyPathBlockObservers"][@"title"];
+        XCTAssertEqual(observations.count, 1);
+        observer1 = nil;
+    }
+    XCTAssertEqual(observations.count, 0);
+    
+    MTKTestingObject *observer2 = [MTKTestingObject new];
+    [observer2 observeObject:object property:@keypath(object, title) withBlock:^(id self, id object, id oldValue, id newValue) {}];
+    
+    XCTAssertEqual(observations.count, 1);
+}
+
 @end

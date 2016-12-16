@@ -218,7 +218,7 @@
 - (void)removeObservationsOfObject:(id)object forKeyPath:(NSString *)keyPath;
 
 //! Deprecated. Called automatically on dealloc. There are very few cases when you need to remove observations earlier.
-- (void)removeAllObservations __deprecated_msg("Called automatically on dealloc of the receiver.");
+- (void)removeAllObservations;
 
 
 @end

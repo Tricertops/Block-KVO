@@ -71,6 +71,10 @@
         observer = [[MTKObserver alloc] initWithTarget:self keyPath:keyPath owner:owner];
         [observersForKeyPath addObject:observer];
         [observer attach];
+        
+        [owner mtk_addDeallocationCallback:^(id owner) {
+            [observer.target mtk_removeObservationsForOwner:owner keyPath:keyPath];
+        }];
     }
     return observer;
 }
