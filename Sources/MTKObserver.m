@@ -70,10 +70,10 @@
 - (void)addSettingObservationBlock:(MTKBlockChange)block {
     [self.afterSettingBlocks addObject:block];
     
-    // Since we supress equal values in observation, to we must manually ensure the block is invoked.
-    // In this only case the old and new values are equal (if the initial value is `nil`).
+    // Since we suppress equal values in observation, we must manually ensure the block is invoked.
+    // This is the only case when the old and new values are equal (in fact, identical).
     id initialValue = [self.target valueForKeyPath:self.keyPath];
-    block(self.target, nil, initialValue);
+    block(self.target, initialValue, initialValue);
 }
 
 - (void)addInsertionObservationBlock:(MTKBlockInsert)block {
