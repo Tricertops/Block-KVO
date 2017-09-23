@@ -106,19 +106,19 @@
 /**
  Observe relationship. See KVC documentation for full explanation how relationships work. Basically there are two options:
  
-	1. You implement KVC methods for relationship yourself.
+    1. You implement KVC methods for relationship yourself.
  
-	2. Use Core Data relationships.
+    2. Use Core Data relationships.
  
  Relationship is a collection object (NSArray, NSSet, NSOrderedSet, maybe some other...) with accessor methods.
  This collection should be modified only through these accessor for changes to be observable.
  There are 3 way how the collection may be modified:
  
-	1. Insert one or more objects.
-	
-	2. Remove one or more objects.
-	
-	3. Replace one or more objects with the same number of other objects.
+    1. Insert one or more objects.
+ 
+     2. Remove one or more objects.
+ 
+     3. Replace one or more objects with the same number of other objects.
  
  In addition there is fourth case of modification - you assign completely new collection object to the property (in case it has setter).
  This method allows you to observe all 4 modifications to the relationship with one call using blocks.

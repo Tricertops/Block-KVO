@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
     NSLog(@"Key of other object by class: %@", @keypathClass(Example, progress));
     
     /// Just try to compile this line:
-    //	id wrong = [self valueForKeyPath:  @keypath(self.notAProperty.title)  ];
+    // id wrong = [self valueForKeyPath:  @keypath(self.notAProperty.title)  ];
     
     /// This great macro is from Extended Objective-C Library: https://github.com/jspahrsummers/libextobjc
 }
