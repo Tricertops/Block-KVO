@@ -122,24 +122,24 @@
 }
 
 - (void)testAutomaticRemovalOfOnObjectDealloc {
-	// Basically, the inverse of -testAutomaticRemovalOfOnOwnerDealloc
-	
-	__weak NSSet *observations = nil;
-	@autoreleasepool {
-		MTKTestingObject *observer1 = [MTKTestingObject new];
-		observer1.title = @"observer";
-		
-		@autoreleasepool {
-			MTKTestingObject *object = [MTKTestingObject new];
-			object.title = @"object";
-			[observer1 observeObject:object property:@"title" withBlock:^(id self, id object, id oldValue, id newValue) {}];
-			observations = [object valueForKey:@"mtk_keyPathBlockObservers"][@"title"];
-			XCTAssertEqual(observations.count, 1);
-			object = nil;
-		}
-		XCTAssertEqual(observations,nil);	// releasing object should release its observation set
-	}
-	// outer autorelease pool should release observer1, which should not crash (duh!)
+    // Basically, the inverse of -testAutomaticRemovalOfOnOwnerDealloc
+    
+    __weak NSSet *observations = nil;
+    @autoreleasepool {
+        MTKTestingObject *observer1 = [MTKTestingObject new];
+        observer1.title = @"observer";
+        
+        @autoreleasepool {
+            MTKTestingObject *object = [MTKTestingObject new];
+            object.title = @"object";
+            [observer1 observeObject:object property:@"title" withBlock:^(id self, id object, id oldValue, id newValue) {}];
+            observations = [object valueForKey:@"mtk_keyPathBlockObservers"][@"title"];
+            XCTAssertEqual(observations.count, 1);
+            object = nil;
+        }
+        XCTAssertEqual(observations, nil); // releasing object should release its observation set
+    }
+    // outer autorelease pool should release observer1, which should not crash (duh!)
 }
 
 @end
