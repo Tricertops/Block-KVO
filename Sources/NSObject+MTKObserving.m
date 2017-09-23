@@ -34,13 +34,13 @@
         if ( ! keyPathObservers) {
             keyPathObservers = [[NSMutableDictionary alloc] init];
             objc_setAssociatedObject(self, _cmd, keyPathObservers, OBJC_ASSOCIATION_RETAIN);
+			// On initial setup, register a block to remove all observations during dealloc
+			[self mtk_addDeallocationCallback:^(id self) {
+				[self internalRemoveAllObservations];
+			}];
         }
-        
-        [self mtk_addDeallocationCallback:^(id self) {
-            [self internalRemoveAllObservations];
-        }];
-        
-        return keyPathObservers;
+
+		return keyPathObservers;
     }
 }
 
@@ -71,10 +71,15 @@
         observer = [[MTKObserver alloc] initWithTarget:self keyPath:keyPath owner:owner];
         [observersForKeyPath addObject:observer];
         [observer attach];
-        
-        [owner mtk_addDeallocationCallback:^(id owner) {
-            [observer.target mtk_removeObservationsForOwner:owner keyPath:keyPath];
-        }];
+		
+		if (owner!=self) {
+			// If not observing self, register a dealloc task to detach the observer if the owner is destroyed first.
+			// A weak reference makes the block safe to execute if the observer is destroyed first.
+			__weak MTKObserver* weakObserver = observer;
+			[owner mtk_addDeallocationCallback:^(id owner) {
+				[weakObserver.target mtk_removeObservationsForOwner:owner keyPath:keyPath];
+			}];
+			}
     }
     return observer;
 }

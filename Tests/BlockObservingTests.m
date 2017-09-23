@@ -40,14 +40,14 @@
     __block MTKTestingObject *initialOldValue = nil;
     __block MTKTestingObject *initialNewValue = nil;
     
-    [self observeProperty:@keypath(self.simple) withBlock:^(__weak typeof(self) self, MTKTestingObject *old, MTKTestingObject *new) {
+    [self observeProperty:@"simple" withBlock:^(__weak typeof(self) self, MTKTestingObject *old, MTKTestingObject *new) {
         initialDidRun = YES;
         initialOldValue = old;
         initialNewValue = new;
     }];
     
     XCTAssertTrue(initialDidRun, @"Failed to run initial observation");
-    XCTAssertEqualObjects(initialOldValue, nil, @"Initial old value must be nil");
+    XCTAssertEqual(initialOldValue, initialNewValue, @"Initial old value must be same as new value");
     XCTAssertEqualObjects(initialNewValue, self.simple, @"Initial new value must be current value");
     
     [self removeAllObservations];
@@ -74,7 +74,7 @@
     self.simple = @"testing remove observer for key path";
     
     __block BOOL observeAfterRemoveDidRun = NO;
-    [self observeProperty:@keypath(self.simple) withBlock:^(__weak typeof(self) self, MTKTestingObject *old, MTKTestingObject *new) {
+    [self observeProperty:@"simple" withBlock:^(__weak typeof(self) self, MTKTestingObject *old, MTKTestingObject *new) {
         if(new != nil) {
             return;
         }
@@ -82,7 +82,7 @@
         observeAfterRemoveDidRun = YES;
     }];
     
-    [self removeObservationsOfObject:self forKeyPath:@keypath(self.simple)];
+    [self removeObservationsOfObject:self forKeyPath:@"simple"];
     self.simple = nil;
     
     XCTAssertTrue(!observeAfterRemoveDidRun, @"Failed to remove observation for keypath");
@@ -92,7 +92,7 @@
 
 - (void)testAutomaticRemoveOnDealloc {
     MTKTestingObject *object = [MTKTestingObject new];
-    [self observeObject:object property:@keypath(object, title) withBlock:^(id self, id object, id old, id new) {}];
+    [self observeObject:object property:@"title" withBlock:^(id self, id object, id old, id new) {}];
     __weak NSSet *observations = [object valueForKey:@"mtk_keyPathBlockObservers"][@"title"];
     
     XCTAssertEqual(observations.count, 1);
@@ -108,7 +108,7 @@
     
     @autoreleasepool {
         MTKTestingObject *observer1 = [MTKTestingObject new];
-        [observer1 observeObject:object property:@keypath(object, title) withBlock:^(id self, id object, id oldValue, id newValue) {}];
+        [observer1 observeObject:object property:@"title" withBlock:^(id self, id object, id oldValue, id newValue) {}];
         observations = [object valueForKey:@"mtk_keyPathBlockObservers"][@"title"];
         XCTAssertEqual(observations.count, 1);
         observer1 = nil;
@@ -116,9 +116,30 @@
     XCTAssertEqual(observations.count, 0);
     
     MTKTestingObject *observer2 = [MTKTestingObject new];
-    [observer2 observeObject:object property:@keypath(object, title) withBlock:^(id self, id object, id oldValue, id newValue) {}];
+    [observer2 observeObject:object property:@"title" withBlock:^(id self, id object, id oldValue, id newValue) {}];
     
     XCTAssertEqual(observations.count, 1);
+}
+
+- (void)testAutomaticRemovalOfOnObjectDealloc {
+	// Basically, the inverse of -testAutomaticRemovalOfOnOwnerDealloc
+	
+	__weak NSSet *observations = nil;
+	@autoreleasepool {
+		MTKTestingObject *observer1 = [MTKTestingObject new];
+		observer1.title = @"observer";
+		
+		@autoreleasepool {
+			MTKTestingObject *object = [MTKTestingObject new];
+			object.title = @"object";
+			[observer1 observeObject:object property:@"title" withBlock:^(id self, id object, id oldValue, id newValue) {}];
+			observations = [object valueForKey:@"mtk_keyPathBlockObservers"][@"title"];
+			XCTAssertEqual(observations.count, 1);
+			object = nil;
+		}
+		XCTAssertEqual(observations,nil);	// releasing object should release its observation set
+	}
+	// outer autorelease pool should release observer1, which should not crash (duh!)
 }
 
 @end
