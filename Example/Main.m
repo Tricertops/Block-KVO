@@ -26,7 +26,6 @@ int main(int argc, char *argv[]) {
     [self exampleObservePropertyWithBlock];
     [self exampleObservePropertyWithSelector];
     [self exampleMap];
-    [self exampleKeypathMacro];
     
     return YES;
 }
@@ -83,24 +82,6 @@ int main(int argc, char *argv[]) {
     
     /// This will change the title to "In progress: 99 %". (Assuming previous examples were called you should see logs.)
     self.property.progress = 0.99;
-}
-
-
-
-- (void)exampleKeypathMacro {
-    NSLog(@"\n\nExample `@keypath()`");
-    /// You may want to use this macro for safe keypaths. They are validated during compilation and support autocompletion and refactoring.
-    Example *example = [self valueForKeyPath:  @keypath(self.property)  ];
-    
-    NSLog(@"Key: %@", @keypath(self.property));
-    NSLog(@"Key Path: %@", @keypath(self.property.title));
-    NSLog(@"Key of other object: %@", @keypath(example.progress));
-    NSLog(@"Key of other object by class: %@", @keypathClass(Example, progress));
-    
-    /// Just try to compile this line:
-    // id wrong = [self valueForKeyPath:  @keypath(self.notAProperty.title)  ];
-    
-    /// This great macro is from Extended Objective-C Library: https://github.com/jspahrsummers/libextobjc
 }
 
 

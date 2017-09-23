@@ -339,6 +339,9 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "iMartin Kiss";
 				TargetAttributes = {
+					5B18EAB616B2F47A00362576 = {
+						DevelopmentTeam = TAQH2MQM62;
+					};
 					5BC45C5B19B8646100AFE784 = {
 						TestTargetID = 5BAD91CA15B18C4800E3A100;
 					};
@@ -456,6 +459,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = TAQH2MQM62;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
@@ -497,6 +501,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = TAQH2MQM62;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",

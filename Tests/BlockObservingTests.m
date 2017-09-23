@@ -47,7 +47,7 @@
     }];
     
     XCTAssertTrue(initialDidRun, @"Failed to run initial observation");
-    XCTAssertEqual(initialOldValue, initialNewValue, @"Initial old value must be same as new value");
+    XCTAssertEqual(initialOldValue, initialNewValue, @"Initial old value must be identical to new value");
     XCTAssertEqualObjects(initialNewValue, self.simple, @"Initial new value must be current value");
     
     [self removeAllObservations];
