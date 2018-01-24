@@ -83,7 +83,7 @@
  @param object
  Observed object.
  
- @param observationBlock
+ @param block
  Block to be executed when the value on specified key-path changes. This value must not be `nil`.
  */
 - (void)observeObject:(id)object property:(NSString *)keyPath withBlock:(MTKBlockForeignChange)block;
