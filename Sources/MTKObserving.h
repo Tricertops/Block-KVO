@@ -13,8 +13,3 @@
 /// Internal Implementation
 #import "MTKObserver.h"
 
-
-
-/// Utilities
-// To avoid retain cycles
-#import "scope.h"
