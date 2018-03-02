@@ -165,7 +165,8 @@
     }
     __weak typeof(self) weakSelf = self;
     [observer addSettingObservationBlock:^(id object, id old, id new) {
-        observationBlock(weakSelf, object, old, new);
+        __strong typeof(weakSelf) self = weakSelf;
+        observationBlock(self, object, old, new);
     }];
 }
 
@@ -319,12 +320,16 @@
     // Invoke manually for the first time.
     block(self, nil);
     __weak typeof(self) weakSelf = self;
-    id internalObserver = [[NSNotificationCenter defaultCenter] addObserverForName:name
-                                                                            object:object
-                                                                             queue:[NSOperationQueue currentQueue]
-                                                                        usingBlock:^(NSNotification *notification) {
-                                                                            block(weakSelf, notification);
-                                                                        }];
+    id internalObserver = [[NSNotificationCenter defaultCenter]
+                           addObserverForName:name
+                           object:object
+                           queue:[NSOperationQueue currentQueue]
+                           usingBlock:^(NSNotification *notification) {
+                               __strong typeof(weakSelf) self = weakSelf;
+                               if (self) {
+                                   block(self, notification);
+                               }
+                           }];
     [[self mtk_notificationBlockObservers] addObject:internalObserver];
 }
 
