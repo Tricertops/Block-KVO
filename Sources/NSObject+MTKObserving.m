@@ -30,7 +30,7 @@
     // There should never exist two or more observers with the same target, key path and owner.
     // Observer has multiple observation block which are executed in order they were added.
     @synchronized(self) {
-        NSMutableDictionary *keyPathObservers = objc_getAssociatedObject(self, _cmd);
+        NSMutableDictionary *keyPathObservers = [self mtk_keyPathBlockObserversIfExists];
         if ( ! keyPathObservers) {
             keyPathObservers = [[NSMutableDictionary alloc] init];
             objc_setAssociatedObject(self, _cmd, keyPathObservers, OBJC_ASSOCIATION_RETAIN);
@@ -43,6 +43,12 @@
         
         return keyPathObservers;
     }
+}
+
+/// Getter for dictionary containing all registered observers for this object. Keys are observed key-paths. Without dealloc callback.
+- (NSMutableDictionary *)mtk_keyPathBlockObserversIfExists {
+    NSMutableDictionary *keyPathObservers = objc_getAssociatedObject(self, _cmd);
+    return keyPathObservers;
 }
 
 /// Find existing observer or create new for this key-path and owner. Multiple uses of one key-path per owner return the same observer.
@@ -360,8 +366,8 @@
 /// Called usually from dealloc (may be called at any time). Detach all observers. The associated objects are released once the deallocation process finishes.
 - (void)internalRemoveAllObservations {
     // Key-Path Observers
-    NSMutableDictionary *keyPathBlockObservers = [self mtk_keyPathBlockObservers];
-    for (NSMutableSet *observersForKeyPath in [[self mtk_keyPathBlockObservers] allValues]) {
+    NSMutableDictionary *keyPathBlockObservers = [self mtk_keyPathBlockObserversIfExists];
+    for (NSMutableSet *observersForKeyPath in [keyPathBlockObservers allValues]) {
         [observersForKeyPath makeObjectsPerformSelector:@selector(detach)];
         [observersForKeyPath removeAllObjects];
     }
