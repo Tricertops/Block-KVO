@@ -316,7 +316,7 @@
 			attributes = {
 				CLASSPREFIX = MTK;
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "iMartin Kiss";
 				TargetAttributes = {
 					5B18EAB616B2F47A00362576 = {
@@ -329,10 +329,11 @@
 			};
 			buildConfigurationList = 5BAD91B115B18B1200E3A100 /* Build configuration list for PBXProject "Block Key-Value Observing" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 5BAD91AC15B18B1200E3A100;
 			productRefGroup = 5BAD91BA15B18BF700E3A100 /* Products */;
