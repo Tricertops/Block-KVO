@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -317,7 +317,7 @@
 				CLASSPREFIX = MTK;
 				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = "iMartin Kiss";
+				ORGANIZATIONNAME = "Martin Kiss";
 				TargetAttributes = {
 					5B18EAB616B2F47A00362576 = {
 						DevelopmentTeam = TAQH2MQM62;
@@ -328,7 +328,7 @@
 				};
 			};
 			buildConfigurationList = 5BAD91B115B18B1200E3A100 /* Build configuration list for PBXProject "Block Key-Value Observing" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
